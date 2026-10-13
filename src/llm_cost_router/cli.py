@@ -25,6 +25,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.cmd == "collect":
         cases = suite[: args.limit] if args.limit else suite
         made = collect(cases, args.models, cache, log=lambda m: print(m, flush=True))
+        cache.compact(suite)
         print(f"made {made} new calls; cache in {CACHE_DIR}")
         return 0
 

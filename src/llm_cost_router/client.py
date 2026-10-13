@@ -117,6 +117,19 @@ class ResponseCache:
         with self._path(r.model).open("a") as f:
             f.write(json.dumps(asdict(r)) + "\n")
 
+    def compact(self, cases: list[dict[str, Any]]) -> None:
+        """Rewrite each model's file with only the answers that match the current prompts."""
+        by_id = {c["id"]: c for c in cases}
+        by_model: dict[str, list[Response]] = {}
+        for (model, case_id), r in sorted(self._store.items()):
+            case = by_id.get(case_id)
+            if case is not None and self.get(model, case) is r:
+                by_model.setdefault(model, []).append(r)
+        for model, rows in by_model.items():
+            with self._path(model).open("w") as f:
+                for r in rows:
+                    f.write(json.dumps(asdict(r)) + "\n")
+
     def caller(self) -> Caller:
         def call(model: str, case: dict[str, Any]) -> Response:
             r = self.get(model, case)

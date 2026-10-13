@@ -137,3 +137,8 @@ def test_cache_round_trip_and_resume(tmp_path):
     reloaded = ResponseCache(tmp_path)
     assert collect(cases, [SMALL], reloaded, call=stub, log=lambda _: None) == 0
     assert reloaded.caller()(SMALL, cases[0]).text == perfect_text(cases[0])
+    # a duplicate line for the same case is dropped on compaction
+    reloaded.put(stub(SMALL, cases[0]))
+    reloaded.compact(cases)
+    lines = next(tmp_path.glob("*.jsonl")).read_text().splitlines()
+    assert len(lines) == 3
