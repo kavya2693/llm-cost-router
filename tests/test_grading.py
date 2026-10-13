@@ -70,7 +70,8 @@ def test_classification_needs_exactly_one_label():
 def test_summary_rejects_wrong_count_and_overlong_text():
     case = _first("summarization")
     ans = case["answer"]
-    good = f"{ans['site']} had {ans['affected_orders']} late orders ({ans['cause_keywords'][0]}); {ans['action_keywords'][0]}."
+    cause, action = ans["cause_keywords"][0], ans["action_keywords"][0]
+    good = f"{ans['site']} had {ans['affected_orders']} late orders ({cause}); {action}."
     assert grade("summarization", good, ans)
     assert not grade("summarization", good.replace(str(ans["affected_orders"]), "12"), ans)
     assert not grade("summarization", good + " filler" * 40, ans)
