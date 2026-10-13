@@ -14,6 +14,8 @@ SUMMARY_WORD_LIMIT = 40
 EXTRACTION_FIELDS = ("order_id", "customer", "sku", "quantity", "delivery_city", "delivery_date")
 NULL_STRINGS = {"", "null", "none", "n/a", "na", "unknown", "tbc", "not provided", "not specified"}
 
+# "ANSWER: 1,234" as asked, or a LaTeX \boxed{1234}, which math-tuned models emit by habit.
+ANSWER_PATTERN = r"(?:answer\s*[:=]\s*\**\s*(?:aed\s*)?|\\boxed\{\s*)(-?[\d,]+)"
 _NUMBER = re.compile(r"-?\d[\d,]*(?:\.\d+)?")
 
 
@@ -112,7 +114,7 @@ def grade_summary(output: str, answer: dict[str, Any]) -> bool:
 
 def parse_final_number(output: str) -> int | None:
     """The number after the last `ANSWER:`, or failing that the last integer in the text."""
-    marks = list(re.finditer(r"answer\s*[:=]\s*\**\s*(?:aed\s*)?(-?[\d,]+)", output, re.IGNORECASE))
+    marks = list(re.finditer(ANSWER_PATTERN, output, re.IGNORECASE))
     if marks:
         return int(marks[-1].group(1).replace(",", ""))
     nums = numbers_in(output)

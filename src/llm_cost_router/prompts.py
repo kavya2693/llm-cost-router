@@ -39,8 +39,8 @@ the action taken. Ignore routine details.
 
 Report: {text}"""
 
-REASONING = """Solve the problem. Show the working in at most four short lines, then finish with
-a line of the form
+REASONING = """Solve the problem in plain text. Do not write code and do not use LaTeX.
+Show the working in at most four short lines, then finish with a line of the form
 ANSWER: <integer>
 
 Problem: {text}"""

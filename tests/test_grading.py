@@ -82,4 +82,5 @@ def test_reasoning_reads_the_last_answer_line():
     assert parse_final_number("ANSWER: 12\nwait, recheck. ANSWER: 1,450") == 1450
     assert parse_final_number("So the total is 3492 AED.") == 3492
     assert parse_final_number("Answer: **AED 88**") == 88
+    assert parse_final_number("so it is \\(\\boxed{2875}\\).") == 2875
     assert parse_final_number("no idea") is None

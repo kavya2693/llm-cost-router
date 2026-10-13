@@ -17,6 +17,7 @@ from typing import Any
 from llm_cost_router.client import Response
 from llm_cost_router.data import LABELS, MONTHS
 from llm_cost_router.grading import (
+    ANSWER_PATTERN,
     EXTRACTION_FIELDS,
     SUMMARY_WORD_LIMIT,
     normalise_null,
@@ -127,10 +128,10 @@ def answer_confidence(r: Response) -> float:
 
 
 def verify_reasoning(case: dict[str, Any], r: Response) -> Verdict:
-    m = list(re.finditer(r"answer\s*[:=]\s*\**\s*(?:aed\s*)?(-?[\d,]+)", r.text, re.IGNORECASE))
+    m = list(re.finditer(ANSWER_PATTERN, r.text, re.IGNORECASE))
     if not m:
         return Verdict(False, 0.0, "no ANSWER line")
-    if r.completion_tokens and r.text.rstrip()[-1:] not in "0123456789.*":
+    if r.completion_tokens and r.text.rstrip()[-1:] not in "0123456789.*}":
         # Truncated or kept talking after the answer: treat as unfinished.
         return Verdict(False, answer_confidence(r), "did not finish on the answer")
     return Verdict(True, answer_confidence(r))
