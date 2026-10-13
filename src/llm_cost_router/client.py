@@ -45,12 +45,15 @@ class Response:
 Caller = Callable[[str, dict[str, Any]], Response]
 
 
-def ollama_call(model: str, case: dict[str, Any], url: str | None = None, timeout: float = 300) -> Response:
+def ollama_call(model: str, case: dict[str, Any], url: str | None = None, timeout: float = 1200) -> Response:
     prompt = build_prompt(case)
     options: dict[str, Any] = {"temperature": 0, "seed": 7, "num_predict": MAX_TOKENS[case["task"]]}
     # macOS 13 crashes on the Metal path for these models; OLLAMA_NUM_GPU=0 forces CPU.
     if os.environ.get("OLLAMA_NUM_GPU"):
         options["num_gpu"] = int(os.environ["OLLAMA_NUM_GPU"])
+    # On a machine shared with other jobs, fewer threads stall less on llama.cpp's barriers.
+    if os.environ.get("OLLAMA_NUM_THREAD"):
+        options["num_thread"] = int(os.environ["OLLAMA_NUM_THREAD"])
     body: dict[str, Any] = {
         "model": model,
         "messages": [{"role": "user", "content": prompt}],
