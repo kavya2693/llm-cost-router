@@ -39,10 +39,10 @@ def single_model_router(model: str, call: Caller) -> Router:
     return Router({}, call, large=model)
 
 
-def oracle(cases: Iterable[dict[str, Any]], call: Caller) -> list[Outcome]:
+def oracle(cases: Iterable[dict[str, Any]], call: Caller, models: Iterable[str]) -> list[Outcome]:
     """The cheapest single call that was right, as if the verifier were perfect."""
     out = []
-    order = sorted(MODELS, key=lambda m: MODELS[m].usd_per_m_output)
+    order = sorted(models, key=lambda m: MODELS[m].usd_per_m_output)
     for case in cases:
         chosen = None
         for m in order:
@@ -98,7 +98,9 @@ def breakdown(outcomes: list[Outcome], key: str) -> dict[str, dict[str, Any]]:
     return {k: summarise(v) for k, v in sorted(groups.items())}
 
 
-def calibrate(dev: list[dict[str, Any]], call: Caller) -> tuple[dict[str, TaskPolicy], dict[str, Any]]:
+def calibrate(
+    dev: list[dict[str, Any]], call: Caller, small_models: tuple[str, ...] = SMALL_MODELS
+) -> tuple[dict[str, TaskPolicy], dict[str, Any]]:
     """Per task type, the cheapest policy that completes at least as many dev cases as the
     large model alone. Thresholds are read off the dev confidences, never the test split."""
     policies: dict[str, TaskPolicy] = {}
@@ -107,7 +109,7 @@ def calibrate(dev: list[dict[str, Any]], call: Caller) -> tuple[dict[str, TaskPo
         cases = [c for c in dev if c["task"] == task]
         large = summarise(run_arm(single_model_router(LARGE_MODEL, call), cases))
         options = [TaskPolicy(first=None)]
-        for m in SMALL_MODELS:
+        for m in small_models:
             confs = sorted({round(verify(c, call(m, c)).confidence, 4) for c in cases})
             options += [TaskPolicy(m, 0.0)] + [TaskPolicy(m, t) for t in confs if t > 0]
         best, best_key, best_stats = options[0], (large["cost_per_1k_usd"], -large["completion"], 0.0), large
@@ -163,16 +165,18 @@ def projected_annual_cost(outcomes: list[Outcome], volume: dict[str, float]) -> 
 
 
 def evaluate(
-    suite: list[dict[str, Any]], call: Caller, traffic: list[dict[str, Any]] | None = None
+    suite: list[dict[str, Any]],
+    call: Caller,
+    traffic: list[dict[str, Any]] | None = None,
+    small_models: tuple[str, ...] = SMALL_MODELS,
 ) -> dict[str, Any]:
     dev = [c for c in suite if c["split"] == "dev"]
     test = [c for c in suite if c["split"] == "test"]
-    tuned, trace = calibrate(dev, call)
-    check_only = {t: TaskPolicy(SMALL_MODELS[0], 0.0) for t in TASK_TYPES}
+    tuned, trace = calibrate(dev, call, small_models)
+    check_only = {t: TaskPolicy(small_models[0], 0.0) for t in TASK_TYPES}
 
-    arms: dict[str, Router | None] = {
-        "all-small llama3.2": single_model_router("llama3.2", call),
-        "all-small qwen2.5-coder:3b": single_model_router("qwen2.5-coder:3b", call),
+    arms: dict[str, Router | None] = {f"all-small {m}": single_model_router(m, call) for m in small_models}
+    arms |= {
         "all-large qwen2.5-coder:7b": single_model_router(LARGE_MODEL, call),
         "router, structural check only": Router(check_only, call),
         "router, tuned on dev": Router(tuned, call),
@@ -185,7 +189,11 @@ def evaluate(
         split: dict[str, Any] = {}
         outcomes_by_arm: dict[str, list[Outcome]] = {}
         for name, router in arms.items():
-            outcomes = oracle(cases, call) if router is None else run_arm(router, cases)
+            outcomes = (
+                oracle(cases, call, [*small_models, LARGE_MODEL])
+                if router is None
+                else run_arm(router, cases)
+            )
             outcomes_by_arm[name] = outcomes
             entry = summarise(outcomes)
             entry["by_task"] = breakdown(outcomes, "task")

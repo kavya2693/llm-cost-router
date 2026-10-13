@@ -29,8 +29,13 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     traffic = load_traffic(TRAFFIC_PATH) if TRAFFIC_PATH.exists() else None
+    # A small model joins the comparison only once every case has a cached answer from it.
+    small = tuple(m for m in SMALL_MODELS if all(cache.get(m, c) for c in suite))
+    if not small:
+        print("no small model has a complete cache; run `make models`", file=sys.stderr)
+        return 1
     try:
-        results = evaluate(suite, cache.caller(), traffic)
+        results = evaluate(suite, cache.caller(), traffic, small)
     except KeyError as e:
         print(e, file=sys.stderr)
         return 1

@@ -9,7 +9,7 @@ from llm_cost_router.data import LABELS
 from llm_cost_router.grading import SUMMARY_WORD_LIMIT
 
 EXTRACTION = """Extract the purchase order from the email below.
-Return only a JSON object with exactly these keys:
+Return only a JSON object, no other text, with exactly these keys:
   "order_id"      the order number being placed now (format PO-12345)
   "customer"      the customer company name
   "sku"           the product SKU
@@ -39,7 +39,8 @@ the action taken. Ignore routine details.
 
 Report: {text}"""
 
-REASONING = """Solve the problem. Work step by step briefly, then finish with a line of the form
+REASONING = """Solve the problem. Show the working in at most four short lines, then finish with
+a line of the form
 ANSWER: <integer>
 
 Problem: {text}"""
@@ -51,8 +52,9 @@ TEMPLATES = {
     "reasoning": REASONING,
 }
 
-# Extraction asks Ollama for JSON mode on every model, so no arm loses points to stray prose.
-JSON_MODE_TASKS = frozenset({"extraction"})
+# Ollama's JSON mode was tried for extraction and dropped: grammar-constrained decoding ran
+# about five times slower per token on CPU, and the prompt alone already yields bare JSON.
+JSON_MODE_TASKS: frozenset[str] = frozenset()
 
 assert set(LABELS) <= set(CLASSIFICATION.split())
 
