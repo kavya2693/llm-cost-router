@@ -45,7 +45,7 @@ class Response:
 Caller = Callable[[str, dict[str, Any]], Response]
 
 
-def ollama_call(model: str, case: dict[str, Any], url: str | None = None, timeout: float = 600) -> Response:
+def ollama_call(model: str, case: dict[str, Any], url: str | None = None, timeout: float = 300) -> Response:
     prompt = build_prompt(case)
     options: dict[str, Any] = {"temperature": 0, "seed": 7, "num_predict": MAX_TOKENS[case["task"]]}
     # macOS 13 crashes on the Metal path for these models; OLLAMA_NUM_GPU=0 forces CPU.
@@ -154,8 +154,14 @@ def collect(
         todo = sorted((c for c in cases if cache.get(model, c) is None), key=lambda c: c["id"][-3:])
         log(f"{model}: {len(todo)} of {len(cases)} cases to run")
         for i, case in enumerate(todo, 1):
-            cache.put(call(model, case))
-            made += 1
+            for attempt in range(3):
+                try:
+                    cache.put(call(model, case))
+                    made += 1
+                    break
+                except (OSError, TimeoutError) as e:
+                    # On a shared CPU a runner occasionally stalls; a retry usually clears it.
+                    log(f"  {model} {case['id']}: attempt {attempt + 1} failed ({e})")
             if i % 25 == 0:
                 log(f"  {model}: {i}/{len(todo)}")
     return made
