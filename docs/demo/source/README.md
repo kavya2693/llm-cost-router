@@ -15,7 +15,7 @@ Everything needed to rebuild the silent walkthrough (`docs/demo/demo.mp4`) and t
 | `compositions/s03-architecture.html` | Slide 05, the architecture diagram (offline tuning, online cascade, evaluation replay) |
 | `compositions/s04-routes.html` | Slide 06, the 120 held-out requests as routed, and completion vs cost for every arm (data injected by `tools/inject_sheet.py`) |
 | `compositions/value.html` | Slide 07, the routing ledger and ops-desk scene (data injected by `tools/inject_sheet.py`) |
-| `compositions/s05-results.html`, `s06-twist.html`, `s07-end.html` | Slides 08-10, results, what didn't win, end card |
+| `compositions/s05-results.html`, `s06-twist.html`, `s07-end.html` | Slides 08-10, results, lesson and fix (what failed and the next step), end card |
 | `assets/routing_log.json` | The tuned router's per-request log on the held-out split, exported by `tools/export_routing_log.py` |
 | `audit/facts.yaml` | Every figure (F-xx), assumption (A-xx), slide text and check expression used by the report |
 | `tools/build_audit_report.py` | Builds the slide stills, re-checks every figure against the repo outputs, writes MD, DOCX and PDF |
@@ -48,7 +48,7 @@ make run
 python3 docs/demo/source/tools/inject_sheet.py docs/demo/source/assets/routing_log.json outputs/results.json \
   docs/demo/source/compositions --rows ext-023,cla-021,sum-026,rea-040,rea-021,cla-035
 
-# 3. render (84 s, 1920x1080, 30 fps, silent) and compress
+# 3. render (87 s, 1920x1080, 30 fps, silent) and compress
 cd docs/demo/source
 npx --yes hyperframes@0.8.156 check
 npx --yes hyperframes@0.8.156 render -f 30 -q looks -o renders/llm-cost-router-master.mp4

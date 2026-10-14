@@ -5,14 +5,17 @@
     <template>
       <style>
         #arch-root { position: absolute; inset: 0; }
-        #arch-root .diagram { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+        #arch-root .eyebrow { top: 60px; }
+        #arch-root .scene-title { top: 92px; }
+        #arch-root .scene-sub { top: 156px; width: 990px; font-size: 26px; }
+        #arch-root .diagram { position: absolute; left: 0; top: 12px; width: 1920px; height: 1080px; }
         #arch-root svg.layer { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
         #arch-root .wire { fill: none; stroke-width: 3.5; stroke-linejoin: round; stroke-linecap: round; }
         #arch-root .lane { position: absolute; left: 60px; width: 1780px; border-radius: 18px; border: 2px solid rgba(178, 191, 204, 0.12); background: rgba(19, 33, 49, 0.35); }
         #arch-root .lane-pill {
           position: absolute; left: 84px; padding: 3px 14px; border-radius: 999px; background: var(--bg);
-          border: 2px solid rgba(178, 191, 204, 0.22); font-family: var(--mono); font-size: 20px; font-weight: 700;
-          letter-spacing: 0.08em; color: var(--ink-soft); white-space: nowrap;
+          border: 2px solid rgba(178, 191, 204, 0.22); font-family: var(--mono); font-size: 22px; font-weight: 700;
+          letter-spacing: 0.06em; color: var(--ink-soft); white-space: nowrap;
         }
         #arch-root .node {
           position: absolute; display: flex; flex-direction: column; justify-content: center; gap: 4px;
@@ -22,9 +25,9 @@
         #arch-root .node.svc { border-style: dashed; }
         #arch-root .node.top { justify-content: flex-start; padding-top: 18px; }
         #arch-root .node .t { font-size: 27px; font-weight: 700; letter-spacing: -0.01em; color: var(--ink); white-space: nowrap; }
-        #arch-root .node .s { font-family: var(--mono); font-size: 20px; color: var(--ink-soft); white-space: nowrap; }
+        #arch-root .node .s { font-size: 22px; font-weight: 500; color: var(--ink-soft); white-space: nowrap; }
         #arch-root .node .f {
-          position: absolute; right: 12px; top: -15px; font-family: var(--mono); font-size: 20px; padding: 0 9px;
+          position: absolute; right: 12px; top: -17px; font-family: var(--mono); font-size: 22px; padding: 0 9px;
           border-radius: 6px; background: var(--bg); border: 2px solid var(--line); white-space: nowrap;
         }
         #arch-root .node.cyl .f { top: -6px; }
@@ -38,19 +41,19 @@
         #arch-root .L-eval .f { color: var(--c-eval); }
         #arch-root .L-risk { border-color: rgba(255, 138, 115, 0.65); }
         #arch-root .L-risk .f { color: var(--c-risk); }
-        #arch-root .hero { border: 3px solid var(--c-opt); background: #0f2629; box-shadow: 0 0 30px rgba(63, 216, 168, 0.12); justify-content: flex-start; padding-top: 20px; }
+        #arch-root .hero { border: 3px solid var(--c-opt); background: #0f2629; box-shadow: 0 0 30px rgba(63, 216, 168, 0.12); justify-content: flex-start; padding-top: 14px; }
         #arch-root .hero .t { font-family: var(--mono); font-size: 28px; }
-        #arch-root .pol { display: grid; grid-template-columns: 96px 100px 92px; row-gap: 4px; column-gap: 10px; margin: 8px 0 6px; font-family: var(--mono); font-size: 20px; color: var(--ink-soft); }
+        #arch-root .pol { display: grid; grid-template-columns: 96px 108px 84px; row-gap: 3px; column-gap: 8px; margin: 6px 0 2px; font-family: var(--mono); font-size: 22px; color: var(--ink-soft); }
         #arch-root .pol .m { color: var(--c-model); }
         #arch-root .pol .x { color: var(--c-risk); font-weight: 700; }
         #arch-root .hero .s.acc { color: var(--c-opt); }
         #arch-root .stat { font-family: var(--mono); font-size: 22px; color: var(--ink); white-space: nowrap; }
         #arch-root .stat b { color: var(--c-opt); }
         #arch-root .rule { width: 100%; height: 2px; background: var(--line); margin: 8px 0; }
-        #arch-root .wl { position: absolute; font-family: var(--mono); font-size: 20px; white-space: nowrap; line-height: 1.15; }
+        #arch-root .wl { position: absolute; font-size: 22px; font-weight: 600; white-space: nowrap; line-height: 1.15; }
         #arch-root .legend {
-          position: absolute; left: 1110px; top: 120px; width: 700px; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px 22px;
-          font-family: var(--mono); font-size: 20px; color: var(--ink-soft);
+          position: absolute; left: 1110px; top: 94px; width: 700px; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px 22px;
+          font-family: var(--mono); font-size: 22px; color: var(--ink-soft);
         }
         #arch-root .legend span { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
         #arch-root .legend i { display: block; width: 14px; height: 14px; border-radius: 3px; }
@@ -67,7 +70,8 @@
       <div id="arch-root" data-composition-id="arch" data-width="1920" data-height="1080">
         <div class="scene" id="arch-in">
           <div class="eyebrow" data-layout-allow-overlap id="arch-eyebrow">05 · Architecture</div>
-          <div class="scene-title" data-layout-allow-overlap id="arch-title" style="width: 1150px">A verifier-gated cascade, tuned offline.</div>
+          <div class="scene-title" data-layout-allow-overlap id="arch-title" style="width: 1150px">Small model first, a check, then the 7B.</div>
+          <div class="scene-sub" id="arch-sub">Each box is a real file in the repo. Requests flow left to right.</div>
           <div class="legend" id="arch-legend">
             <span><i style="background: var(--c-data)"></i>data</span>
             <span><i style="background: var(--c-model)"></i>models</span>
@@ -83,9 +87,9 @@
             <div class="lane" id="lane1" style="top: 204px; height: 186px"></div>
             <div class="lane" id="lane2" style="top: 438px; height: 390px"></div>
             <div class="lane" id="lane3" style="top: 850px; height: 142px"></div>
-            <div class="lane-pill" id="lane1-l" style="top: 190px">OFFLINE · TUNED ON THE DEV SPLIT</div>
+            <div class="lane-pill" id="lane1-l" style="top: 190px">OFFLINE · TUNED ON 80 PRACTICE CASES</div>
             <div class="lane-pill" id="lane2-l" style="top: 424px">ONLINE · PER REQUEST · ≤ 2 CALLS</div>
-            <div class="lane-pill" id="lane3-l" style="top: 836px">EVALUATION · REPLAYS THE CACHE · make run &lt; 1 s</div>
+            <div class="lane-pill" id="lane3-l" style="top: 836px">EVALUATION · REPLAYS SAVED ANSWERS · make run &lt; 1 s</div>
 
             <svg class="layer" viewBox="0 0 1920 1080" id="arch-shapes"></svg>
             <svg class="layer" viewBox="0 0 1920 1080" id="arch-wires"></svg>
@@ -94,9 +98,9 @@
             <div class="node L-data" id="n-gen" style="left: 120px; top: 252px; width: 220px; height: 120px">
               <div class="f">data.py</div><div class="t">Generator</div><div class="s">seeded</div><div class="s">answers first</div></div>
             <div class="node cyl L-data" id="n-suite" style="left: 440px; top: 246px; width: 350px; height: 132px">
-              <div class="f">eval_suite.jsonl</div><div class="t">Eval suite</div><div class="s">200 cases · 4 tasks</div><div class="s">dev 80 · test 120</div></div>
+              <div class="f">eval_suite.jsonl</div><div class="t">Eval suite</div><div class="s">200 cases · 4 tasks</div><div class="s">80 practice · 120 test</div></div>
             <div class="node L-eval" id="n-cal" style="left: 890px; top: 252px; width: 250px; height: 120px">
-              <div class="f">evaluate.py</div><div class="t">calibrate()</div><div class="s">per task, the</div><div class="s">cheapest ≥ 7B</div></div>
+              <div class="f">evaluate.py</div><div class="t">calibrate()</div><div class="s">per task, cheapest</div><div class="s">as right as 7B</div></div>
             <div class="node cyl L-data" id="n-cache" style="left: 1240px; top: 246px; width: 260px; height: 132px">
               <div class="f">outputs/responses/</div><div class="t">Response cache</div><div class="s">3 models × 200</div><div class="s">≈ 46 min CPU</div></div>
             <div class="node cyl L-data" id="n-traffic" style="left: 1600px; top: 246px; width: 200px; height: 132px">
@@ -109,56 +113,57 @@
               <div class="f" style="color: var(--c-opt); left: 14px; right: auto">router.py</div>
               <div class="t">Router.route()</div>
               <div class="pol" id="arch-pol">
-                <span>extract</span><span class="m">llama3.2</span><span>τ 0</span>
-                <span>classify</span><span class="m">qwen 3B</span><span>τ 0</span>
-                <span>summary</span><span class="m">llama3.2</span><span>τ 0</span>
-                <span>reason</span><span class="m">qwen 3B</span><span class="x">τ .9999</span>
+                <span>orders</span><span class="m">llama3.2</span><span>no bar</span>
+                <span>tickets</span><span class="m">qwen 3B</span><span>no bar</span>
+                <span>reports</span><span class="m">llama3.2</span><span>no bar</span>
+                <span>math</span><span class="m">qwen 3B</span><span class="x">.9999</span>
               </div>
-              <div class="s acc">≤ 2 calls / request</div>
+              <div class="s acc">≤ 2 calls per request</div>
             </div>
             <div class="node svc top L-model" id="n-small" style="left: 890px; top: 486px; width: 250px; height: 146px">
-              <div class="f">Ollama</div><div class="t">Small 3B</div><div class="s">qwen2.5-coder:3b</div><div class="s">llama3.2</div><div class="s">$0.06 / M tok</div></div>
+              <div class="f">Ollama</div><div class="t">Small 3B</div><div class="s">qwen2.5-coder:3b</div><div class="s">llama3.2</div><div class="s">$0.06 / M tokens</div></div>
             <div class="node top L-risk" id="n-ver" style="left: 1240px; top: 486px; width: 260px; height: 146px">
-              <div class="f">verifiers.py</div><div class="t">verify()</div><div class="s">schema</div><div class="s">grounded in input</div><div class="s">confidence ≥ τ</div></div>
+              <div class="f">verifiers.py</div><div class="t">verify()</div><div class="s">well formed</div><div class="s">found in the request</div><div class="s">confidence ≥ bar</div></div>
             <div class="node L-opt" id="n-ans" style="left: 1600px; top: 486px; width: 200px; height: 330px">
               <div class="t">Answer</div><div class="s">to the caller</div>
               <div class="rule"></div>
               <div class="stat">3B kept <b>91%</b></div>
-              <div class="stat">p50 <b>3.6 s</b></div>
-              <div class="stat">p95 <b>20.4 s</b></div>
+              <div class="stat">median <b>3.6 s</b></div>
+              <div class="s">slowest 1 in 20:</div>
+              <div class="stat"><b>20.4 s</b> +</div>
               <div class="s">on CPU</div>
             </div>
             <div class="node svc L-model" id="n-large" style="left: 890px; top: 712px; width: 250px; height: 104px">
-              <div class="f">Ollama</div><div class="t">Large 7B</div><div class="s">qwen2.5-coder:7b</div><div class="s">$0.20 / M tok</div></div>
+              <div class="f">Ollama</div><div class="t">Large 7B</div><div class="s">qwen2.5-coder:7b</div><div class="s">$0.20 / M tokens</div></div>
 
             <!-- lane 3: evaluation -->
             <div class="node L-eval" id="n-arms" style="left: 120px; top: 890px; width: 220px; height: 88px">
-              <div class="f">evaluate.py</div><div class="t">Replay arms</div><div class="s">6 arms · 120</div></div>
+              <div class="f">evaluate.py</div><div class="t">Replay</div><div class="s">6 setups · 120 test</div></div>
             <div class="node L-eval" id="n-key" style="left: 440px; top: 890px; width: 350px; height: 88px">
               <div class="f">grading.py</div><div class="t">Answer key</div><div class="s">the router never sees it</div></div>
             <div class="node L-eval" id="n-score" style="left: 890px; top: 890px; width: 250px; height: 88px">
               <div class="f">summarise()</div><div class="t">Score</div><div class="s">completion · cost</div></div>
             <div class="node L-eval" id="n-boot" style="left: 1240px; top: 890px; width: 260px; height: 88px">
-              <div class="f">paired_bootstrap()</div><div class="t">Bootstrap</div><div class="s">95% CI · 4,000</div></div>
+              <div class="f">paired_bootstrap()</div><div class="t">Bootstrap</div><div class="s">95% range · 4,000×</div></div>
             <div class="node cyl L-eval" id="n-res" style="left: 1600px; top: 884px; width: 200px; height: 100px">
               <div class="f">outputs/</div><div class="t">results.json</div><div class="s">per_case.csv</div></div>
 
             <!-- edge labels -->
-            <div class="wl" id="wl-dev" style="left: 806px; top: 270px; color: var(--c-data)">dev 80</div>
-            <div class="wl" id="wl-ans" style="left: 1150px; top: 338px; color: var(--c-data)">answers</div>
+            <div class="wl" id="wl-dev" style="left: 797px; top: 270px; color: var(--c-data)">practice</div>
+            <div class="wl" id="wl-ans" style="left: 1146px; top: 338px; color: var(--c-data)">answers</div>
             <div class="wl" id="wl-pol" style="left: 716px; top: 394px; color: var(--c-opt)">policy × 4</div>
             <div class="wl" id="wl-log" style="left: 1112px; top: 416px; color: var(--c-data)">calls logged</div>
             <div class="wl" id="wl-prompt" style="left: 352px; top: 526px; color: var(--c-data)">prompt</div>
             <div class="wl" id="wl-first" style="left: 794px; top: 526px; color: var(--c-opt)">3B first</div>
-            <div class="wl" id="wl-lp" style="left: 1146px; top: 506px; color: var(--c-model)">text +<div>logprobs</div></div>
-            <div class="wl" id="wl-pass" style="left: 1548px; top: 588px; color: var(--c-opt)">pass</div>
-            <div class="wl" id="wl-fail" style="left: 1176px; top: 652px; color: var(--c-risk); text-align: right; width: 180px">fail → 7B<div>or conf &lt; τ</div></div>
+            <div class="wl" id="wl-lp" style="left: 1146px; top: 506px; color: var(--c-model)">text +<div>odds</div></div>
+            <div class="wl" id="wl-pass" style="left: 1542px; top: 588px; color: var(--c-opt)">pass</div>
+            <div class="wl" id="wl-fail" style="left: 1176px; top: 652px; color: var(--c-risk); text-align: right; width: 180px">fail or unsure<div>→ 7B</div></div>
             <div class="wl" id="wl-none" style="left: 578px; top: 758px; color: var(--c-model)">no small model</div>
             <div class="wl" id="wl-7b" style="left: 1390px; top: 758px; color: var(--c-model)">7B answer</div>
             <div class="wl" id="wl-correct" style="left: 796px; top: 900px; color: var(--c-eval)">right?</div>
 
             <svg class="layer" viewBox="0 0 1920 1080" id="arch-packets"></svg>
-            <div class="callout" id="arch-callout">critical path · <b>1 small call</b> · 91% of requests · p50 <b>3.6 s</b> vs 5.8 s for all-7B</div>
+            <div class="callout" id="arch-callout">main path · <b>1 small call</b> · 91% of requests · median <b>3.6 s</b> vs 5.8 s for all-7B</div>
           </div>
         </div>
       </div>
@@ -238,6 +243,7 @@
           tl.fromTo("#arch-eyebrow", { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }, 0.1);
           tl.fromTo("#arch-title", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 0.2);
           tl.fromTo("#arch-legend", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 0.5);
+          tl.fromTo("#arch-sub", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 0.5);
           const pop = (id, at, from) => {
             tl.fromTo("#" + id, Object.assign({ opacity: 0, x: 0, y: 0 }, from || { y: 16 }), { opacity: 1, x: 0, y: 0, duration: 0.5, ease: "power3.out" }, at);
             if (CYL[id]) tl.fromTo("#cyl-" + id, { attr: { opacity: 0 } }, { attr: { opacity: 1 }, duration: 0.5 }, at);
@@ -304,20 +310,24 @@
           }
           // phase 3: highlight the critical path (request -> router -> small -> verify -> answer)
           const P3 = 12.4;
-          const dim = ["#n-gen", "#n-suite", "#n-cal", "#n-cache", "#n-traffic", "#n-large", "#n-arms", "#n-key", "#n-score", "#n-boot", "#n-res",
-            "#wl-dev", "#wl-ans", "#wl-pol", "#wl-log", "#wl-fail", "#wl-none", "#wl-7b", "#wl-correct",
-            "#lane1-l", "#lane3-l", "#lane1", "#lane3"];
-          tl.to(dim, { opacity: 0.18, duration: 0.5, ease: "power2.inOut" }, P3);
-          Object.keys(CYL).forEach((id) => tl.to("#cyl-" + id, { attr: { opacity: 0.18 }, duration: 0.5 }, P3));
+          const dim = ["#n-gen", "#n-suite", "#n-cal", "#n-cache", "#n-traffic", "#n-large",
+            "#wl-dev", "#wl-ans", "#wl-pol", "#wl-log", "#wl-fail", "#wl-none", "#wl-7b",
+            "#lane1-l", "#lane1"];
+          // the evaluation lane sits under the callout: hide it fully rather than leave two layers of text
+          const hide = ["#n-arms", "#n-key", "#n-score", "#n-boot", "#n-res", "#wl-correct", "#lane3-l", "#lane3"];
+          tl.to(hide, { opacity: 0, duration: 0.4, ease: "power2.inOut" }, P3);
+          tl.to(dim, { opacity: 0.75, duration: 0.5, ease: "power2.inOut" }, P3); // stays >= 4.5:1
+          Object.keys(CYL).forEach((id) => tl.to("#cyl-" + id, { attr: { opacity: id === "n-res" ? 0 : 0.45 }, duration: 0.5 }, P3));
           ["gen_suite", "suite_cal", "cache_cal", "suite_req", "cal_router", "ver_large", "router_large", "large_ans", "small_cache", "arms_key", "key_score", "score_boot", "boot_res"].forEach((k) => {
-            tl.to("#w-" + k, { attr: { opacity: 0.15 }, duration: 0.5 }, P3);
-            tl.to("#h-" + k, { attr: { opacity: 0.15 }, duration: 0.5 }, P3);
+            const o = k.startsWith("arms") || ["key_score", "score_boot", "boot_res"].includes(k) ? 0 : 0.3;
+            tl.to("#w-" + k, { attr: { opacity: o }, duration: 0.5 }, P3);
+            tl.to("#h-" + k, { attr: { opacity: o }, duration: 0.5 }, P3);
           });
           ["req_router", "router_small", "small_ver", "ver_ans"].forEach((k) =>
             tl.to("#w-" + k, { attr: { "stroke-width": 7, opacity: 1 }, duration: 0.5, ease: "power2.out" }, P3));
           tl.to("#n-router", { boxShadow: "0 0 60px rgba(63,216,168,0.4)", duration: 0.6 }, P3);
           tl.fromTo("#arch-callout", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, P3 + 0.3);
-          tl.to("#arch-in", { opacity: 0, duration: 0.4, ease: "power2.in" }, D - 0.4);
+          tl.to("#arch-in", { opacity: 0, duration: 0.4, ease: "power2.in" }, D - 0.8); // dip: fully out before the next scene starts
           window.__timelines["arch"] = tl;
         })();
       </script>

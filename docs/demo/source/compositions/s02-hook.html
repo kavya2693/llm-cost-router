@@ -16,12 +16,16 @@
           display: block; font-family: var(--mono); font-size: 26px; padding: 14px 22px; white-space: nowrap; border-radius: 10px;
           border: 2px solid var(--line); background: rgba(15, 26, 38, 0.9); color: var(--ink);
         }
+        #hook-root .scene-sub { top: 132px; }
+        #hook-root .def { position: absolute; left: 120px; top: 772px; width: 1680px; font-size: 28px; font-weight: 500; line-height: 1.4; color: var(--ink-soft); }
+        #hook-root .def b { color: var(--ink); font-weight: 700; }
         #hook-root .fact.risk { border-color: rgba(255, 138, 115, 0.6); color: var(--c-risk); }
       </style>
       <div id="hook-root" data-composition-id="hook" data-width="1920" data-height="1080">
         <div class="scene" id="hook-in">
           <svg class="rings" id="hook-rings" aria-hidden="true" width="1920" height="1080" viewBox="0 0 1920 1080"></svg>
           <div class="eyebrow" data-layout-allow-overlap id="hook-eyebrow">02 · This project</div>
+          <div class="scene-sub" id="hook-sub">The project in one line: send each AI-model (LLM) request to the cheapest model that still gets it right.</div>
           <div class="lines">
             <span class="line" id="hook-l1"><span class="num">16.4M</span> LLM requests a year.</span>
             <span class="line" id="hook-l2"><span class="num d">4</span> tasks, <span class="num d">3</span> self-hosted models.</span>
@@ -32,6 +36,7 @@
             <span class="fact" id="hook-f2">3B $0.06 · 7B $0.20 per M tokens</span>
             <span class="fact risk" id="hook-f3">wrong small answers ship silently</span>
           </div>
+          <div class="def" id="hook-def"><b>3B / 7B</b> = a small and a large model (3 and 7 billion parameters). <b>Tokens</b> = word pieces; models are priced per million tokens.</div>
         </div>
       </div>
       <script>
@@ -62,7 +67,9 @@
           tl.fromTo("#hook-l3", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.7, ease: "expo.out" }, 1.1);
           ["#hook-f1", "#hook-f2", "#hook-f3"].forEach((f, i) =>
             tl.fromTo(f, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 1.8 + i * 0.15));
-          tl.to("#hook-in", { opacity: 0, duration: 0.4, ease: "power2.in" }, D - 0.4);
+          tl.fromTo("#hook-sub", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 0.3);
+          tl.fromTo("#hook-def", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 2.4);
+          tl.to("#hook-in", { opacity: 0, duration: 0.4, ease: "power2.in" }, D - 0.8); // dip: fully out before the next scene starts
           window.__timelines["hook"] = tl;
         })();
       </script>

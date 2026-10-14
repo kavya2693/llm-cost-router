@@ -8,8 +8,10 @@
            person using it (right). Data is inlined by tools/inject_sheet.py between the SHEET markers. */
         #value-root {
           position: absolute; inset: 0;
-          --w-bg: #ffffff; --w-ink: #111827; --w-soft: #4b5563; --w-mute: #6b7280; --w-line: #d1d5db; --w-faint: #f3f4f6;
+          --w-bg: #ffffff; --w-ink: #111827; --w-soft: #4b5563; --w-mute: #4b5563; --w-line: #d1d5db; --w-faint: #f3f4f6;
           --w-data: #d97706; --w-model: #6d3cf0; --w-tools: #1f8fa8; --w-risk: #dc2b4a; --w-opt: #0f9f6e;
+          /* text versions of the layer colours, >= 4.5:1 on white (the fills above are for tiles and bars only) */
+          --w-data-t: #b45309; --w-model-t: #6d3cf0; --w-tools-t: #0e7490; --w-risk-t: #be123c; --w-opt-t: #047857;
           color: var(--w-ink); font-family: Inter, "Helvetica Neue", sans-serif;
         }
         #value-root .page { position: absolute; inset: 0; background: var(--w-bg); }
@@ -27,7 +29,7 @@
 
         /* ledger */
         #value-root .sheet {
-          position: absolute; left: 120px; top: 280px; width: 1050px; height: 640px; border: 3px solid var(--w-line);
+          position: absolute; left: 120px; top: 300px; width: 1050px; height: 620px; border: 3px solid var(--w-line);
           border-radius: 24px; background: #fff; box-shadow: 0 18px 40px rgba(17, 24, 39, 0.08); overflow: hidden;
         }
         #value-root .sheet-head {
@@ -36,24 +38,24 @@
         }
         #value-root .sheet-head span:last-child { color: #c4b5fd; }
         #value-root .row {
-          position: relative; display: flex; align-items: center; height: 64px; padding: 0 24px;
-          font-family: "JetBrains Mono", monospace; font-size: 20px; color: var(--w-ink); border-bottom: 2px solid var(--w-faint);
+          position: relative; display: flex; align-items: center; height: 60px; padding: 0 24px;
+          font-family: "JetBrains Mono", monospace; font-size: 22px; color: var(--w-ink); border-bottom: 2px solid var(--w-faint);
         }
-        #value-root .row.hdr { height: 54px; font-size: 18px; font-weight: 700; letter-spacing: 0.08em; color: var(--w-mute); background: #fafafa; }
+        #value-root .row.hdr { height: 54px; font-size: 22px; font-weight: 700; letter-spacing: 0.02em; color: var(--w-mute); background: #fafafa; }
         #value-root .row .tint { position: absolute; inset: 0; opacity: 0; }
         #value-root .c { position: relative; white-space: nowrap; overflow: hidden; }
-        #value-root .c1 { width: 112px; display: flex; align-items: center; gap: 10px; font-weight: 700; }
+        #value-root .c1 { width: 132px; display: flex; align-items: center; gap: 10px; font-weight: 700; }
         #value-root .c1 i { display: block; width: 14px; height: 14px; border-radius: 4px; flex: 0 0 auto; }
-        #value-root .c2 { width: 158px; font-family: Inter, sans-serif; font-size: 21px; }
-        #value-root .c3 { width: 108px; color: var(--w-soft); }
-        #value-root .c4 { width: 222px; }
-        #value-root .c4.ok { color: var(--w-opt); }
-        #value-root .c4.no { color: var(--w-risk); }
-        #value-root .c5 { width: 62px; }
-        #value-root .c5 b { display: inline-block; padding: 1px 8px; border-radius: 6px; color: #fff; font-size: 18px; }
-        #value-root .c6 { width: 238px; }
-        #value-root .c7 { width: 72px; text-align: right; color: var(--w-soft); }
-        #value-root .more { padding: 14px 30px 0; font-family: "JetBrains Mono", monospace; font-size: 20px; color: var(--w-mute); }
+        #value-root .c2 { width: 150px; font-family: Inter, sans-serif; font-size: 22px; font-weight: 500; }
+        #value-root .c3 { width: 118px; color: var(--w-soft); }
+        #value-root .c4 { width: 186px; }
+        #value-root .c4.ok { color: var(--w-opt-t); }
+        #value-root .c4.no { color: var(--w-risk-t); }
+        #value-root .c5 { width: 60px; }
+        #value-root .c5 b { display: inline-block; padding: 1px 8px; border-radius: 6px; color: #fff; font-size: 22px; }
+        #value-root .c6 { width: 262px; }
+        #value-root .c7 { width: 82px; text-align: right; color: var(--w-soft); }
+        #value-root .more { padding: 14px 30px 0; font-family: "JetBrains Mono", monospace; font-size: 22px; color: var(--w-mute); }
         #value-root .totals {
           position: absolute; left: 0; bottom: 0; width: 100%; height: 66px; display: flex; align-items: center; gap: 14px; padding: 0 26px;
           background: #ecfdf5; border-top: 2px solid #a7f3d0; font-size: 22px; font-weight: 700; color: #065f46; white-space: nowrap;
@@ -62,9 +64,11 @@
         #value-root .totals svg { position: absolute; left: 6px; top: 6px; width: 16px; height: 16px; }
 
         /* scene */
-        #value-root .scene-lab { position: absolute; font-family: "JetBrains Mono", monospace; font-size: 20px; font-weight: 700; letter-spacing: 0.12em; color: var(--w-mute); white-space: nowrap; }
+        #value-root .scene-lab { position: absolute; font-family: "JetBrains Mono", monospace; font-size: 22px; font-weight: 700; letter-spacing: 0.1em; color: var(--w-mute); white-space: nowrap; }
+        #value-root .subt { position: absolute; left: 120px; top: 248px; width: 1680px; font-size: 26px; font-weight: 500; color: var(--w-soft); }
+        #value-root .subt b { color: var(--w-ink); }
         #value-root .floor {
-          position: absolute; left: 1220px; top: 312px; width: 600px; height: 608px; border-radius: 24px; border: 3px solid var(--w-line);
+          position: absolute; left: 1220px; top: 332px; width: 600px; height: 588px; border-radius: 24px; border: 3px solid var(--w-line);
           background-color: #fbfbfc;
           background-image: linear-gradient(#eef0f3 2px, transparent 2px), linear-gradient(90deg, #eef0f3 2px, transparent 2px);
           background-size: 48px 48px;
@@ -81,11 +85,12 @@
           <div class="kick" id="va-kick">07 · END-USER VALUE</div>
           <div class="ttl" id="va-ttl">What the <em>ops team</em> gets</div>
           <div class="uline" id="va-ul"></div>
+          <div class="subt" id="va-sub">Each row: one real request, the check it went through, which model answered, and its cost. <b>Lower $/1K</b> is better.</div>
 
           <div class="sheet" id="va-sheet">
             <div class="sheet-head"><span>ROUTING LEDGER</span><span id="va-head-r"></span></div>
             <div class="row hdr" id="va-hdr">
-              <div class="c c1">CASE</div><div class="c c2" style="font-family: 'JetBrains Mono', monospace; font-size: 18px">REQUEST</div>
+              <div class="c c1">CASE</div><div class="c c2" style="font-family: 'JetBrains Mono', monospace; font-size: 22px">REQUEST</div>
               <div class="c c3">1ST TRY</div><div class="c c4">CHECK</div><div class="c c5">BY</div>
               <div class="c c6">ANSWER</div><div class="c c7">$/1K</div>
             </div>
@@ -94,7 +99,7 @@
             <div class="totals" id="va-totals"></div>
           </div>
 
-          <div class="scene-lab" id="va-lab" style="left: 1220px; top: 280px">OPS DESK · REQUESTS IN, ANSWERS OUT</div>
+          <div class="scene-lab" id="va-lab" style="left: 1220px; top: 300px">OPS DESK · REQUESTS IN, ANSWERS OUT</div>
           <div class="floor" id="va-floor"></div>
           <svg class="layer" id="va-svg" viewBox="0 0 1920 1080"></svg>
 
@@ -105,7 +110,7 @@
 
       <script>
         (() => {
-          /* SHEET:BEGIN */ const SHEET = {"rows":[{"id":"ext-023","task":"extraction","kind":"order email","first":"llama3.2","check":"\u2713 grounded","by":"3B","answer":"PO-51719 \u00b7 20 units","cost_1k":"$0.017"},{"id":"cla-021","task":"classification","kind":"ticket","first":"qwen 3B","check":"\u2713 one label","by":"3B","answer":"account_access","cost_1k":"$0.011"},{"id":"sum-026","task":"summarization","kind":"shift report","first":"llama3.2","check":"\u2713 \u2264 40 words","by":"3B","answer":"994 missed cut-off","cost_1k":"$0.009"},{"id":"rea-040","task":"reasoning","kind":"arithmetic","first":"qwen 3B","check":"\u2713 conf .99997","by":"3B","answer":"ANSWER 1642","cost_1k":"$0.010"},{"id":"rea-021","task":"reasoning","kind":"arithmetic","first":"qwen 3B","check":"\u2717 conf .99989 < \u03c4","by":"7B","answer":"ANSWER 2050","cost_1k":"$0.073"},{"id":"cla-035","task":"classification","kind":"ticket","first":"qwen 3B","check":"\u2713 one label","by":"3B","answer":"cancellation","cost_1k":"$0.010"}],"cases":120,"kept":109,"escalated":11,"cost_per_1k":0.0176,"large_cost_per_1k":0.0452}; /* SHEET:END */
+          /* SHEET:BEGIN */ const SHEET = {"rows":[{"id":"ext-023","task":"extraction","kind":"order email","first":"llama3.2","check":"\u2713 grounded","by":"3B","answer":"PO-51719 \u00b7 20 units","cost_1k":"$0.017"},{"id":"cla-021","task":"classification","kind":"ticket","first":"qwen 3B","check":"\u2713 one label","by":"3B","answer":"account_access","cost_1k":"$0.011"},{"id":"sum-026","task":"summarization","kind":"shift report","first":"llama3.2","check":"\u2713 \u2264 40 words","by":"3B","answer":"994 missed cut-off","cost_1k":"$0.009"},{"id":"rea-040","task":"reasoning","kind":"arithmetic","first":"qwen 3B","check":"\u2713 conf .99997","by":"3B","answer":"ANSWER 1642","cost_1k":"$0.010"},{"id":"rea-021","task":"reasoning","kind":"arithmetic","first":"qwen 3B","check":"\u2717 conf .99989","by":"7B","answer":"ANSWER 2050","cost_1k":"$0.073"},{"id":"cla-035","task":"classification","kind":"ticket","first":"qwen 3B","check":"\u2713 one label","by":"3B","answer":"cancellation","cost_1k":"$0.010"}],"cases":120,"kept":109,"escalated":11,"cost_per_1k":0.0176,"large_cost_per_1k":0.0452}; /* SHEET:END */
 
           const CONFIG = {
             duration: 13.0,
@@ -126,7 +131,7 @@
             return n;
           };
           const txt = (x, y, s, attrs, parent) => {
-            const t = el("text", Object.assign({ x, y, "text-anchor": "middle", "font-family": "JetBrains Mono, monospace", "font-size": 20, "font-weight": 700, fill: "#111827" }, attrs), parent);
+            const t = el("text", Object.assign({ x, y, "text-anchor": "middle", "font-family": "JetBrains Mono, monospace", "font-size": 22, "font-weight": 700, fill: "#111827" }, attrs), parent);
             t.textContent = s;
             return t;
           };
@@ -167,32 +172,32 @@
           line("M1692 700 L1745 700 L1745 517", "10 9");
           const inbox = el("g", { id: "va-inbox", opacity: 0 });
           el("rect", { x: 1248, y: 470, width: 96, height: 46, rx: 8, fill: "#e5e7eb", stroke: "#9ca3af", "stroke-width": 3 }, inbox);
-          txt(1296, 548, "INBOX", { fill: "#6b7280" }, inbox);
+          txt(1296, 548, "INBOX", { fill: "#4b5563" }, inbox);
           const small = el("g", { id: "va-small", opacity: 0 });
           el("rect", { x: 1400, y: 430, width: 120, height: 110, rx: 20, fill: "#6d3cf0" }, small);
           txt(1460, 482, "3B", { fill: "#fff", "font-size": 36 }, small);
-          txt(1460, 516, "small", { fill: "#ddd6fe", "font-weight": 400 }, small);
+          txt(1460, 516, "small", { fill: "#ffffff", "font-weight": 500 }, small);
           const gate = el("g", { id: "va-gate", opacity: 0 });
           const gateRing = el("circle", { cx: 1612, cy: 485, r: 36, fill: "#fff", stroke: "#d1d5db", "stroke-width": 5, id: "va-gate-ring" }, gate);
           el("path", { d: "M1612 465l14 5v10c0 9-6 15-14 18c-8-3-14-9-14-18v-10z", fill: "none", stroke: "#dc2b4a", "stroke-width": 3.4, "stroke-linejoin": "round" }, gate);
-          txt(1612, 552, "CHECK", { fill: "#6b7280" }, gate);
+          txt(1612, 552, "CHECK", { fill: "#4b5563" }, gate);
           const large = el("g", { id: "va-large", opacity: 0 });
           el("rect", { x: 1540, y: 640, width: 150, height: 120, rx: 22, fill: "#4c2bb8" }, large);
           txt(1615, 700, "7B", { fill: "#fff", "font-size": 40 }, large);
           txt(1615, 736, "backup", { fill: "#ddd6fe", "font-weight": 400 }, large);
           const done = el("g", { id: "va-done", opacity: 0 });
           el("rect", { x: 1690, y: 452, width: 110, height: 66, rx: 12, fill: "#ecfdf5", stroke: "#0f9f6e", "stroke-width": 3 }, done);
-          txt(1745, 552, "DONE", { fill: "#0f9f6e" }, done);
+          txt(1745, 552, "DONE", { fill: "#047857" }, done);
           const counts = [0, 1, 2, 3, 4, 5, 6].map((n) => txt(1745, 495, String(n), { fill: "#065f46", "font-size": 30, opacity: n === 0 ? 1 : 0 }, done));
           // cost meter (real: cost per 1k requests, test split)
           const meter = el("g", { id: "va-meter", opacity: 0 });
-          txt(1250, 806, "COST PER 1K REQUESTS", { "text-anchor": "start", fill: "#6b7280" }, meter);
+          txt(1250, 806, "COST PER 1K REQUESTS", { "text-anchor": "start", fill: "#4b5563" }, meter);
           const W = 360;
           el("rect", { x: 1250, y: 824, width: W, height: 26, rx: 8, fill: "#9ca3af" }, meter);
-          txt(1626, 845, "all-7B $" + SHEET.large_cost_per_1k.toFixed(4), { "text-anchor": "start", "font-weight": 400, fill: "#4b5563" }, meter);
+          txt(1626, 845, "all-7B $" + SHEET.large_cost_per_1k.toFixed(4), { "text-anchor": "start", "font-weight": 500, fill: "#4b5563" }, meter);
           el("rect", { x: 1250, y: 866, width: W, height: 26, rx: 8, fill: "#f3f4f6" }, meter);
           const fill = el("rect", { x: 1250, y: 866, width: W * (SHEET.cost_per_1k / SHEET.large_cost_per_1k), height: 26, rx: 8, fill: "#0f9f6e", id: "va-fill" }, meter);
-          txt(1626, 887, "router $" + SHEET.cost_per_1k.toFixed(4), { "text-anchor": "start", fill: "#0f9f6e" }, meter);
+          txt(1626, 887, "router $" + SHEET.cost_per_1k.toFixed(4), { "text-anchor": "start", fill: "#047857" }, meter);
 
           // ---------------- choreography ----------------
           tl.fromTo("#va-page", { clipPath: "inset(0px 100% 0px 0px)" }, { clipPath: "inset(0px 0% 0px 0px)", duration: 0.7, ease: "power3.inOut" }, 0);
@@ -201,6 +206,7 @@
           tl.fromTo("#va-kick", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.5);
           tl.fromTo("#va-ttl", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.55);
           tl.fromTo("#va-ul", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, 0.9);
+          tl.fromTo("#va-sub", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 1.0);
           tl.fromTo("#va-sheet", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.8);
           SHEET.rows.forEach((_, i) => tl.fromTo("#va-r" + i, { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.35, ease: "power2.out" }, 1.3 + i * 0.3));
           tl.fromTo("#va-more", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 1.3 + SHEET.rows.length * 0.3);
@@ -240,6 +246,8 @@
             tl.to("#va-t" + k, { opacity: 0.4, duration: 0.4 }, end);
           });
           tl.fromTo("#va-caption", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 9.9);
+          // all text fades fully out before the wipe, so no two slides' text is ever on screen together
+          tl.to(["#va-kick", "#va-ttl", "#va-ul", "#va-sub", "#va-sheet", "#va-lab", "#va-floor", "#va-svg", "#va-caption"], { opacity: 0, duration: 0.35, ease: "power2.in" }, D - 1.05);
           // wipe out (white -> dark), revealing the next dark scene underneath
           tl.to("#va-page", { clipPath: "inset(0px 0px 0px 100%)", duration: 0.7, ease: "power3.inOut" }, D - 0.7);
           tl.fromTo("#va-edge", { x: 0, opacity: 0 }, { x: 1920, opacity: 1, duration: 0.7, ease: "power3.inOut", immediateRender: false }, D - 0.7);

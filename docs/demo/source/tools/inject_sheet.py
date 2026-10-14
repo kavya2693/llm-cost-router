@@ -35,7 +35,7 @@ def check_text(r: dict) -> str:
         conf = f"{r['confidence']:.5f}".lstrip("0")
         if r["confidence"] >= r["threshold"]:
             return f"✓ conf {conf}"
-        return f"✗ conf {conf} < τ"
+        return f"✗ conf {conf}"  # the cross already says it fell below the bar
     return {
         "extraction": "✓ grounded",
         "classification": "✓ one label",

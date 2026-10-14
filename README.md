@@ -8,9 +8,9 @@ Send each LLM request to the cheapest self-hosted model likely to get it right, 
 answer with a cheap verifier, and pay for the large model only when the check fails. Measured
 on a 200-case suite with known answers, against sending everything to the large or the small model.
 
-[![84-second silent walkthrough: the problem, how the cascade works, the architecture, the 120 held-out requests as routed, the results and what didn't win](docs/demo/demo.gif)](https://kavya2693.github.io/work-demos/llm-cost-router.mp4)
+[![87-second silent walkthrough: the problem, how the cascade works, the architecture, the 120 held-out requests as routed, the results, and the lesson on arithmetic with the next step](docs/demo/demo.gif)](https://kavya2693.github.io/work-demos/llm-cost-router.mp4)
 
-*84-second silent walkthrough. [Play the full video](https://kavya2693.github.io/work-demos/llm-cost-router.mp4) · [download the MP4, 5 MB](docs/demo/demo.mp4).*
+*87-second silent walkthrough. [Play the full video](https://kavya2693.github.io/work-demos/llm-cost-router.mp4) · [download the MP4, 5 MB](docs/demo/demo.mp4).*
 
 📄 **Audit report:** every figure and assumption in the video, traced to its source — [PDF](docs/demo/AUDIT_REPORT.pdf) · [Word](docs/demo/AUDIT_REPORT.docx) · [Markdown](docs/demo/AUDIT_REPORT.md)
 

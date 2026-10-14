@@ -8,8 +8,10 @@
            Per repo, edit only the CONFIG object in the script below (and slide B's markup if the key idea differs). */
         #explainer-root {
           position: absolute; inset: 0;
-          --w-bg: #ffffff; --w-ink: #111827; --w-soft: #4b5563; --w-mute: #6b7280; --w-line: #d1d5db;
+          --w-bg: #ffffff; --w-ink: #111827; --w-soft: #4b5563; --w-mute: #4b5563; --w-line: #d1d5db;
           --w-data: #d97706; --w-model: #6d3cf0; --w-tools: #1f8fa8; --w-risk: #dc2b4a; --w-opt: #0f9f6e; --w-eval: #b45309;
+          /* text versions of the layer colours: every one is >= 4.5:1 on white (the fills above are for tiles only) */
+          --w-data-t: #b45309; --w-model-t: #6d3cf0; --w-tools-t: #0e7490; --w-risk-t: #be123c; --w-opt-t: #047857;
           color: var(--w-ink); font-family: Inter, "Helvetica Neue", sans-serif;
         }
         #explainer-root .page { position: absolute; inset: 0; background: var(--w-bg); }
@@ -45,12 +47,12 @@
         #explainer-root .box { position: absolute; border: 3px solid var(--w-line); border-radius: 28px; }
         #explainer-root .pill {
           position: absolute; left: 28px; top: -22px; padding: 6px 18px; border-radius: 999px; background: var(--w-bg);
-          border: 3px solid var(--w-line); font-family: "JetBrains Mono", monospace; font-size: 20px; font-weight: 700;
+          border: 3px solid var(--w-line); font-family: "JetBrains Mono", monospace; font-size: 22px; font-weight: 700;
           letter-spacing: 0.14em; color: var(--w-soft); white-space: nowrap;
         }
         #explainer-root .loop { position: absolute; width: 84px; height: 84px; }
         #explainer-root .loop-lab {
-          position: absolute; font-family: "JetBrains Mono", monospace; font-size: 22px; font-weight: 700; color: var(--w-opt); white-space: nowrap;
+          position: absolute; font-family: "JetBrains Mono", monospace; font-size: 24px; font-weight: 700; color: var(--w-opt-t); white-space: nowrap;
         }
         #explainer-root .badges { margin-top: 18px; display: flex; flex-direction: column; gap: 10px; }
         #explainer-root .badge { display: flex; align-items: center; gap: 12px; font-size: 24px; font-weight: 700; color: var(--w-ink); white-space: nowrap; }
@@ -62,7 +64,7 @@
         #explainer-root .step .tile { width: 104px; height: 104px; border-radius: 26px; flex: 0 0 auto; }
         #explainer-root .step .tile svg { width: 56px; height: 56px; }
         #explainer-root .step .txt { font-size: 32px; font-weight: 700; line-height: 1.25; color: var(--w-ink); }
-        #explainer-root .step .txt small { display: block; margin-top: 6px; font-size: 24px; font-weight: 400; color: var(--w-soft); }
+        #explainer-root .step .txt small { display: block; margin-top: 6px; font-size: 24px; font-weight: 500; color: var(--w-soft); }
         #explainer-root .demo {
           position: absolute; left: 990px; top: 320px; width: 810px; height: 470px; border: 3px solid var(--w-line); border-radius: 28px;
         }
@@ -72,13 +74,14 @@
           font-size: 22px; line-height: 1.45; color: var(--w-soft);
         }
         #explainer-root .mail b { color: var(--w-ink); font-weight: 700; background: #fde68a; border-radius: 4px; padding: 0 4px; }
-        #explainer-root .fields { position: absolute; left: 40px; top: 228px; width: 730px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 26px; }
-        #explainer-root .fld { display: flex; align-items: center; gap: 12px; font-family: "JetBrains Mono", monospace; font-size: 20px; color: var(--w-ink); white-space: nowrap; }
-        #explainer-root .fld .k { color: var(--w-mute); width: 92px; }
+        #explainer-root .fields { position: absolute; left: 40px; top: 228px; width: 730px; display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 12px 26px; }
+        #explainer-root .fld { display: flex; align-items: center; gap: 10px; font-family: "JetBrains Mono", monospace; font-size: 22px; color: var(--w-ink); white-space: nowrap; }
+        #explainer-root .fld .k { color: var(--w-soft); width: 112px; flex: 0 0 auto; }
         #explainer-root .fld i { display: block; width: 26px; height: 26px; border-radius: 50%; background: var(--w-opt); position: relative; flex: 0 0 auto; }
         #explainer-root .fld i svg { position: absolute; left: 5px; top: 5px; width: 16px; height: 16px; }
         #explainer-root .verdict { position: absolute; left: 40px; top: 392px; width: 730px; font-size: 26px; line-height: 1.35; color: var(--w-ink); }
-        #explainer-root .verdict b { color: var(--w-opt); }
+        #explainer-root .verdict b { color: var(--w-opt-t); }
+        #explainer-root .subt { position: absolute; left: 120px; top: 252px; width: 1680px; font-size: 28px; font-weight: 500; color: var(--w-soft); }
         #explainer-root .foot {
           position: absolute; left: 120px; top: 880px; font-family: "JetBrains Mono", monospace; font-size: 24px; color: var(--w-soft);
         }
@@ -89,16 +92,18 @@
           <!-- SLIDE A: the flow -->
           <div class="slide" id="ex-a">
             <div class="kick" id="ex-a-kick">03 · HOW IT WORKS</div>
-            <div class="ttl" id="ex-a-ttl">Cheap first, <em style="color: var(--w-opt)">checked</em>, then big</div>
+            <div class="ttl" id="ex-a-ttl">Cheap first, <em style="color: var(--w-opt-t)">checked</em>, then big</div>
             <div class="uline" id="ex-a-ul" style="background: var(--w-opt)"></div>
+            <div class="subt" id="ex-a-sub">Read left to right: a small model answers first, and the big 7B model is paid for only when the check fails.</div>
             <div id="ex-a-flow"></div>
           </div>
 
           <!-- SLIDE B: the one key idea -->
           <div class="slide" id="ex-b">
             <div class="kick" id="ex-b-kick">04 · THE KEY IDEA</div>
-            <div class="ttl" id="ex-b-ttl">Checking without an <em style="color: var(--w-risk)">answer key</em></div>
+            <div class="ttl" id="ex-b-ttl">Checking without an <em style="color: var(--w-risk-t)">answer key</em></div>
             <div class="uline" id="ex-b-ul" style="background: var(--w-risk)"></div>
+            <div class="subt" id="ex-b-sub">Three checks run on every small-model answer. All pass: keep it. Any fail: ask the 7B instead.</div>
             <div class="steps">
               <div class="step" id="ex-b-s1"><div class="tile" style="background: var(--w-risk)" data-icon="shield"></div>
                 <div class="txt">Is the answer well formed?<small>right keys, one known label, short summary</small></div></div>
@@ -134,10 +139,10 @@
             slideB: 8.0, // when slide B replaces slide A
             blocks: [
               // x = block centre; colour = layer; icon = key in ICONS
-              { x: 260, label: "REQUEST", sub: "email, ticket, report, sum", color: "--w-data", icon: "archive" },
-              { x: 545, label: "PICK MODEL", sub: "a small model per task", color: "--w-tools", icon: "route" },
+              { x: 260, label: "REQUEST", sub: "4 kinds of request", color: "--w-data", icon: "archive" },
+              { x: 545, label: "PICK MODEL", sub: "small model per task", color: "--w-tools", icon: "route" },
               { x: 825, label: "SMALL MODEL", sub: "a 3B model tries first", color: "--w-model", icon: "sparkle" },
-              { x: 1115, label: "CHECK", sub: "well formed? sure of it?", color: "--w-risk", icon: "shield" },
+              { x: 1115, label: "CHECK", sub: "valid and sure?", color: "--w-risk", icon: "shield" },
               { x: 1395, label: "BIG MODEL", sub: "only if the check fails", color: "--w-model", icon: "sparkle" },
               { x: 1675, label: "ANSWER", sub: "", color: "--w-opt", icon: "doc",
                 badges: ["lower bill", "mostly small", "answers checked"] },
@@ -182,7 +187,7 @@
             }
             const col = "var(" + b.color + ")";
             let inner = '<div class="tile" style="background:' + col + '">' + svgIcon(b.icon) + "</div>" +
-              '<div class="lab" style="color:' + col + '">' + b.label + "</div>";
+              '<div class="lab" style="color:var(' + b.color + '-t)">' + b.label + "</div>";
             if (b.sub) inner += '<div class="sub">' + b.sub + "</div>";
             if (b.badges) inner += '<div class="badges">' + b.badges.map((t, k) => '<div class="badge" id="ex-bd' + k + '"><i>' + CHECK + "</i>" + t + "</div>").join("") + "</div>";
             html.push('<div class="blk" id="ex-b' + i + '" style="left:' + (b.x - W / 2) + "px;top:" + TILE_TOP + 'px">' + inner + "</div>");
@@ -205,6 +210,7 @@
           tl.fromTo("#ex-a-kick", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.5);
           tl.fromTo("#ex-a-ttl", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.55);
           tl.fromTo("#ex-a-ul", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, 0.9);
+          tl.fromTo("#ex-a-sub", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 1.0);
           const STEP = 0.55, S0 = 1.3;
           CONFIG.blocks.forEach((b, i) => {
             const at = S0 + i * STEP;
@@ -227,6 +233,7 @@
           tl.fromTo("#ex-b-kick", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, B);
           tl.fromTo("#ex-b-ttl", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, B + 0.05);
           tl.fromTo("#ex-b-ul", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, B + 0.4);
+          tl.fromTo("#ex-b-sub", { opacity: 0 }, { opacity: 1, duration: 0.5 }, B + 0.45);
           ["#ex-b-s1", "#ex-b-s2", "#ex-b-s3"].forEach((s, i) =>
             tl.fromTo(s, { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, B + 0.6 + i * 0.5));
           tl.fromTo("#ex-b-demo", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, B + 0.7);
@@ -240,6 +247,8 @@
           });
           tl.fromTo("#ex-b-verdict", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, SW + 2.1);
           tl.fromTo("#ex-b-foot", { opacity: 0 }, { opacity: 1, duration: 0.5 }, SW + 2.6);
+          // slide B text fades fully out before the wipe, so no two slides' text is ever on screen together
+          tl.to("#ex-b", { opacity: 0, duration: 0.35, ease: "power2.in" }, D - 1.05);
           // wipe out (white -> dark), revealing the next dark scene underneath
           tl.to("#ex-page", { clipPath: "inset(0px 0px 0px 100%)", duration: 0.7, ease: "power3.inOut" }, D - 0.7);
           tl.fromTo("#ex-edge", { x: 0, opacity: 0 }, { x: 1920, opacity: 1, duration: 0.7, ease: "power3.inOut", immediateRender: false }, D - 0.7);
