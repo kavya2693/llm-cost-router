@@ -1,0 +1,477 @@
+# Audit facts for the llm-cost-router demo video.
+# Read by docs/demo/source/tools/build_audit_report.py (paths below are relative to this file).
+#
+# Check expressions are Python, evaluated with these helpers (paths relative to the repo root;
+# a "demo:" prefix means relative to the demo project folder):
+#   R(path) -> pandas DataFrame from CSV      J(path) -> parsed JSON
+#   row(path, **eq) -> the single CSV row matching all equalities (a pandas Series)
+#   T(path) -> file text                      grep(path, regex) -> True/False
+# A check passes when fmt.format(value) == expect (or, with fmt "bool", when value is True).
+# TEST() = J('outputs/results.json')['splits']['test'] and the other helpers are defined at the bottom.
+
+project:
+  name: llm-cost-router
+  title: "llm-cost-router: demo video audit report"
+  repo_url: https://github.com/kavya2693/llm-cost-router
+  repo_dir: ../../../..
+  demo_dir: ..
+  demo_display: docs/demo/source
+  out_dir: ../..
+  video: docs/demo/demo.mp4
+  video_duration_s: 84.0
+  outputs_dir: outputs
+  venv_python: .venv/bin/python
+  version_packages: [llm_cost_router]
+  regenerate:
+    - "make run                                   # data/*, outputs/results.json|md, per_case.csv (replays the response cache, under a second)"
+    - ".venv/bin/python docs/demo/source/tools/export_routing_log.py docs/demo/source/assets/routing_log.json"
+    - "python3 docs/demo/source/tools/inject_sheet.py docs/demo/source/assets/routing_log.json outputs/results.json docs/demo/source/compositions --rows ext-023,cla-021,sum-026,rea-040,rea-021,cla-035"
+    - "cd docs/demo/source && npx --yes hyperframes@0.8.156 check && npx --yes hyperframes@0.8.156 render -f 30 -q looks -o renders/llm-cost-router-master.mp4 && cd -"
+    - "ffmpeg -y -i docs/demo/source/renders/llm-cost-router-master.mp4 -c:v libx264 -preset slow -crf 25 -pix_fmt yuv420p -movflags +faststart -an docs/demo/demo.mp4"
+    - "python3 docs/demo/source/tools/build_audit_report.py docs/demo/source/audit/facts.yaml   # stills, checks, MD/DOCX/PDF"
+  seeds: {suite_and_traffic: 20261013, ollama_seed: 7, temperature: 0, bootstrap_seed: 0}
+  run_time: "make run replays the committed response cache in 0.47 s (outputs/run_log.txt); refreshing the cache with make models took 45.8 min of CPU inference (13.3 + 11.8 + 20.7 min)"
+
+assumptions:
+  - id: A-01
+    statement: "All data is synthetic, produced by a seeded generator sized to the production problem: 200 evaluation cases (50 per task type, half easy, half hard) and 365 days of request volume per task type. The production data is proprietary."
+    source: "src/llm_cost_router/config.py:15 (SEED = 20261013); src/llm_cost_router/data.py:390-470; README 'The data'"
+    all_figures: true
+    edit: ["src/llm_cost_router/data.py", "src/llm_cost_router/config.py:15"]
+    rerun: ["make data", "make models (~46 min CPU) if prompts or cases change", "make run"]
+  - id: A-02
+    statement: "Prices are an assumption, not a quote: $0.06 per million tokens for the 3B models and $0.20 for the 7B model. The saving is driven by the 3.3x ratio between tiers."
+    source: "src/llm_cost_router/config.py:34-37 (MODELS); README 'Known limitations'"
+    figures: [F-07, F-09, F-31, F-32, F-37, F-38, F-40, F-43]
+    edit: ["src/llm_cost_router/config.py:34-37"]
+    rerun: ["make run", "export_routing_log.py + inject_sheet.py"]
+  - id: A-03
+    statement: "Latency is the measured CPU inference time per request on an M1 Pro laptop shared with other jobs (model load time excluded); an escalated request waits for the small call and then the large one."
+    source: "src/llm_cost_router/client.py:79; src/llm_cost_router/router.py:43-46; README lines 53-54 and 'Known limitations'"
+    figures: [F-16, F-22, F-23]
+    edit: ["re-collect with make models on the target machine"]
+    rerun: ["make models", "make run"]
+  - id: A-04
+    statement: "The routing policy is tuned on the dev split only (20 cases per task type): per task, the cheapest {first small model, confidence threshold} whose dev completion is at least the 7B model's. Every headline number is on the 120 held-out cases."
+    source: "src/llm_cost_router/evaluate.py:102-134 (calibrate); src/llm_cost_router/data.py:402 (split)"
+    figures: [F-12, F-13, F-14, F-19, F-21, F-27, F-28, F-29, F-30, F-31, F-33, F-35, F-36, F-37, F-38, F-39, F-40, F-42, F-44]
+    edit: ["src/llm_cost_router/evaluate.py:102-134", "DEV_PER_TYPE in src/llm_cost_router/data.py"]
+    rerun: ["make run", "export_routing_log.py + inject_sheet.py"]
+  - id: A-05
+    statement: "Ground truth comes from the generator (answers fixed before the text is written); grading.py is the answer key the router never sees. A summary must stay under 40 words and use only numbers from the report."
+    source: "src/llm_cost_router/grading.py:1-13; src/llm_cost_router/verifiers.py:99-112"
+    figures: [F-08, F-12, F-13, F-33, F-34, F-35, F-37, F-39, F-42, F-44, F-45]
+    edit: ["src/llm_cost_router/grading.py"]
+    rerun: ["make run"]
+  - id: A-06
+    statement: "Models run at temperature 0 with seed 7, but multi-threaded CPU inference is not bit-for-bit deterministic; the committed response cache (outputs/responses/*.jsonl) is what makes every number reproducible."
+    source: "src/llm_cost_router/client.py:50; README 'Known limitations'"
+    all_figures: true
+    edit: ["outputs/responses/*.jsonl (via make models)"]
+    rerun: ["make models", "make run"]
+  - id: A-07
+    statement: "Annual volume is the sum of the 365-day traffic log, with logging gaps filled by the mean of the same weekday within 28 days; the projected bill multiplies each task's cost per 1k requests by its volume."
+    source: "src/llm_cost_router/evaluate.py:146-166 (annual_volume, projected_annual_cost); data.py:428 (base_daily = 38,000)"
+    figures: [F-03, F-17, F-43]
+    edit: ["src/llm_cost_router/data.py:428-446"]
+    rerun: ["make data", "make run"]
+  - id: A-08
+    statement: "The completion interval is a paired bootstrap over the same 120 cases, 4,000 resamples, seed 0."
+    source: "src/llm_cost_router/evaluate.py:136-142"
+    figures: [F-26, F-42]
+    edit: ["src/llm_cost_router/evaluate.py:136"]
+    rerun: ["make run"]
+  - id: A-09
+    statement: "Output caps per task (160, 8, 90, 220 tokens) keep a full collection run under an hour on CPU; a truncated reasoning answer fails its check."
+    source: "src/llm_cost_router/config.py:44 (MAX_TOKENS); verifiers.py:134-137"
+    figures: [F-16]
+    edit: ["src/llm_cost_router/config.py:44"]
+    rerun: ["make models", "make run"]
+  - id: A-10
+    statement: "Video rounding: percentages to whole numbers or 1 decimal, dollars per 1k to 4 decimals, per-request costs as $ per 1k to 3 decimals, the yearly bill to whole dollars, 16.4M to 1 decimal, 45.8 min shown as '≈ 46 min'."
+    source: "this audit (display convention)"
+    figures: [F-03, F-16, F-21, F-22, F-23, F-31, F-32, F-33, F-34, F-37, F-38, F-39, F-40, F-43, F-44]
+    edit: ["the composition file named on each slide"]
+    rerun: ["hyperframes render"]
+  - id: A-11
+    statement: "Slide 01 (industry, everyday problems) is general knowledge about running LLMs in operations, used as context. It is not a result of this repo and carries no numbers."
+    source: "author's framing; README 'The problem' and 'Why it is hard' support all four problems"
+    figures: [F-01, F-02]
+    edit: ["compositions/s01-context.html"]
+    rerun: ["hyperframes render"]
+
+figures:
+  # ---- slide 01
+  - {id: F-01, slides: ["01"], label: "Who relates: operations & logistics platforms, customer support desks, in-house AI platform teams", shown: "3 industry chips", type: general-knowledge, source: "author's framing", key: "-", formula: "-", manual: "Context statement, not a repo output."}
+  - {id: F-02, slides: ["01"], label: "Four everyday problems (everything to the biggest model; most traffic routine; a small model fails silently; a wrong answer costs people time)", shown: "4 problem cards", type: general-knowledge, source: "README 'The problem', 'Why it is hard'", key: "README lines 12-35", formula: "-",
+     check: {expr: "grep('README.md', r'send all of it to the biggest model') and grep('README.md', r'most of those requests are routine') and grep('README.md', r'there is no answer key') and grep('README.md', r\"costs a person's time\")", fmt: bool}}
+  # ---- slide 02
+  - {id: F-03, slides: ["02", "05", "08"], label: "Annual request volume from the traffic log", shown: "16.4M LLM requests a year / 16.4M / yr / 16.4M req", type: derived, source: "outputs/results.json", key: "annual_requests (sum over 4 tasks = 16,394,979)", formula: "sum / 1e6, 1 decimal",
+     check: {expr: "sum(J('outputs/results.json')['annual_requests'].values()) / 1e6", fmt: "{:.1f}M", expect: "16.4M"}}
+  - {id: F-04, slides: ["02", "05"], label: "Task types", shown: "4 tasks", type: direct, source: "outputs/results.json", key: "policy (one entry per task type)", formula: "count",
+     check: {expr: "len(J('outputs/results.json')['policy'])", fmt: "{:d}", expect: "4"}}
+  - {id: F-05, slides: ["02", "05", "10"], label: "Self-hosted models", shown: "3 self-hosted models / 3 models", type: direct, source: "outputs/results.json", key: "model_seconds (one entry per model)", formula: "count",
+     check: {expr: "len(J('outputs/results.json')['model_seconds'])", fmt: "{:d}", expect: "3"}}
+  - {id: F-06, slides: ["02", "05", "10"], label: "Evaluation cases with known answers", shown: "200 cases, known answers", type: direct, source: "data/eval_suite.jsonl", key: "line count; every case has an 'answer'", formula: "count",
+     check: {expr: "(lambda L: len(L) if all('\"answer\"' in x for x in L) else -1)(T('data/eval_suite.jsonl').strip().splitlines())", fmt: "{:d}", expect: "200"}}
+  - {id: F-07, slides: ["02", "05", "08"], label: "Price per million tokens: 3B $0.06, 7B $0.20", shown: "3B $0.06 · 7B $0.20 per M tokens", type: direct, source: "src/llm_cost_router/config.py:35-37", key: "MODELS usd_per_m_*", formula: "-",
+     check: {expr: "grep('src/llm_cost_router/config.py', r'\"llama3.2\", \"small\", 3.2, 0.06, 0.06') and grep('src/llm_cost_router/config.py', r'\"qwen2.5-coder:3b\", \"small\", 3.1, 0.06, 0.06') and grep('src/llm_cost_router/config.py', r'\"qwen2.5-coder:7b\", \"large\", 7.6, 0.20, 0.20')", fmt: bool}}
+  - {id: F-08, slides: ["02"], label: "Wrong small answers ship silently (a cascade with only structural checks lets wrong answers through)", shown: "wrong small answers ship silently", type: derived, source: "outputs/results.json", key: "splits.test['router, structural check only'].wrong_accepted_small = 27", formula: "> 0",
+     check: {expr: "TEST()['router, structural check only']['wrong_accepted_small'] > 0", fmt: bool}}
+  # ---- slide 03
+  - {id: F-09, slides: ["03"], label: "Badges: lower bill, mostly small, answers checked (tuned router vs all-7B, held out)", shown: "lower bill / mostly small / answers checked", type: derived, source: "outputs/results.json; src/llm_cost_router/router.py:61", key: "cost_per_1k_usd router < all-large; share_answered_small > 0.5; verify() runs on every small answer", formula: "-",
+     check: {expr: "TEST()['router, tuned on dev']['cost_per_1k_usd'] < TEST()['all-large qwen2.5-coder:7b']['cost_per_1k_usd'] and TEST()['router, tuned on dev']['share_answered_small'] > 0.5 and grep('src/llm_cost_router/router.py', r'verdict = verify\\(case, first\\)')", fmt: bool}}
+  - {id: F-10, slides: ["03", "05"], label: "At most two calls per request: one small, one large (no retry loop)", shown: "≤ 2 calls / request; FALLBACK", type: direct, source: "src/llm_cost_router/router.py:54-66; README 'Stop condition'", key: "route(): one optional small call, one large call", formula: "-",
+     check: {expr: "T('src/llm_cost_router/router.py').count('calls.append(') == 2 and grep('README.md', r'at most two calls per request')", fmt: bool}}
+  # ---- slide 04
+  - {id: F-11, slides: ["04", "07"], label: "Case ext-023: the 3B model's six extracted values, all found in the email; answer kept", shown: "PO-51719 · Summit Auto Parts · LED-3580 · 20 · Sharjah · 2026-05-14; keep the 3B answer", type: direct, source: "demo:assets/routing_log.json (export of the repo's Router)", key: "id = ext-023: first_model, check_passed, escalated, output, input", formula: "-",
+     check: {expr: "ext023_ok()", fmt: bool}}
+  - {id: F-12, slides: ["04", "09"], label: "Held-out arithmetic answers that were wrong but passed the confidence bar", shown: "6 confident wrong answers got through / 6 wrong answers passed above 0.9999", type: derived, source: "outputs/per_case.csv; demo:assets/routing_log.json", key: "arm = router, tuned on dev; task = reasoning; escalated = False; correct = False", formula: "count = 6; every confidence > 0.9999",
+     check: {expr: "len(R('outputs/per_case.csv').query(\"arm == 'router, tuned on dev' and task == 'reasoning' and escalated == False and correct == False\")) if confident_wrong_ok() else -1", fmt: "{:d}", expect: "6"}}
+  - {id: F-13, slides: ["04", "09"], label: "Worked for orders, tickets and summaries: router completion ≥ all-7B on extraction, classification, summarization", shown: "Worked for orders, tickets and summaries", type: derived, source: "outputs/results.json", key: "splits.test[arm].by_task[task].completion", formula: "router ≥ all-large for 3 tasks",
+     check: {expr: "all(TEST()['router, tuned on dev']['by_task'][k]['completion'] >= TEST()['all-large qwen2.5-coder:7b']['by_task'][k]['completion'] for k in ('extraction', 'classification', 'summarization'))", fmt: bool}}
+  # ---- slide 05
+  - {id: F-14, slides: ["05"], label: "Split sizes", shown: "dev 80 · test 120", type: direct, source: "data/eval_suite.jsonl", key: "split", formula: "count per split",
+     check: {expr: "split_sizes()", fmt: "{}", expect: "dev 80 · test 120"}}
+  - {id: F-15, slides: ["05", "10"], label: "Response cache: every model on every case", shown: "3 models × 200", type: direct, source: "outputs/responses/*.jsonl", key: "line counts", formula: "200 lines in each of 3 files",
+     check: {expr: "[len(T('outputs/responses/' + f).strip().splitlines()) for f in ('llama3.2.jsonl', 'qwen2.5-coder_3b.jsonl', 'qwen2.5-coder_7b.jsonl')] == [200, 200, 200]", fmt: bool}}
+  - {id: F-16, slides: ["05"], label: "CPU inference time to fill the cache", shown: "≈ 46 min CPU", type: derived, source: "outputs/results.json", key: "model_seconds (796.1 + 706.2 + 1240.3 s)", formula: "sum / 60 = 45.8 min, rounded",
+     check: {expr: "round(sum(J('outputs/results.json')['model_seconds'].values()) / 60)", fmt: "{:d}", expect: "46"}}
+  - {id: F-17, slides: ["05"], label: "Traffic log length", shown: "365 days", type: direct, source: "data/traffic_daily.csv", key: "row count", formula: "-",
+     check: {expr: "len(R('data/traffic_daily.csv'))", fmt: "{:d}", expect: "365"}}
+  - {id: F-18, slides: ["05"], label: "Every architecture box names a real file or function", shown: "data.py, eval_suite.jsonl, evaluate.py calibrate(), outputs/responses/, data/, prompts.py, router.py Router.route(), Ollama (client.py), verifiers.py verify(), grading.py, summarise(), paired_bootstrap(), outputs/results.json, per_case.csv", type: direct, source: "src/llm_cost_router/*.py; data/; outputs/", key: "file / def", formula: "-",
+     check: {expr: "components_exist()", fmt: bool}}
+  - {id: F-19, slides: ["05"], label: "Tuned policy: extraction llama3.2 τ 0, classification qwen 3B τ 0, summarization llama3.2 τ 0, reasoning qwen 3B τ 0.9999", shown: "policy table in Router.route()", type: direct, source: "outputs/results.json", key: "policy[task].first, policy[task].threshold", formula: "-",
+     check: {expr: "{k: (v['first'], v['threshold']) for k, v in J('outputs/results.json')['policy'].items()} == {'extraction': ('llama3.2', 0.0), 'classification': ('qwen2.5-coder:3b', 0.0), 'summarization': ('llama3.2', 0.0), 'reasoning': ('qwen2.5-coder:3b', 0.9999)}", fmt: bool}}
+  - {id: F-20, slides: ["05"], label: "Verifier checks: schema, grounded in input, confidence ≥ τ", shown: "schema / grounded in input / confidence ≥ τ", type: direct, source: "src/llm_cost_router/verifiers.py:59-149; router.py:62", key: "verify_* functions; verdict.confidence >= policy.threshold", formula: "-",
+     check: {expr: "grep('src/llm_cost_router/verifiers.py', r'not found in the email') and grep('src/llm_cost_router/verifiers.py', r'wrong keys') and grep('src/llm_cost_router/router.py', r'verdict.confidence >= policy.threshold')", fmt: bool}}
+  - {id: F-21, slides: ["05", "06", "08"], label: "Share of held-out requests answered by a 3B model (tuned router)", shown: "3B kept 91% / 91% of requests / 91%", type: direct, source: "outputs/results.json", key: "splits.test['router, tuned on dev'].share_answered_small = 0.9083", formula: "x 100, whole number",
+     check: {expr: "100 * TEST()['router, tuned on dev']['share_answered_small']", fmt: "{:.0f}%", expect: "91%"}}
+  - {id: F-22, slides: ["05"], label: "Router latency p50 / p95 (held out, CPU)", shown: "p50 3.6 s · p95 20.4 s", type: direct, source: "outputs/results.json", key: "splits.test['router, tuned on dev'].p50_latency_s, p95_latency_s", formula: "1 decimal",
+     check: {expr: "'p50 {:.1f} s · p95 {:.1f} s'.format(TEST()['router, tuned on dev']['p50_latency_s'], TEST()['router, tuned on dev']['p95_latency_s'])", fmt: "{}", expect: "p50 3.6 s · p95 20.4 s"}}
+  - {id: F-23, slides: ["05"], label: "All-7B latency p50", shown: "vs 5.8 s for all-7B", type: direct, source: "outputs/results.json", key: "splits.test['all-large qwen2.5-coder:7b'].p50_latency_s", formula: "1 decimal",
+     check: {expr: "TEST()['all-large qwen2.5-coder:7b']['p50_latency_s']", fmt: "{:.1f} s", expect: "5.8 s"}}
+  - {id: F-24, slides: ["05"], label: "Evaluation replays 6 arms", shown: "6 arms · 120", type: direct, source: "outputs/results.json", key: "splits.test arms with a completion", formula: "count",
+     check: {expr: "sum(1 for v in TEST().values() if isinstance(v, dict) and 'completion' in v)", fmt: "{:d}", expect: "6"}}
+  - {id: F-25, slides: ["05", "10"], label: "make run replays the cache in under a second", shown: "make run < 1 s / replays … in under a second", type: direct, source: "outputs/run_log.txt:85", key: "'make run ... 0.469 total'", formula: "total < 1 s",
+     check: {expr: "float(re.search(r'make run .* ([0-9.]+) total', T('outputs/run_log.txt')).group(1)) < 1", fmt: bool}}
+  - {id: F-26, slides: ["05"], label: "Bootstrap resamples", shown: "95% CI · 4,000", type: direct, source: "src/llm_cost_router/evaluate.py:136", key: "reps: int = 4000", formula: "-",
+     check: {expr: "grep('src/llm_cost_router/evaluate.py', r'reps: int = 4000')", fmt: bool}}
+  - {id: F-27, slides: ["05"], label: "Calibration rule: cheapest policy with dev completion at least the 7B's", shown: "per task, the cheapest ≥ 7B", type: direct, source: "src/llm_cost_router/evaluate.py:105-122", key: "options below large completion are skipped; key = (cost, -completion, threshold)", formula: "-",
+     check: {expr: "'if s[\"completion\"] + 1e-9 < large[\"completion\"]:' in T('src/llm_cost_router/evaluate.py')", fmt: bool}}
+  # ---- slide 06
+  - {id: F-28, slides: ["06", "07"], label: "Held-out requests", shown: "120 held-out requests", type: direct, source: "outputs/results.json", key: "splits.test['router, tuned on dev'].n", formula: "-",
+     check: {expr: "TEST()['router, tuned on dev']['n']", fmt: "{:d}", expect: "120"}}
+  - {id: F-29, slides: ["06", "07", "08"], label: "Requests answered by a 3B model (tuned router, held out)", shown: "109 / 109 answered by 3B / 109 of 120 requests", type: direct, source: "outputs/per_case.csv", key: "arm = router, tuned on dev; escalated = False", formula: "count",
+     check: {expr: "int((R('outputs/per_case.csv').query(\"arm == 'router, tuned on dev'\")['escalated'] == False).sum())", fmt: "{:d}", expect: "109"}}
+  - {id: F-30, slides: ["06", "07"], label: "Requests escalated to the 7B (tuned router, held out)", shown: "11 / 11 escalated", type: direct, source: "outputs/per_case.csv", key: "arm = router, tuned on dev; escalated = True", formula: "count",
+     check: {expr: "int(R('outputs/per_case.csv').query(\"arm == 'router, tuned on dev'\")['escalated'].sum())", fmt: "{:d}", expect: "11"}}
+  - {id: F-31, slides: ["06", "07", "08"], label: "Router cost per 1k requests (held out)", shown: "$0.0176", type: direct, source: "outputs/results.json", key: "splits.test['router, tuned on dev'].cost_per_1k_usd = 0.0175998", formula: "4 decimals",
+     check: {expr: "TEST()['router, tuned on dev']['cost_per_1k_usd']", fmt: "${:.4f}", expect: "$0.0176"}}
+  - {id: F-32, slides: ["06", "07", "08"], label: "All-7B cost per 1k requests (held out)", shown: "$0.0452", type: direct, source: "outputs/results.json", key: "splits.test['all-large qwen2.5-coder:7b'].cost_per_1k_usd = 0.045235", formula: "4 decimals",
+     check: {expr: "TEST()['all-large qwen2.5-coder:7b']['cost_per_1k_usd']", fmt: "${:.4f}", expect: "$0.0452"}}
+  - {id: F-33, slides: ["06", "08"], label: "Router completion (held out)", shown: "82.5%", type: direct, source: "outputs/results.json", key: "splits.test['router, tuned on dev'].completion = 0.825", formula: "x 100, 1 decimal",
+     check: {expr: "100 * TEST()['router, tuned on dev']['completion']", fmt: "{:.1f}%", expect: "82.5%"}}
+  - {id: F-34, slides: ["06", "08"], label: "All-7B completion (held out)", shown: "85.0%", type: direct, source: "outputs/results.json", key: "splits.test['all-large qwen2.5-coder:7b'].completion = 0.85", formula: "x 100, 1 decimal",
+     check: {expr: "100 * TEST()['all-large qwen2.5-coder:7b']['completion']", fmt: "{:.1f}%", expect: "85.0%"}}
+  - {id: F-35, slides: ["06"], label: "Grid: one cell per held-out request (kept / escalated / wrong), in case order", shown: "120-cell grid", type: direct, source: "outputs/per_case.csv; demo:compositions/s04-routes.html (GRID block)", key: "arm = router, tuned on dev: task, escalated, correct", formula: "cell-by-cell equality",
+     check: {expr: "grid_matches()", fmt: bool}}
+  - {id: F-36, slides: ["06"], label: "Every escalation came from the confidence bar (the structural check passed)", shown: "failed the confidence bar", type: derived, source: "demo:assets/routing_log.json (export of the repo's Router)", key: "escalated rows: check_passed, confidence < threshold", formula: "-",
+     check: {expr: "all(r['check_passed'] and r['confidence'] < r['threshold'] for r in J('demo:assets/routing_log.json')['rows'] if r['escalated'])", fmt: bool}}
+  - {id: F-37, slides: ["06"], label: "Scatter: completion and cost per 1k for all 6 arms (held out)", shown: "all qwen 3B 75.8% · all llama3.2 80.0% · all 7B 85.0% · $0.0452 · router, checks only 77.5% · router, tuned 82.5% · $0.0176 · perfect verifier 91.7% · $0.0178", type: direct, source: "outputs/results.json; demo:compositions/s04-routes.html (GRID.arms)", key: "splits.test[arm].completion, cost_per_1k_usd", formula: "1 decimal %, 4 decimals $",
+     check: {expr: "arms_match()", fmt: bool}}
+  - {id: F-38, slides: ["06", "07", "08"], label: "Cost reduction vs all-7B (held out)", shown: "61% cheaper / About 61% cheaper / −61%", type: derived, source: "outputs/results.json", key: "cost_per_1k_usd: router 0.0175998, all-large 0.045235", formula: "(router / all-large − 1) x 100 = −61.1%",
+     check: {expr: "100 * (TEST()['router, tuned on dev']['cost_per_1k_usd'] / TEST()['all-large qwen2.5-coder:7b']['cost_per_1k_usd'] - 1)", fmt: "{:+.0f}%", expect: "-61%"}}
+  - {id: F-39, slides: ["06", "08"], label: "Completion gap all-7B − router (held out)", shown: "2.5 points less complete", type: derived, source: "outputs/results.json", key: "completion: router 0.825, all-large 0.85", formula: "(0.85 − 0.825) x 100 = 2.5",
+     check: {expr: "100 * (TEST()['all-large qwen2.5-coder:7b']['completion'] - TEST()['router, tuned on dev']['completion'])", fmt: "{:.1f}", expect: "2.5"}}
+  # ---- slide 07
+  - {id: F-40, slides: ["07"], label: "Routing ledger rows (case, request type, first model, check, answered by, answer, $ per 1k) for ext-023, cla-021, sum-026, rea-040, rea-021, cla-035", shown: "6 ledger rows", type: direct, source: "demo:assets/routing_log.json; outputs/per_case.csv; demo:compositions/value.html (SHEET block)", key: "per case: first_model, check_passed, confidence, escalated, output, cost_usd", formula: "$ per 1k = cost_usd x 1000, 3 decimals",
+     check: {expr: "ledger_matches()", fmt: bool}}
+  - {id: F-41, slides: ["07"], label: "Ledger remainder", shown: "+ 114 more requests in the ledger", type: derived, source: "outputs/results.json", key: "n = 120 minus the 6 rows shown", formula: "120 − 6",
+     check: {expr: "TEST()['router, tuned on dev']['n'] - 6", fmt: "{:d}", expect: "114"}}
+  # ---- slide 08
+  - {id: F-42, slides: ["08"], label: "Completion gap 95% interval (router − all-7B, held out)", shown: "CI [−7.5, +2.5] pts", type: direct, source: "outputs/results.json", key: "splits.test.router_minus_large_ci95 = [-0.075, 0.025]", formula: "x 100, 1 decimal",
+     check: {expr: "'[{:+.1f}, {:+.1f}]'.format(*[100 * x for x in TEST()['router_minus_large_ci95']])", fmt: "{}", expect: "[-7.5, +2.5]"}}
+  - {id: F-43, slides: ["08"], label: "Projected yearly bill at logged traffic: router vs all-7B", shown: "$247 / all-7B $779", type: direct, source: "outputs/results.json", key: "splits.test[arm].projected_annual_cost_usd: 246.65, 778.78", formula: "whole dollars",
+     check: {expr: "'${:.0f} / ${:.0f}'.format(TEST()['router, tuned on dev']['projected_annual_cost_usd'], TEST()['all-large qwen2.5-coder:7b']['projected_annual_cost_usd'])", fmt: "{}", expect: "$247 / $779"}}
+  # ---- slide 09
+  - {id: F-44, slides: ["09"], label: "Completion per task, router / all-7B (held out)", shown: "93 / 93 · 87 / 87 · 87 / 83 · 63 / 77", type: direct, source: "outputs/results.json", key: "splits.test[arm].by_task[task].completion", formula: "x 100, whole numbers",
+     check: {expr: "' · '.join('{:.0f} / {:.0f}'.format(100 * TEST()['router, tuned on dev']['by_task'][t]['completion'], 100 * TEST()['all-large qwen2.5-coder:7b']['by_task'][t]['completion']) for t in ('extraction', 'classification', 'summarization', 'reasoning'))", fmt: "{}", expect: "93 / 93 · 87 / 87 · 87 / 83 · 63 / 77"}}
+  - {id: F-45, slides: ["09"], label: "Worked example rea-028: the 3B model wrote 38 × 168 = 6264 (true 6384) and answered 6309 above 0.9999 confidence; correct total 6429", shown: "38 × 168 = 6264 (true 6384)", type: direct, source: "outputs/responses/qwen2.5-coder_3b.jsonl; demo:assets/routing_log.json", key: "case rea-028", formula: "38 x 168 = 6384; 6384 + 45 = 6429",
+     check: {expr: "rea028_ok()", fmt: bool}}
+  - {id: F-46, slides: ["09"], label: "Confidence is read at the ANSWER line", shown: "confidence is read at the ANSWER line", type: direct, source: "src/llm_cost_router/verifiers.py:115-127 (answer_confidence)", key: "lowest token probability among the digits after the final ANSWER marker", formula: "-",
+     check: {expr: "grep('src/llm_cost_router/verifiers.py', r'Lowest token probability among the digits after the final ANSWER marker')", fmt: bool}}
+  # ---- slide 10
+  - {id: F-47, slides: ["10"], label: "Licence and runtime needs", shown: "OPEN SOURCE · MIT · NO GPU, NO API KEY", type: direct, source: "LICENSE; README 'Running it', 'Inference time'", key: "MIT License; 'need no model server or key'; CPU inference", formula: "-",
+     check: {expr: "grep('LICENSE', r'^MIT License') and grep('README.md', r'need no model server or key') and grep('README.md', r'on CPU')", fmt: bool}}
+  - {id: F-48, slides: ["10"], label: "Stack chips", shown: "Ollama · Qwen2.5-Coder · Llama 3.2 · Python", type: direct, source: "src/llm_cost_router/client.py; config.py; pyproject.toml", key: "Ollama client; model ids; python", formula: "-",
+     check: {expr: "grep('src/llm_cost_router/client.py', r'Ollama') and grep('src/llm_cost_router/config.py', r'qwen2.5-coder') and grep('src/llm_cost_router/config.py', r'llama3.2') and grep('pyproject.toml', r'python')", fmt: bool}}
+
+slides:
+  - id: "01"
+    title: "The industry"
+    image: slides/slide-01.jpg
+    time: "0.0-7.2 s"
+    composition: "compositions/s01-context.html"
+    text:
+      - "01 · THE INDUSTRY"
+      - "Routine LLM requests, billed at large-model prices."
+      - "WHO LIVES WITH THIS · Operations & logistics platforms · Customer support desks · In-house AI platform teams"
+      - "01 Every request goes to the biggest model — The safe default, and the biggest bill"
+      - "02 Most of the traffic is routine — Pull a field, pick a queue, add up a total"
+      - "03 A small model fails silently — At serving time there is no answer key"
+      - "04 A wrong answer costs people time — Someone has to find it and fix it"
+      - "THIS PROJECT pays for the big model only when a cheap check fails · small → check → escalate → measure"
+    assumptions: [A-11]
+    illustrative: ["The whole slide is context; no repo figures."]
+    change: "Edit the chips (#ctx-c1..3) and cards (#ctx-k1..4) in compositions/s01-context.html."
+  - id: "02"
+    title: "This project"
+    image: slides/slide-02.jpg
+    time: "6.8-11.6 s"
+    composition: "compositions/s02-hook.html"
+    text:
+      - "02 · THIS PROJECT"
+      - "16.4M LLM requests a year. 4 tasks, 3 self-hosted models. Which ones can a 3B model take?"
+      - "200 cases, known answers · 3B $0.06 · 7B $0.20 per M tokens · wrong small answers ship silently"
+    assumptions: [A-01, A-02, A-07]
+    illustrative: ["Rings in the background are decoration."]
+    change: "Headline spans #hook-l1..l3 and chips #hook-f1..f3 in compositions/s02-hook.html."
+  - id: "03"
+    title: "How it works (white chapter, slide A)"
+    image: slides/slide-03.jpg
+    time: "11.3-19.3 s"
+    composition: "compositions/explainer.html (CONFIG.blocks, CONFIG.groups)"
+    text:
+      - "03 · HOW IT WORKS"
+      - "Cheap first, checked, then big"
+      - "REQUEST email, ticket, report, sum → PICK MODEL a small model per task → [CHEAP TRY: SMALL MODEL a 3B model tries first → CHECK well formed? sure of it?] → [FALLBACK: BIG MODEL only if the check fails] → ANSWER ✓ lower bill ✓ mostly small ✓ answers checked"
+    assumptions: [A-02, A-04]
+    illustrative: ["Icons and colours are a visual language, not data."]
+    change: "Edit CONFIG in compositions/explainer.html; badge truth is F-09."
+  - id: "04"
+    title: "The key idea (white chapter, slide B)"
+    image: slides/slide-04.jpg
+    time: "19.3-26.3 s"
+    composition: "compositions/explainer.html (#ex-b)"
+    text:
+      - "04 · THE KEY IDEA"
+      - "Checking without an answer key"
+      - "Is the answer well formed? — right keys, one known label, short summary"
+      - "Did it come from the request? — every value must appear in the email"
+      - "Was the model sure of it? — a confidence bar, tuned on practice cases"
+      - "ONE REAL ORDER EMAIL · CASE EXT-023: 'Please raise a new order PO-51719 for Summit Auto Parts. We need LED panel light 60x60 (SKU LED-3580). I first wrote 12 units, but please make it 20 units instead. Delivery to our Sharjah site by May 14, 2026.' → order PO-51719 ✓ customer Summit Auto Parts ✓ sku LED-3580 ✓ quantity 20 ✓ city Sharjah ✓ date 2026-05-14 ✓ · All six found in the email: keep the 3B answer."
+      - "Worked for orders, tickets and summaries. On arithmetic, 6 confident wrong answers got through."
+    assumptions: [A-04, A-05]
+    illustrative: ["The email is an excerpt of case ext-023 (greeting, previous-order line, phone number and sign-off omitted); the six ticks show verify_extraction's grounding rule, which checks every value."]
+    change: "Markup under #ex-b in compositions/explainer.html; the footnote figures are F-12 and F-13."
+  - id: "05"
+    title: "Architecture"
+    image: slides/slide-05.jpg
+    time: "26.0-41.0 s"
+    composition: "compositions/s03-architecture.html"
+    text:
+      - "05 · ARCHITECTURE"
+      - "A verifier-gated cascade, tuned offline."
+      - "OFFLINE · TUNED ON THE DEV SPLIT: data.py Generator (seeded, answers first) → eval_suite.jsonl Eval suite (200 cases · 4 tasks, dev 80 · test 120) → dev 80 → evaluate.py calibrate() (per task, the cheapest ≥ 7B) ← answers ← outputs/responses/ Response cache (3 models × 200, ≈ 46 min CPU) · data/ Traffic log (365 days, 16.4M / yr)"
+      - "ONLINE · PER REQUEST · ≤ 2 CALLS: prompts.py Request (task + input, 1 prompt/task) → prompt → router.py Router.route() [extract llama3.2 τ 0 · classify qwen 3B τ 0 · summary llama3.2 τ 0 · reason qwen 3B τ .9999 · ≤ 2 calls / request] → 3B first → Ollama Small 3B (qwen2.5-coder:3b, llama3.2, $0.06 / M tok) → text + logprobs → verifiers.py verify() (schema, grounded in input, confidence ≥ τ) → pass → Answer (to the caller · 3B kept 91% · p50 3.6 s · p95 20.4 s · on CPU)"
+      - "fail → 7B or conf < τ → Ollama Large 7B (qwen2.5-coder:7b, $0.20 / M tok) → 7B answer → Answer · no small model → Large 7B · policy × 4 (calibrate → Router) · calls logged (Small 3B → Response cache)"
+      - "EVALUATION · REPLAYS THE CACHE · make run < 1 s: evaluate.py Replay arms (6 arms · 120) → grading.py Answer key (the router never sees it) → right? → summarise() Score (completion · cost) → paired_bootstrap() Bootstrap (95% CI · 4,000) → outputs/ results.json, per_case.csv"
+      - "critical path · 1 small call · 91% of requests · p50 3.6 s vs 5.8 s for all-7B"
+      - "Legend: data · models · router · verifier · evaluation · per request (solid) · batch / offline (dashed)"
+    assumptions: [A-01, A-02, A-03, A-04, A-06, A-08, A-09]
+    illustrative: ["Packets moving along the wires are a schematic of execution order; 1 escalation in 11 packets approximates the 11 / 120 escalation share, not real traffic.", "'Ollama' marks the model calls made by client.py; the evaluation replays the same calls from the cache.", "The 'no small model' path exists in router.py (TaskPolicy first=None) but the tuned policy does not use it for any task.", "The critical-path p50 (3.6 s) is the router's median over all held-out requests, including escalated ones."]
+    change: "Node boxes (#n-*) and the edge table E in compositions/s03-architecture.html."
+  - id: "06"
+    title: "The system running"
+    image: slides/slide-06a.jpg
+    image2: slides/slide-06b.jpg
+    time: "40.6-53.0 s"
+    composition: "compositions/s04-routes.html (GRID block injected by tools/inject_sheet.py)"
+    text:
+      - "06 · THE SYSTEM RUNNING"
+      - "Phase 1: The tuned router on 120 held-out requests. · kept the 3B answer · escalated to 7B · ✕ wrong, graded afterwards against the key · rows extraction / classification / summarization / reasoning (30 cells each)"
+      - "109 answered by a 3B model (of 120 requests) · 11 escalated to the 7B (failed the confidence bar) · $0.0176 per 1k requests (all-7B: $0.0452) · 82.5% graded correct (all-7B: 85.0%)"
+      - "Phase 2: Six ways to serve the same 120 requests. Completion % vs cost per 1k requests: all qwen 3B 75.8% · all llama3.2 80.0% · router, checks only 77.5% · router, tuned 82.5% · $0.0176 · perfect verifier 91.7% · $0.0178 · all 7B 85.0% · $0.0452; dashed line at the all-7B completion."
+      - "Router vs all-7B: 61% cheaper, 2.5 points less complete. The perfect verifier shows the headroom."
+    assumptions: [A-02, A-04, A-05, A-10]
+    illustrative: []
+    change: "Re-run export_routing_log.py and inject_sheet.py; layout constants in compositions/s04-routes.html."
+  - id: "07"
+    title: "End-user value"
+    image: slides/slide-07.jpg
+    time: "52.7-65.7 s"
+    composition: "compositions/value.html (SHEET block injected by tools/inject_sheet.py)"
+    text:
+      - "07 · END-USER VALUE"
+      - "What the ops team gets"
+      - "ROUTING LEDGER · HELD-OUT · 120 REQUESTS · CASE / REQUEST / 1ST TRY / CHECK / BY / ANSWER / $/1K"
+      - "ext-023 order email llama3.2 ✓ grounded 3B PO-51719 · 20 units $0.017"
+      - "cla-021 ticket qwen 3B ✓ one label 3B account_access $0.011"
+      - "sum-026 shift report llama3.2 ✓ ≤ 40 words 3B 994 missed cut-off $0.009"
+      - "rea-040 arithmetic qwen 3B ✓ conf .99997 3B ANSWER 1642 $0.010"
+      - "rea-021 arithmetic qwen 3B ✗ conf .99989 < τ 7B ANSWER 2050 $0.073"
+      - "cla-035 ticket qwen 3B ✓ one label 3B cancellation $0.010"
+      - "+ 114 more requests in the ledger · ✓ 109 answered by 3B · 11 escalated · $0.0176 per 1k vs $0.0452 all-7B"
+      - "Scene: OPS DESK · REQUESTS IN, ANSWERS OUT — INBOX → 3B small → CHECK → DONE (count 0..6); rea-021 detours through 7B backup · COST PER 1K REQUESTS all-7B $0.0452 / router $0.0176"
+      - "Same inbox, every small answer checked and costed. About 61% cheaper, with the 7B as backup."
+    assumptions: [A-02, A-04, A-05, A-10]
+    illustrative: ["The ledger is a presentation of the router's real per-request log; the repo writes outputs/per_case.csv, not a ledger file.", "The six rows were picked to show each task and one escalation; they are not a random sample (16 of the 109 kept answers were wrong, see slide 09).", "'994 missed cut-off' condenses the summary's reported count; the full summary text is in the routing log.", "The person, inbox, trays and envelopes are a schematic of the routing flow."]
+    change: "Pick rows with inject_sheet.py --rows; scene geometry in CONFIG in compositions/value.html."
+  - id: "08"
+    title: "Results"
+    image: slides/slide-08.jpg
+    time: "65.4-74.2 s"
+    composition: "compositions/s05-results.html"
+    text:
+      - "08 · RESULTS · 120 HELD-OUT REQUESTS"
+      - "61% cheaper, 2.5 points less complete."
+      - "router −61% cost per 1k requests ($0.0452 → $0.0176)"
+      - "evaluation 82.5% completion, held out (all-7B 85.0% · 95% CI)"
+      - "models 91% answered by 3B (109 of 120 requests)"
+      - "projection $247 yearly bill (16.4M req · all-7B $779)"
+      - "Completion gap CI [−7.5, +2.5] pts · prices are an assumption ($0.06 vs $0.20 per M tokens)"
+    assumptions: [A-02, A-04, A-07, A-08, A-10]
+    illustrative: ["Mini bars are ratios to the all-7B baseline (or to 120 requests for the 91% card)."]
+    change: "The stats array and card text in compositions/s05-results.html."
+  - id: "09"
+    title: "What didn't win"
+    image: slides/slide-09.jpg
+    time: "73.8-80.0 s"
+    composition: "compositions/s06-twist.html"
+    text:
+      - "09 · WHAT DIDN'T WIN"
+      - "On arithmetic, the confidence check failed."
+      - "Completion per task, held out · bar = tuned router · tick = all-7B · router / 7B"
+      - "Orders (extraction) 93 / 93 · Tickets (classification) 87 / 87 · Shift reports (summarization) 87 / 83 · Arithmetic (reasoning) 63 / 77"
+      - "Why: confidence is read at the ANSWER line, which copies a number already worked out. 6 wrong answers passed above 0.9999, e.g. 38 × 168 = 6264 (true 6384). Next: send arithmetic to the 7B."
+    assumptions: [A-04, A-05]
+    illustrative: []
+    change: "Bar widths, ticks and values in compositions/s06-twist.html (1000 px = 100%)."
+  - id: "10"
+    title: "End card"
+    image: slides/slide-10.jpg
+    time: "79.6-84.0 s"
+    composition: "compositions/s07-end.html"
+    text:
+      - "10 · OPEN SOURCE · MIT · NO GPU, NO API KEY"
+      - "llm-cost-router"
+      - "github.com/kavya2693/llm-cost-router"
+      - "Ollama · Qwen2.5-Coder · Llama 3.2 · Python"
+      - "$ make run   # replays 3 models × 200 cases in under a second"
+    assumptions: [A-06]
+    illustrative: []
+    change: "Text in compositions/s07-end.html."
+
+caveats:
+  - "The repo's results are on a synthetic suite (A-01); the 16.4M requests a year is the generator's traffic log, not a measured production volume."
+  - "Prices are an assumption (A-02). Every cost figure (61%, $0.0176, $0.0452, $247, $779, the per-row $/1k) scales with the price table."
+  - "The router is 2.5 points less complete than all-7B on the held-out split, with a 95% interval of [−7.5, +2.5]; the slides state the deficit, they do not claim parity."
+  - "16 of the 109 kept 3B answers were wrong (outputs/results.md 'Wrong answers let through'); the ledger on slide 07 shows six chosen rows, all graded correct."
+  - "Latency is CPU time on a shared laptop (A-03); the router's p95 (20.4 s) is worse than all-7B's (12.6 s) because an escalation pays for two calls. The video shows p95 on slide 05 only."
+  - "routing_log.json is produced by the demo's export script calling the repo's own calibrate() and Router on the committed cache; F-35 and F-40 cross-check it against outputs/per_case.csv."
+  - "Slide 01 statements are general knowledge (A-11)."
+
+stills:
+  master: renders/llm-cost-router-master.mp4   # relative to demo_dir
+  width: 1600
+  times: {"01": 6.4, "02": 11.1, "03": 18.9, "04": 25.5, "05": 39.4, "06a": 46.4, "06b": 52.3, "07": 64.9, "08": 73.6, "09": 79.4, "10": 83.8}
+
+# Extra check helpers (Python), available to check expressions.
+helpers: |
+  import re as _re
+
+  def TEST():
+      return J('outputs/results.json')['splits']['test']
+
+  def _block(path, name):
+      m = _re.search(r"const " + name + r" = (\{.*?\}); /\* " + name + ":END", T(path), _re.S)
+      return json.loads(m.group(1))
+
+  def _router_cases():
+      d = R('outputs/per_case.csv')
+      return d[d['arm'] == 'router, tuned on dev'].reset_index(drop=True)
+
+  def _log():
+      return {r['id']: r for r in J('demo:assets/routing_log.json')['rows']}
+
+  def split_sizes():
+      L = [json.loads(x) for x in T('data/eval_suite.jsonl').strip().splitlines()]
+      return 'dev {} · test {}'.format(sum(c['split'] == 'dev' for c in L), sum(c['split'] == 'test' for c in L))
+
+  def grid_matches():
+      """GRID cells in s04-routes.html == per_case.csv (tuned router) row by row; the log agrees too."""
+      g = _block('demo:compositions/s04-routes.html', 'GRID')
+      pc = _router_cases()
+      if len(g['cells']) != len(pc):
+          return False
+      for cell, (_, r) in zip(g['cells'], pc.iterrows()):
+          if cell != [r['task'], int(bool(r['escalated'])), int(bool(r['correct']))]:
+              return False
+      log = _log()
+      for _, r in pc.iterrows():
+          x = log[r['id']]
+          if (x['escalated'], x['correct'], x['final_model']) != (bool(r['escalated']), bool(r['correct']), r['final_model']):
+              return False
+          if abs(x['cost_usd'] - r['cost_usd']) > 1e-9:
+              return False
+      return (g['kept'], g['escalated'], g['correct'], g['cases']) == (109, 11, 99, 120)
+
+  def arms_match():
+      g = _block('demo:compositions/s04-routes.html', 'GRID')
+      t = TEST()
+      names = {'all qwen 3B': 'all-small qwen2.5-coder:3b', 'all llama3.2': 'all-small llama3.2', 'all 7B': 'all-large qwen2.5-coder:7b',
+               'router, checks only': 'router, structural check only', 'router, tuned': 'router, tuned on dev', 'perfect verifier': 'oracle (perfect verifier)'}
+      return len(g['arms']) == 6 and all(
+          a['completion'] == round(100 * t[names[a['name']]]['completion'], 1) and a['cost'] == round(t[names[a['name']]]['cost_per_1k_usd'], 4)
+          for a in g['arms'])
+
+  def ledger_matches():
+      """SHEET rows in value.html == routing log == per_case.csv for the six cases shown."""
+      s = _block('demo:compositions/value.html', 'SHEET')
+      log = _log()
+      pc = _router_cases().set_index('id')
+      if [r['id'] for r in s['rows']] != ['ext-023', 'cla-021', 'sum-026', 'rea-040', 'rea-021', 'cla-035']:
+          return False
+      for r in s['rows']:
+          x, p = log[r['id']], pc.loc[r['id']]
+          if r['by'] != ('7B' if bool(p['escalated']) else '3B'):
+              return False
+          if r['cost_1k'] != '${:.3f}'.format(1000 * p['cost_usd']):
+              return False
+          if r['check'].startswith('✓') != (x['check_passed'] and x['confidence'] >= x['threshold']):
+              return False
+          if r['task'] == 'reasoning' and ('ANSWER: ' + r['answer'].split()[-1]) not in x['output']:
+              return False
+          if r['task'] == 'classification' and r['answer'] != x['output'].strip().split()[0]:
+              return False
+          if r['task'] == 'summarization' and r['answer'].split()[0] not in x['output']:
+              return False
+          if r['task'] == 'extraction' and not all(v in x['output'] for v in r['answer'].replace(' units', '').split(' · ')):
+              return False
+      return (s['kept'], s['escalated'], s['cost_per_1k'], s['cases']) == (109, 11, 0.0176, 120)
+
+  def ext023_ok():
+      x = _log()['ext-023']
+      o = json.loads(x['output'][x['output'].find('{'):x['output'].rfind('}') + 1])
+      want = {'order_id': 'PO-51719', 'customer': 'Summit Auto Parts', 'sku': 'LED-3580', 'quantity': 20, 'delivery_city': 'Sharjah', 'delivery_date': '2026-05-14'}
+      return o == want and x['check_passed'] and not x['escalated'] and x['first_model'] == 'llama3.2' and 'May 14, 2026' in x['input']
+
+  def confident_wrong_ok():
+      rows = [r for r in _log().values() if r['task'] == 'reasoning' and not r['escalated'] and not r['correct']]
+      return len(rows) == 6 and all(r['confidence'] > 0.9999 for r in rows)
+
+  def rea028_ok():
+      x = _log()['rea-028']
+      return ('38 * 168 = 6264' in x['output'] and 'ANSWER: 6309' in x['output'] and x['answer'] == 6429
+              and 38 * 168 == 6384 and 6384 + 45 == 6429 and not x['escalated'] and x['confidence'] > 0.9999
+              and grep('outputs/responses/qwen2.5-coder_3b.jsonl', r'38 \* 168 = 6264'))
+
+  def components_exist():
+      src = 'src/llm_cost_router/'
+      defs = {'router.py': [r'def route\('], 'evaluate.py': [r'def calibrate\(', r'def summarise\(', r'def paired_bootstrap\(', r'def run_arm\('],
+              'verifiers.py': [r'def verify\('], 'client.py': [r'class ResponseCache', r'def ollama_call\('], 'prompts.py': [r'def build_prompt\('],
+              'grading.py': [r'def grade\('], 'data.py': [r'def generate_suite\(', r'def generate_traffic\(']}
+      ok = all(grep(src + f, rx) for f, rxs in defs.items() for rx in rxs)
+      files = ['data/eval_suite.jsonl', 'data/traffic_daily.csv', 'outputs/results.json', 'outputs/per_case.csv', 'outputs/responses/llama3.2.jsonl']
+      return ok and all(len(T(f)) > 0 for f in files)

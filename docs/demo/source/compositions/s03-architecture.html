@@ -1,0 +1,326 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #arch-root { position: absolute; inset: 0; }
+        #arch-root .diagram { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+        #arch-root svg.layer { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+        #arch-root .wire { fill: none; stroke-width: 3.5; stroke-linejoin: round; stroke-linecap: round; }
+        #arch-root .lane { position: absolute; left: 60px; width: 1780px; border-radius: 18px; border: 2px solid rgba(178, 191, 204, 0.12); background: rgba(19, 33, 49, 0.35); }
+        #arch-root .lane-pill {
+          position: absolute; left: 84px; padding: 3px 14px; border-radius: 999px; background: var(--bg);
+          border: 2px solid rgba(178, 191, 204, 0.22); font-family: var(--mono); font-size: 20px; font-weight: 700;
+          letter-spacing: 0.08em; color: var(--ink-soft); white-space: nowrap;
+        }
+        #arch-root .node {
+          position: absolute; display: flex; flex-direction: column; justify-content: center; gap: 4px;
+          padding: 0 20px; border: 2px solid var(--line); border-radius: 14px; background: var(--panel);
+        }
+        #arch-root .node.cyl { border: none; background: none; padding-top: 18px; }
+        #arch-root .node.svc { border-style: dashed; }
+        #arch-root .node.top { justify-content: flex-start; padding-top: 18px; }
+        #arch-root .node .t { font-size: 27px; font-weight: 700; letter-spacing: -0.01em; color: var(--ink); white-space: nowrap; }
+        #arch-root .node .s { font-family: var(--mono); font-size: 20px; color: var(--ink-soft); white-space: nowrap; }
+        #arch-root .node .f {
+          position: absolute; right: 12px; top: -15px; font-family: var(--mono); font-size: 20px; padding: 0 9px;
+          border-radius: 6px; background: var(--bg); border: 2px solid var(--line); white-space: nowrap;
+        }
+        #arch-root .node.cyl .f { top: -6px; }
+        #arch-root .L-data { border-color: rgba(127, 168, 255, 0.6); }
+        #arch-root .L-data .f { color: var(--c-data); }
+        #arch-root .L-model { border-color: rgba(185, 162, 255, 0.65); }
+        #arch-root .L-model .f { color: var(--c-model); }
+        #arch-root .L-opt { border-color: rgba(63, 216, 168, 0.6); }
+        #arch-root .L-opt .f { color: var(--c-opt); }
+        #arch-root .L-eval { border-color: rgba(242, 196, 109, 0.65); }
+        #arch-root .L-eval .f { color: var(--c-eval); }
+        #arch-root .L-risk { border-color: rgba(255, 138, 115, 0.65); }
+        #arch-root .L-risk .f { color: var(--c-risk); }
+        #arch-root .hero { border: 3px solid var(--c-opt); background: #0f2629; box-shadow: 0 0 30px rgba(63, 216, 168, 0.12); justify-content: flex-start; padding-top: 20px; }
+        #arch-root .hero .t { font-family: var(--mono); font-size: 28px; }
+        #arch-root .pol { display: grid; grid-template-columns: 96px 100px 92px; row-gap: 4px; column-gap: 10px; margin: 8px 0 6px; font-family: var(--mono); font-size: 20px; color: var(--ink-soft); }
+        #arch-root .pol .m { color: var(--c-model); }
+        #arch-root .pol .x { color: var(--c-risk); font-weight: 700; }
+        #arch-root .hero .s.acc { color: var(--c-opt); }
+        #arch-root .stat { font-family: var(--mono); font-size: 22px; color: var(--ink); white-space: nowrap; }
+        #arch-root .stat b { color: var(--c-opt); }
+        #arch-root .rule { width: 100%; height: 2px; background: var(--line); margin: 8px 0; }
+        #arch-root .wl { position: absolute; font-family: var(--mono); font-size: 20px; white-space: nowrap; line-height: 1.15; }
+        #arch-root .legend {
+          position: absolute; left: 1110px; top: 120px; width: 700px; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px 22px;
+          font-family: var(--mono); font-size: 20px; color: var(--ink-soft);
+        }
+        #arch-root .legend span { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+        #arch-root .legend i { display: block; width: 14px; height: 14px; border-radius: 3px; }
+        #arch-root .legend em { display: block; width: 30px; height: 0; border-top: 3px solid var(--ink-soft); }
+        #arch-root .legend em.dash { border-top-style: dashed; }
+        #arch-root .callout {
+          position: absolute; left: 300px; top: 884px; width: 1360px; height: 92px; border-radius: 14px; border: 2px solid var(--c-opt);
+          background: rgba(10, 17, 25, 0.96); display: flex; align-items: center; justify-content: center; gap: 18px;
+          font-family: var(--mono); font-size: 26px; color: var(--ink); white-space: nowrap;
+        }
+        #arch-root .callout b { color: var(--c-opt); }
+      </style>
+
+      <div id="arch-root" data-composition-id="arch" data-width="1920" data-height="1080">
+        <div class="scene" id="arch-in">
+          <div class="eyebrow" data-layout-allow-overlap id="arch-eyebrow">05 · Architecture</div>
+          <div class="scene-title" data-layout-allow-overlap id="arch-title" style="width: 1150px">A verifier-gated cascade, tuned offline.</div>
+          <div class="legend" id="arch-legend">
+            <span><i style="background: var(--c-data)"></i>data</span>
+            <span><i style="background: var(--c-model)"></i>models</span>
+            <span><i style="background: var(--c-opt)"></i>router</span>
+            <span><i style="background: var(--c-risk)"></i>verifier</span>
+            <span><i style="background: var(--c-eval)"></i>evaluation</span>
+            <span><em></em>per request</span>
+            <span><em class="dash"></em>batch / offline</span>
+          </div>
+
+          <div class="diagram" id="arch-diagram">
+            <!-- swimlanes -->
+            <div class="lane" id="lane1" style="top: 204px; height: 186px"></div>
+            <div class="lane" id="lane2" style="top: 438px; height: 390px"></div>
+            <div class="lane" id="lane3" style="top: 850px; height: 142px"></div>
+            <div class="lane-pill" id="lane1-l" style="top: 190px">OFFLINE · TUNED ON THE DEV SPLIT</div>
+            <div class="lane-pill" id="lane2-l" style="top: 424px">ONLINE · PER REQUEST · ≤ 2 CALLS</div>
+            <div class="lane-pill" id="lane3-l" style="top: 836px">EVALUATION · REPLAYS THE CACHE · make run &lt; 1 s</div>
+
+            <svg class="layer" viewBox="0 0 1920 1080" id="arch-shapes"></svg>
+            <svg class="layer" viewBox="0 0 1920 1080" id="arch-wires"></svg>
+
+            <!-- lane 1: offline -->
+            <div class="node L-data" id="n-gen" style="left: 120px; top: 252px; width: 220px; height: 120px">
+              <div class="f">data.py</div><div class="t">Generator</div><div class="s">seeded</div><div class="s">answers first</div></div>
+            <div class="node cyl L-data" id="n-suite" style="left: 440px; top: 246px; width: 350px; height: 132px">
+              <div class="f">eval_suite.jsonl</div><div class="t">Eval suite</div><div class="s">200 cases · 4 tasks</div><div class="s">dev 80 · test 120</div></div>
+            <div class="node L-eval" id="n-cal" style="left: 890px; top: 252px; width: 250px; height: 120px">
+              <div class="f">evaluate.py</div><div class="t">calibrate()</div><div class="s">per task, the</div><div class="s">cheapest ≥ 7B</div></div>
+            <div class="node cyl L-data" id="n-cache" style="left: 1240px; top: 246px; width: 260px; height: 132px">
+              <div class="f">outputs/responses/</div><div class="t">Response cache</div><div class="s">3 models × 200</div><div class="s">≈ 46 min CPU</div></div>
+            <div class="node cyl L-data" id="n-traffic" style="left: 1600px; top: 246px; width: 200px; height: 132px">
+              <div class="f">data/</div><div class="t">Traffic log</div><div class="s">365 days</div><div class="s">16.4M / yr</div></div>
+
+            <!-- lane 2: online -->
+            <div class="node L-data" id="n-req" style="left: 120px; top: 500px; width: 220px; height: 120px">
+              <div class="f">prompts.py</div><div class="t">Request</div><div class="s">task + input</div><div class="s">1 prompt/task</div></div>
+            <div class="node hero" id="n-router" style="left: 440px; top: 478px; width: 350px; height: 228px">
+              <div class="f" style="color: var(--c-opt); left: 14px; right: auto">router.py</div>
+              <div class="t">Router.route()</div>
+              <div class="pol" id="arch-pol">
+                <span>extract</span><span class="m">llama3.2</span><span>τ 0</span>
+                <span>classify</span><span class="m">qwen 3B</span><span>τ 0</span>
+                <span>summary</span><span class="m">llama3.2</span><span>τ 0</span>
+                <span>reason</span><span class="m">qwen 3B</span><span class="x">τ .9999</span>
+              </div>
+              <div class="s acc">≤ 2 calls / request</div>
+            </div>
+            <div class="node svc top L-model" id="n-small" style="left: 890px; top: 486px; width: 250px; height: 146px">
+              <div class="f">Ollama</div><div class="t">Small 3B</div><div class="s">qwen2.5-coder:3b</div><div class="s">llama3.2</div><div class="s">$0.06 / M tok</div></div>
+            <div class="node top L-risk" id="n-ver" style="left: 1240px; top: 486px; width: 260px; height: 146px">
+              <div class="f">verifiers.py</div><div class="t">verify()</div><div class="s">schema</div><div class="s">grounded in input</div><div class="s">confidence ≥ τ</div></div>
+            <div class="node L-opt" id="n-ans" style="left: 1600px; top: 486px; width: 200px; height: 330px">
+              <div class="t">Answer</div><div class="s">to the caller</div>
+              <div class="rule"></div>
+              <div class="stat">3B kept <b>91%</b></div>
+              <div class="stat">p50 <b>3.6 s</b></div>
+              <div class="stat">p95 <b>20.4 s</b></div>
+              <div class="s">on CPU</div>
+            </div>
+            <div class="node svc L-model" id="n-large" style="left: 890px; top: 712px; width: 250px; height: 104px">
+              <div class="f">Ollama</div><div class="t">Large 7B</div><div class="s">qwen2.5-coder:7b</div><div class="s">$0.20 / M tok</div></div>
+
+            <!-- lane 3: evaluation -->
+            <div class="node L-eval" id="n-arms" style="left: 120px; top: 890px; width: 220px; height: 88px">
+              <div class="f">evaluate.py</div><div class="t">Replay arms</div><div class="s">6 arms · 120</div></div>
+            <div class="node L-eval" id="n-key" style="left: 440px; top: 890px; width: 350px; height: 88px">
+              <div class="f">grading.py</div><div class="t">Answer key</div><div class="s">the router never sees it</div></div>
+            <div class="node L-eval" id="n-score" style="left: 890px; top: 890px; width: 250px; height: 88px">
+              <div class="f">summarise()</div><div class="t">Score</div><div class="s">completion · cost</div></div>
+            <div class="node L-eval" id="n-boot" style="left: 1240px; top: 890px; width: 260px; height: 88px">
+              <div class="f">paired_bootstrap()</div><div class="t">Bootstrap</div><div class="s">95% CI · 4,000</div></div>
+            <div class="node cyl L-eval" id="n-res" style="left: 1600px; top: 884px; width: 200px; height: 100px">
+              <div class="f">outputs/</div><div class="t">results.json</div><div class="s">per_case.csv</div></div>
+
+            <!-- edge labels -->
+            <div class="wl" id="wl-dev" style="left: 806px; top: 270px; color: var(--c-data)">dev 80</div>
+            <div class="wl" id="wl-ans" style="left: 1150px; top: 338px; color: var(--c-data)">answers</div>
+            <div class="wl" id="wl-pol" style="left: 716px; top: 394px; color: var(--c-opt)">policy × 4</div>
+            <div class="wl" id="wl-log" style="left: 1112px; top: 416px; color: var(--c-data)">calls logged</div>
+            <div class="wl" id="wl-prompt" style="left: 352px; top: 526px; color: var(--c-data)">prompt</div>
+            <div class="wl" id="wl-first" style="left: 794px; top: 526px; color: var(--c-opt)">3B first</div>
+            <div class="wl" id="wl-lp" style="left: 1146px; top: 506px; color: var(--c-model)">text +<div>logprobs</div></div>
+            <div class="wl" id="wl-pass" style="left: 1548px; top: 588px; color: var(--c-opt)">pass</div>
+            <div class="wl" id="wl-fail" style="left: 1176px; top: 652px; color: var(--c-risk); text-align: right; width: 180px">fail → 7B<div>or conf &lt; τ</div></div>
+            <div class="wl" id="wl-none" style="left: 578px; top: 758px; color: var(--c-model)">no small model</div>
+            <div class="wl" id="wl-7b" style="left: 1390px; top: 758px; color: var(--c-model)">7B answer</div>
+            <div class="wl" id="wl-correct" style="left: 796px; top: 900px; color: var(--c-eval)">right?</div>
+
+            <svg class="layer" viewBox="0 0 1920 1080" id="arch-packets"></svg>
+            <div class="callout" id="arch-callout">critical path · <b>1 small call</b> · 91% of requests · p50 <b>3.6 s</b> vs 5.8 s for all-7B</div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          const tl = gsap.timeline({ paused: true });
+          const D = 15;
+          const NS = "http://www.w3.org/2000/svg";
+          const COL = { data: "#7fa8ff", model: "#b9a2ff", opt: "#3fd8a8", eval: "#f2c46d", risk: "#ff8a73" };
+          const shapes = document.getElementById("arch-shapes");
+          const wiresSvg = document.getElementById("arch-wires");
+          const pk = document.getElementById("arch-packets");
+          const mk = (tag, attrs, parent) => {
+            const n = document.createElementNS(NS, tag);
+            Object.entries(attrs).forEach(([k, v]) => n.setAttribute(k, v));
+            parent.appendChild(n);
+            return n;
+          };
+
+          // ---------- data stores drawn as cylinders (behind their HTML text)
+          const CYL = { "n-suite": "data", "n-cache": "data", "n-traffic": "data", "n-res": "eval" };
+          Object.entries(CYL).forEach(([id, c]) => {
+            const el = document.getElementById(id);
+            const x = parseFloat(el.style.left), y = parseFloat(el.style.top), w = parseFloat(el.style.width), h = parseFloat(el.style.height);
+            const ry = 13, rx = w / 2;
+            const g = mk("g", { id: "cyl-" + id, opacity: 0 }, shapes);
+            mk("path", { d: `M${x} ${y + ry} V${y + h - ry} A${rx} ${ry} 0 0 0 ${x + w} ${y + h - ry} V${y + ry}`, fill: "#0f1a26", stroke: COL[c], "stroke-opacity": 0.7, "stroke-width": 2 }, g);
+            mk("ellipse", { cx: x + rx, cy: y + ry, rx, ry, fill: "#132131", stroke: COL[c], "stroke-opacity": 0.7, "stroke-width": 2 }, g);
+          });
+          // decision point on the pass edge
+          mk("polygon", { points: "1550,540 1566,556 1550,572 1534,556", fill: "#0a1119", stroke: COL.opt, "stroke-width": 3, opacity: 0, id: "arch-dia" }, pk);
+
+          // ---------- edges: pts, colour, start time, dash = batch/offline
+          const E = {
+            gen_suite: { pts: [[340, 312], [440, 312]], c: "data", at: 1.2 },
+            suite_cal: { pts: [[790, 300], [890, 300]], c: "data", at: 1.55 },
+            cache_cal: { pts: [[1240, 330], [1140, 330]], c: "data", at: 1.75, dash: true },
+            suite_req: { pts: [[600, 378], [600, 460], [230, 460], [230, 500]], c: "data", at: 2.45, dash: true },
+            cal_router: { pts: [[960, 372], [960, 420], [700, 420], [700, 478]], c: "opt", at: 2.9, dash: true },
+            req_router: { pts: [[340, 556], [440, 556]], c: "data", at: 2.7 },
+            router_small: { pts: [[790, 556], [890, 556]], c: "opt", at: 3.3 },
+            small_ver: { pts: [[1140, 556], [1240, 556]], c: "model", at: 3.7 },
+            ver_ans: { pts: [[1500, 556], [1600, 556]], c: "opt", at: 4.1 },
+            ver_large: { pts: [[1370, 632], [1370, 740], [1140, 740]], c: "risk", at: 4.5 },
+            router_large: { pts: [[560, 706], [560, 790], [890, 790]], c: "model", at: 4.75, dash: true },
+            large_ans: { pts: [[1140, 790], [1600, 790]], c: "model", at: 5.0 },
+            small_cache: { pts: [[1000, 486], [1000, 446], [1300, 446], [1300, 378]], c: "data", at: 5.3, dash: true },
+            arms_key: { pts: [[340, 934], [440, 934]], c: "eval", at: 6.2 },
+            key_score: { pts: [[790, 934], [890, 934]], c: "eval", at: 6.4 },
+            score_boot: { pts: [[1140, 934], [1240, 934]], c: "eval", at: 6.6 },
+            boot_res: { pts: [[1500, 934], [1600, 934]], c: "eval", at: 6.8 },
+          };
+          const lenOf = (pts) => pts.slice(1).reduce((s, p, i) => s + Math.hypot(p[0] - pts[i][0], p[1] - pts[i][1]), 0);
+          Object.entries(E).forEach(([k, w]) => {
+            w.len = lenOf(w.pts);
+            const p = mk("path", { d: "M" + w.pts.map((q) => q.join(" ")).join(" L"), class: "wire", id: "w-" + k, stroke: COL[w.c], opacity: 0.85 }, wiresSvg);
+            // arrowhead along the last segment
+            const [a, b] = w.pts.slice(-2);
+            const ang = Math.atan2(b[1] - a[1], b[0] - a[0]);
+            const tip = (r, da) => [b[0] - r * Math.cos(ang + da), b[1] - r * Math.sin(ang + da)];
+            const p1 = tip(15, 0.42), p2 = tip(15, -0.42);
+            const head = mk("polygon", { points: `${b[0]},${b[1]} ${p1[0].toFixed(1)},${p1[1].toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)}`, fill: COL[w.c], opacity: 0, id: "h-" + k }, wiresSvg);
+            const dur = Math.max(0.3, w.len / 900);
+            if (w.dash) {
+              p.setAttribute("stroke-dasharray", "10 8");
+              tl.fromTo(p, { attr: { opacity: 0 } }, { attr: { opacity: 0.85 }, duration: 0.5 }, w.at);
+            } else {
+              p.setAttribute("stroke-dasharray", w.len + " " + w.len);
+              tl.fromTo(p, { attr: { "stroke-dashoffset": w.len } }, { attr: { "stroke-dashoffset": 0 }, duration: dur, ease: "power2.inOut" }, w.at);
+            }
+            tl.fromTo(head, { attr: { opacity: 0 } }, { attr: { opacity: 1 }, duration: 0.15 }, w.at + (w.dash ? 0.35 : dur - 0.1));
+          });
+
+          // ---------- build, layer by layer
+          tl.fromTo("#arch-in", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0);
+          tl.fromTo("#arch-eyebrow", { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }, 0.1);
+          tl.fromTo("#arch-title", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 0.2);
+          tl.fromTo("#arch-legend", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 0.5);
+          const pop = (id, at, from) => {
+            tl.fromTo("#" + id, Object.assign({ opacity: 0, x: 0, y: 0 }, from || { y: 16 }), { opacity: 1, x: 0, y: 0, duration: 0.5, ease: "power3.out" }, at);
+            if (CYL[id]) tl.fromTo("#cyl-" + id, { attr: { opacity: 0 } }, { attr: { opacity: 1 }, duration: 0.5 }, at);
+          };
+          const lane = (n, at) => {
+            tl.fromTo("#lane" + n, { opacity: 0 }, { opacity: 1, duration: 0.5 }, at);
+            tl.fromTo("#lane" + n + "-l", { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.45, ease: "power2.out" }, at + 0.05);
+          };
+          lane(1, 0.7);
+          pop("n-gen", 0.85, { x: -24 });
+          pop("n-suite", 1.05);
+          pop("n-cal", 1.45);
+          pop("n-cache", 1.6);
+          pop("n-traffic", 1.85);
+          lane(2, 2.2);
+          pop("n-req", 2.35, { x: -24 });
+          tl.fromTo("#n-router", { opacity: 0, scale: 0.94 }, { opacity: 1, scale: 1, duration: 0.6, ease: "power3.out" }, 2.75);
+          pop("n-small", 3.45);
+          pop("n-ver", 3.85);
+          tl.fromTo("#arch-dia", { attr: { opacity: 0 } }, { attr: { opacity: 1 }, duration: 0.3 }, 4.2);
+          pop("n-ans", 4.3, { x: -20 });
+          pop("n-large", 4.65);
+          lane(3, 5.7);
+          ["n-arms", "n-key", "n-score", "n-boot", "n-res"].forEach((id, i) => pop(id, 5.85 + i * 0.2));
+          const labels = { "wl-dev": 1.7, "wl-ans": 1.95, "wl-pol": 3.2, "wl-prompt": 2.9, "wl-first": 3.5, "wl-lp": 3.9,
+            "wl-pass": 4.3, "wl-fail": 4.8, "wl-none": 5.0, "wl-7b": 5.25, "wl-log": 5.55, "wl-correct": 6.55 };
+          Object.entries(labels).forEach(([id, at]) => tl.fromTo("#" + id, { opacity: 0 }, { opacity: 1, duration: 0.35 }, at));
+
+          // ---------- data packets, in execution order
+          // a route is a list of [x, y, visible]; a segment is drawn when its END point is flagged visible
+          const packet = (route, start, color, speed) => {
+            const c = mk("circle", { r: 7, cx: route[0][0], cy: route[0][1], fill: color, opacity: 0 }, pk);
+            let t = start;
+            for (let i = 1; i < route.length; i++) {
+              const [x0, y0] = route[i - 1], [x1, y1, vis] = route[i];
+              const dur = vis ? Math.hypot(x1 - x0, y1 - y0) / speed : 0.12;
+              tl.set(c, { attr: { opacity: vis ? 1 : 0 } }, t);
+              tl.to(c, { attr: { cx: x1, cy: y1 }, duration: dur, ease: "none" }, t);
+              t += dur;
+            }
+            tl.set(c, { attr: { opacity: 0 } }, t);
+            return t;
+          };
+          const along = (k) => E[k].pts.map((p) => [p[0], p[1], 1]);
+          // phase 1 (offline, batch): generate -> suite -> calibrate <- cache, policy -> router; evaluation chain
+          const P1 = 7.2;
+          [0, 0.35].forEach((o) => {
+            packet(along("gen_suite"), P1 + o, COL.data, 500);
+            packet(along("suite_cal"), P1 + 0.3 + o, COL.data, 500);
+            packet(along("cache_cal"), P1 + 0.3 + o, COL.data, 500);
+            packet(along("cal_router"), P1 + 0.8 + o, COL.opt, 520);
+          });
+          const evalRoute = [[340, 934, 1], [440, 934, 1], [790, 934, 0], [890, 934, 1], [1140, 934, 0], [1240, 934, 1], [1500, 934, 0], [1600, 934, 1]];
+          [0, 0.4, 0.8].forEach((o) => packet(evalRoute, P1 + 0.2 + o, COL.eval, 600));
+          // phase 2 (online): 11 requests stream through; one in eleven fails the check and goes to 7B
+          const P2 = 8.9;
+          const head = [[340, 556, 1], [440, 556, 1], [790, 556, 0], [890, 556, 1], [1140, 556, 0], [1240, 556, 1]];
+          const pass = head.concat([[1500, 556, 0], [1600, 556, 1]]);
+          const fail = head.concat([[1370, 556, 0], [1370, 632, 0], [1370, 740, 1], [1140, 740, 1], [1140, 790, 0], [1600, 790, 1]]);
+          for (let k = 0; k < 11; k++) {
+            const isFail = k === 5;
+            packet(isFail ? fail : pass, P2 + k * 0.26, isFail ? COL.risk : COL.opt, 700);
+            if (k % 3 === 0) packet(along("small_cache"), P2 + k * 0.26 + 0.5, COL.data, 600);
+          }
+          // phase 3: highlight the critical path (request -> router -> small -> verify -> answer)
+          const P3 = 12.4;
+          const dim = ["#n-gen", "#n-suite", "#n-cal", "#n-cache", "#n-traffic", "#n-large", "#n-arms", "#n-key", "#n-score", "#n-boot", "#n-res",
+            "#wl-dev", "#wl-ans", "#wl-pol", "#wl-log", "#wl-fail", "#wl-none", "#wl-7b", "#wl-correct",
+            "#lane1-l", "#lane3-l", "#lane1", "#lane3"];
+          tl.to(dim, { opacity: 0.18, duration: 0.5, ease: "power2.inOut" }, P3);
+          Object.keys(CYL).forEach((id) => tl.to("#cyl-" + id, { attr: { opacity: 0.18 }, duration: 0.5 }, P3));
+          ["gen_suite", "suite_cal", "cache_cal", "suite_req", "cal_router", "ver_large", "router_large", "large_ans", "small_cache", "arms_key", "key_score", "score_boot", "boot_res"].forEach((k) => {
+            tl.to("#w-" + k, { attr: { opacity: 0.15 }, duration: 0.5 }, P3);
+            tl.to("#h-" + k, { attr: { opacity: 0.15 }, duration: 0.5 }, P3);
+          });
+          ["req_router", "router_small", "small_ver", "ver_ans"].forEach((k) =>
+            tl.to("#w-" + k, { attr: { "stroke-width": 7, opacity: 1 }, duration: 0.5, ease: "power2.out" }, P3));
+          tl.to("#n-router", { boxShadow: "0 0 60px rgba(63,216,168,0.4)", duration: 0.6 }, P3);
+          tl.fromTo("#arch-callout", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, P3 + 0.3);
+          tl.to("#arch-in", { opacity: 0, duration: 0.4, ease: "power2.in" }, D - 0.4);
+          window.__timelines["arch"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #twist-root { position: absolute; inset: 0; }
+        #twist-root .eyebrow { color: var(--c-risk); }
+        #twist-root .sub { position: absolute; left: 120px; top: 200px; font-size: 32px; color: var(--ink-soft); }
+        #twist-root .bars { position: absolute; left: 120px; top: 310px; width: 1680px; }
+        #twist-root .row { display: flex; align-items: center; height: 112px; }
+        #twist-root .who { width: 470px; font-size: 36px; font-weight: 700; color: var(--ink); }
+        #twist-root .who small { display: block; font-family: var(--mono); font-size: 22px; font-weight: 400; color: var(--ink-mute); }
+        #twist-root .track { position: relative; width: 1000px; height: 44px; border-radius: 8px; background: rgba(178, 191, 204, 0.08); }
+        #twist-root .fill { position: absolute; left: 0; top: 0; height: 44px; border-radius: 8px; background: var(--ink-mute); transform-origin: left center; }
+        #twist-root .val { width: 210px; white-space: nowrap; text-align: right; font-family: var(--mono); font-size: 44px; font-weight: 700; color: var(--ink-soft); }
+        #twist-root .fill { background: var(--c-opt) !important; }
+        #twist-root .rule .fill { background: var(--c-risk) !important; }
+        #twist-root .rule .val { color: var(--c-risk); }
+        #twist-root .ref { position: absolute; top: -10px; width: 4px; height: 64px; border-radius: 2px; background: var(--ink-soft); }
+        #twist-root .xgb .fill { background: var(--c-model); }
+        #twist-root .xgb .val { color: var(--c-model); }
+        #twist-root .lr .fill { background: rgba(185, 162, 255, 0.55); }
+        #twist-root .verdict {
+          position: absolute; left: 120px; top: 806px; width: 1680px; padding: 22px 28px; border-radius: 12px;
+          border: 2px solid rgba(255, 138, 115, 0.45); background: rgba(255, 138, 115, 0.07);
+          font-size: 30px; line-height: 1.4; color: var(--ink);
+        }
+        #twist-root .verdict b { color: var(--c-risk); }
+      </style>
+      <div id="twist-root" data-composition-id="twist" data-width="1920" data-height="1080">
+        <div class="scene" id="twist-in">
+          <div class="eyebrow" data-layout-allow-overlap id="twist-eyebrow">09 · What didn't win</div>
+          <div class="scene-title" data-layout-allow-overlap id="twist-title">On arithmetic, the confidence check failed.</div>
+          <div class="sub" id="twist-sub">Completion per task, held out · bar = tuned router · tick = all-7B · router / 7B</div>
+          <div class="bars">
+            <div class="row" id="twist-r1"><div class="who">Orders<small>extraction</small></div>
+              <div class="track"><div class="fill" id="twist-b1" style="width: 930px"></div><div class="ref" style="left: 930px"></div></div><div class="val">93 / 93</div></div>
+            <div class="row" id="twist-r2"><div class="who">Tickets<small>classification</small></div>
+              <div class="track"><div class="fill" id="twist-b2" style="width: 870px"></div><div class="ref" style="left: 870px"></div></div><div class="val">87 / 87</div></div>
+            <div class="row" id="twist-r3"><div class="who">Shift reports<small>summarization</small></div>
+              <div class="track"><div class="fill" id="twist-b3" style="width: 870px"></div><div class="ref" style="left: 830px"></div></div><div class="val">87 / 83</div></div>
+            <div class="row rule" id="twist-r4"><div class="who">Arithmetic<small>reasoning</small></div>
+              <div class="track"><div class="fill" id="twist-b4" style="width: 630px"></div><div class="ref" id="twist-ref" style="left: 770px"></div></div><div class="val">63 / 77</div></div>
+          </div>
+          <div class="verdict" id="twist-verdict"><b>Why:</b> confidence is read at the ANSWER line, which copies a number already worked out. 6 wrong answers passed above 0.9999, e.g. 38 × 168 = 6264 (true 6384). Next: send arithmetic to the 7B.</div>
+        </div>
+      </div>
+      <script>
+        (() => {
+          const tl = gsap.timeline({ paused: true });
+          const D = 6.2;
+          tl.fromTo("#twist-in", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0);
+          tl.fromTo("#twist-eyebrow", { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }, 0.1);
+          tl.fromTo("#twist-title", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 0.2);
+          tl.fromTo("#twist-sub", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 0.5);
+          [1, 2, 3, 4].forEach((n, i) => {
+            tl.fromTo("#twist-r" + n, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" }, 0.8 + i * 0.15);
+            tl.fromTo("#twist-b" + n, { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out" }, 1.0 + i * 0.15);
+          });
+          tl.fromTo("#twist-root .ref", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 1.9);
+          tl.fromTo("#twist-verdict", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 2.4);
+          tl.to("#twist-in", { opacity: 0, duration: 0.4, ease: "power2.in" }, D - 0.4);
+          window.__timelines["twist"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

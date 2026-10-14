@@ -1,0 +1,184 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #routes-root { position: absolute; inset: 0; }
+        #routes-root .legend { position: absolute; left: 120px; top: 214px; display: flex; gap: 34px; font-family: var(--mono); font-size: 22px; color: var(--ink-soft); }
+        #routes-root .legend span { display: flex; align-items: center; gap: 10px; }
+        #routes-root .legend i { display: block; width: 22px; height: 22px; border-radius: 5px; }
+        #routes-root .legend b { color: var(--c-risk); font-size: 26px; }
+        #routes-root .rowlab { position: absolute; left: 120px; width: 220px; font-family: var(--mono); font-size: 22px; color: var(--ink-soft); }
+        #routes-root svg.layer { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+        #routes-root .counters { position: absolute; left: 120px; top: 600px; width: 1680px; display: flex; gap: 26px; }
+        #routes-root .ctr { flex: 1 1 0; height: 230px; border-radius: 16px; border: 2px solid var(--line); background: var(--panel); padding: 30px 30px; position: relative; overflow: hidden; }
+        #routes-root .ctr .bar { position: absolute; left: 0; top: 0; width: 100%; height: 6px; }
+        #routes-root .ctr .v { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 72px; font-weight: 700; letter-spacing: -0.04em; line-height: 1; white-space: nowrap; }
+        #routes-root .ctr .l { margin-top: 18px; font-size: 28px; font-weight: 700; color: var(--ink); }
+        #routes-root .ctr .n { margin-top: 8px; font-family: var(--mono); font-size: 22px; color: var(--ink-soft); white-space: nowrap; }
+        #routes-root .phase2 { position: absolute; inset: 0; }
+        #routes-root .ax { position: absolute; font-family: var(--mono); font-size: 22px; color: var(--ink-mute); white-space: nowrap; }
+        #routes-root .pl { position: absolute; font-family: var(--mono); font-size: 22px; color: var(--ink-soft); white-space: nowrap; line-height: 1.2; }
+        #routes-root .pl b { color: var(--ink); }
+        #routes-root .pl.hero { font-size: 26px; color: var(--c-opt); }
+        #routes-root .pl.hero b { color: var(--c-opt); }
+        #routes-root .note {
+          position: absolute; left: 1180px; top: 620px; width: 520px; padding: 20px 26px; border-radius: 12px; border: 2px solid rgba(63, 216, 168, 0.55);
+          background: rgba(63, 216, 168, 0.07); font-size: 28px; line-height: 1.4; color: var(--ink);
+        }
+        #routes-root .note b { color: var(--c-opt); }
+      </style>
+
+      <div id="routes-root" data-composition-id="routes" data-width="1920" data-height="1080">
+        <div class="scene" id="routes-in">
+          <div class="eyebrow" data-layout-allow-overlap id="routes-eyebrow">06 · The system running</div>
+          <div class="scene-title" data-layout-allow-overlap id="routes-title">The tuned router on 120 held-out requests.</div>
+          <div class="scene-title" data-layout-allow-overlap id="routes-title2">Six ways to serve the same 120 requests.</div>
+
+          <div id="routes-p1">
+            <div class="legend" id="routes-legend">
+              <span><i style="background: var(--c-opt)"></i>kept the 3B answer</span>
+              <span><i style="background: var(--c-model)"></i>escalated to 7B</span>
+              <span><b>✕</b>wrong, graded afterwards against the key</span>
+            </div>
+            <div class="rowlab" id="routes-r0" style="top: 296px">extraction</div>
+            <div class="rowlab" id="routes-r1" style="top: 364px">classification</div>
+            <div class="rowlab" id="routes-r2" style="top: 432px">summarization</div>
+            <div class="rowlab" id="routes-r3" style="top: 500px">reasoning</div>
+            <svg class="layer" viewBox="0 0 1920 1080" id="routes-grid"></svg>
+            <div class="counters">
+              <div class="ctr" id="routes-k1"><div class="bar" style="background: var(--c-opt)"></div>
+                <div class="v" style="color: var(--c-opt)" id="routes-v1">0</div><div class="l">answered by a 3B model</div><div class="n" id="routes-n1"></div></div>
+              <div class="ctr" id="routes-k2"><div class="bar" style="background: var(--c-model)"></div>
+                <div class="v" style="color: var(--c-model)" id="routes-v2">0</div><div class="l">escalated to the 7B</div><div class="n">failed the confidence bar</div></div>
+              <div class="ctr" id="routes-k3"><div class="bar" style="background: var(--c-opt)"></div>
+                <div class="v" style="color: var(--c-opt)" id="routes-v3">$0.0000</div><div class="l">per 1k requests</div><div class="n" id="routes-n3"></div></div>
+              <div class="ctr" id="routes-k4"><div class="bar" style="background: var(--c-eval)"></div>
+                <div class="v" style="color: var(--c-eval)" id="routes-v4">0.0%</div><div class="l">graded correct</div><div class="n" id="routes-n4"></div></div>
+            </div>
+          </div>
+
+          <div class="phase2" id="routes-p2">
+            <svg class="layer" viewBox="0 0 1920 1080" id="routes-plot"></svg>
+            <div class="ax" id="routes-ax-x" style="left: 860px; top: 900px">cost per 1k requests, USD →</div>
+            <div class="ax" id="routes-ax-y" style="left: 120px; top: 232px">completion, % ↑</div>
+            <div id="routes-labels"></div>
+            <div class="note" id="routes-note">Router vs all-7B: <b>61% cheaper</b>, 2.5 points less complete. The perfect verifier shows the headroom.</div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* GRID:BEGIN */ const GRID = {"tasks":["extraction","classification","summarization","reasoning"],"cells":[["extraction",0,1],["extraction",0,0],["extraction",0,1],["extraction",0,1],["extraction",0,1],["extraction",0,1],["extraction",0,1],["extraction",0,1],["extraction",0,1],["extraction",0,1],["extraction",0,1],["extraction",0,1],["extraction",0,1],["extraction",0,0],["extraction",0,1],["extraction",0,1],["extraction",0,1],["extraction",0,1],["extraction",0,1],["extraction",0,1],["extraction",0,1],["extraction",0,1],["extraction",0,1],["extraction",0,1],["extraction",0,1],["extraction",0,1],["extraction",0,1],["extraction",0,1],["extraction",0,1],["extraction",0,1],["classification",0,1],["classification",0,1],["classification",0,1],["classification",0,0],["classification",0,1],["classification",0,1],["classification",0,1],["classification",0,1],["classification",0,1],["classification",0,0],["classification",0,1],["classification",0,1],["classification",0,1],["classification",0,1],["classification",0,1],["classification",0,1],["classification",0,1],["classification",0,1],["classification",0,1],["classification",0,1],["classification",0,1],["classification",0,0],["classification",0,1],["classification",0,1],["classification",0,1],["classification",0,1],["classification",0,1],["classification",0,0],["classification",0,1],["classification",0,1],["summarization",0,0],["summarization",0,0],["summarization",0,1],["summarization",0,1],["summarization",0,1],["summarization",0,1],["summarization",0,1],["summarization",0,1],["summarization",0,1],["summarization",0,1],["summarization",0,1],["summarization",0,1],["summarization",0,1],["summarization",0,1],["summarization",0,1],["summarization",0,1],["summarization",0,1],["summarization",0,0],["summarization",0,1],["summarization",0,0],["summarization",0,1],["summarization",0,1],["summarization",0,1],["summarization",0,1],["summarization",0,1],["summarization",0,1],["summarization",0,1],["summarization",0,1],["summarization",0,1],["summarization",0,1],["reasoning",0,1],["reasoning",1,1],["reasoning",0,1],["reasoning",0,0],["reasoning",0,1],["reasoning",1,0],["reasoning",0,1],["reasoning",1,1],["reasoning",0,0],["reasoning",1,1],["reasoning",0,1],["reasoning",1,0],["reasoning",0,0],["reasoning",0,0],["reasoning",0,0],["reasoning",1,1],["reasoning",0,1],["reasoning",1,0],["reasoning",0,1],["reasoning",0,1],["reasoning",0,1],["reasoning",1,1],["reasoning",0,1],["reasoning",1,0],["reasoning",0,1],["reasoning",0,0],["reasoning",0,1],["reasoning",1,1],["reasoning",0,1],["reasoning",1,0]],"kept":109,"escalated":11,"correct":99,"cases":120,"cost_per_1k":0.0176,"arms":[{"name":"all qwen 3B","completion":75.8,"cost":0.0134},{"name":"all llama3.2","completion":80.0,"cost":0.0125},{"name":"all 7B","completion":85.0,"cost":0.0452},{"name":"router, checks only","completion":77.5,"cost":0.0152},{"name":"router, tuned","completion":82.5,"cost":0.0176},{"name":"perfect verifier","completion":91.7,"cost":0.0178}]}; /* GRID:END */
+          const tl = gsap.timeline({ paused: true });
+          const D = 12.4;
+          const NS = "http://www.w3.org/2000/svg";
+          const mk = (tag, attrs, parent) => {
+            const n = document.createElementNS(NS, tag);
+            Object.entries(attrs).forEach(([k, v]) => n.setAttribute(k, v));
+            parent.appendChild(n);
+            return n;
+          };
+          tl.fromTo("#routes-in", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0);
+          tl.fromTo("#routes-eyebrow", { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }, 0.1);
+          tl.fromTo("#routes-title", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 0.2);
+          tl.fromTo("#routes-legend", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 0.5);
+          [0, 1, 2, 3].forEach((i) => tl.fromTo("#routes-r" + i, { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" }, 0.6 + i * 0.08));
+
+          // ---- phase 1: one cell per held-out request, in case order, per task row
+          const grid = document.getElementById("routes-grid");
+          const X0 = 360, Y0 = 292, CELL = 40, GAP = 8, ROW = 68;
+          const seen = {};
+          const marks = [];
+          GRID.cells.forEach(([task, esc, ok]) => {
+            const row = GRID.tasks.indexOf(task);
+            const col = (seen[task] = (seen[task] || 0) + 1) - 1;
+            const x = X0 + col * (CELL + GAP), y = Y0 + row * ROW;
+            const r = mk("rect", { x, y, width: CELL, height: CELL, rx: 7, fill: esc ? "#b9a2ff" : "#3fd8a8", opacity: 0 }, grid);
+            tl.fromTo(r, { attr: { opacity: 0 } }, { attr: { opacity: 0.9 }, duration: 0.2 }, 1.0 + col * 0.09);
+            if (!ok) {
+              const g = mk("g", { opacity: 0 }, grid);
+              mk("path", { d: `M${x + 11} ${y + 11} L${x + 29} ${y + 29} M${x + 29} ${y + 11} L${x + 11} ${y + 29}`, stroke: "#0a1119", "stroke-width": 9, "stroke-linecap": "round" }, g);
+              mk("path", { d: `M${x + 11} ${y + 11} L${x + 29} ${y + 29} M${x + 29} ${y + 11} L${x + 11} ${y + 29}`, stroke: "#ff8a73", "stroke-width": 5, "stroke-linecap": "round" }, g);
+              marks.push(g);
+            }
+          });
+          marks.forEach((g, i) => tl.fromTo(g, { attr: { opacity: 0 } }, { attr: { opacity: 1 }, duration: 0.2 }, 4.1 + i * 0.03));
+          const large = GRID.arms.find((a) => a.name === "all 7B");
+          document.getElementById("routes-n1").textContent = "of " + GRID.cases + " requests";
+          document.getElementById("routes-n3").textContent = "all-7B: $" + large.cost.toFixed(4);
+          document.getElementById("routes-n4").textContent = "all-7B: " + large.completion.toFixed(1) + "%";
+          ["#routes-k1", "#routes-k2", "#routes-k3", "#routes-k4"].forEach((k, i) =>
+            tl.fromTo(k, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.9 + i * 0.12));
+          const count = (id, to, fmt, at, dur) => {
+            const o = { v: 0 }, el = document.getElementById(id);
+            tl.to(o, { v: to, duration: dur, ease: "none", onUpdate: () => { el.textContent = fmt(o.v); } }, at);
+          };
+          count("routes-v1", GRID.kept, (v) => String(Math.round(v)), 1.0, 2.8);
+          count("routes-v2", GRID.escalated, (v) => String(Math.round(v)), 1.0, 2.8);
+          count("routes-v3", GRID.cost_per_1k, (v) => "$" + v.toFixed(4), 1.0, 2.8);
+          count("routes-v4", (100 * GRID.correct) / GRID.cases, (v) => v.toFixed(1) + "%", 4.1, 1.0);
+
+          // ---- phase 2: completion vs cost for every arm (results.json, test split)
+          const P2 = 6.0;
+          tl.to("#routes-p1", { opacity: 0, duration: 0.4, ease: "power2.in" }, P2);
+          tl.to("#routes-title", { opacity: 0, duration: 0.3 }, P2);
+          tl.fromTo("#routes-title2", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, P2 + 0.3);
+          const plot = document.getElementById("routes-plot");
+          const PX = { x0: 400, x1: 1700, y0: 860, y1: 290, c0: 0, c1: 0.05, p0: 70, p1: 95 };
+          const sx = (c) => PX.x0 + ((c - PX.c0) / (PX.c1 - PX.c0)) * (PX.x1 - PX.x0);
+          const sy = (p) => PX.y0 - ((p - PX.p0) / (PX.p1 - PX.p0)) * (PX.y0 - PX.y1);
+          const axes = mk("g", { opacity: 0, id: "routes-axes" }, plot);
+          mk("line", { x1: PX.x0, y1: PX.y0, x2: PX.x1, y2: PX.y0, stroke: "#8494a6", "stroke-width": 2 }, axes);
+          mk("line", { x1: PX.x0, y1: PX.y0, x2: PX.x0, y2: PX.y1, stroke: "#8494a6", "stroke-width": 2 }, axes);
+          [75, 80, 85, 90, 95].forEach((p) => {
+            mk("line", { x1: PX.x0, y1: sy(p), x2: PX.x1, y2: sy(p), stroke: "rgba(178,191,204,0.08)", "stroke-width": 2 }, axes);
+            const t = mk("text", { x: PX.x0 - 16, y: sy(p) + 7, "text-anchor": "end", "font-family": "JetBrains Mono, monospace", "font-size": 20, fill: "#8494a6" }, axes);
+            t.textContent = p + "%";
+          });
+          [0, 0.01, 0.02, 0.03, 0.04, 0.05].forEach((c) => {
+            const t = mk("text", { x: sx(c), y: PX.y0 + 32, "text-anchor": "middle", "font-family": "JetBrains Mono, monospace", "font-size": 20, fill: "#8494a6" }, axes);
+            t.textContent = "$" + c.toFixed(2);
+          });
+          tl.fromTo("#routes-axes", { attr: { opacity: 0 } }, { attr: { opacity: 1 }, duration: 0.5 }, P2 + 0.4);
+          tl.fromTo(["#routes-ax-x", "#routes-ax-y"], { opacity: 0 }, { opacity: 1, duration: 0.5 }, P2 + 0.4);
+          // reference line at the all-7B completion
+          const ref = mk("line", { x1: PX.x0, y1: sy(large.completion), x2: PX.x1, y2: sy(large.completion), stroke: "#8494a6", "stroke-width": 2, "stroke-dasharray": "8 8", opacity: 0, id: "routes-ref" }, plot);
+          tl.fromTo(ref, { attr: { opacity: 0 } }, { attr: { opacity: 1 }, duration: 0.4 }, P2 + 1.6);
+          // label placement per arm: dx, dy, anchor side
+          const LAB = {
+            "all qwen 3B": [-24, 0, "left"], "all llama3.2": [-24, 0, "left"], "router, checks only": [24, 0, "right"],
+            "router, tuned": [26, 8, "right"], "perfect verifier": [24, 0, "right"], "all 7B": [-24, -34, "left"],
+          };
+          const COLR = { "router, tuned": "#3fd8a8", "perfect verifier": "#f2c46d", "all 7B": "#b2bfcc" };
+          const labels = document.getElementById("routes-labels");
+          GRID.arms.forEach((a, i) => {
+            const x = sx(a.cost), y = sy(a.completion);
+            const hero = a.name === "router, tuned";
+            const dot = mk("circle", { cx: x, cy: y, r: hero ? 16 : 12, fill: COLR[a.name] || "#8494a6", stroke: "#0a1119", "stroke-width": 3, opacity: 0 }, plot);
+            const at = P2 + 0.9 + i * 0.22;
+            tl.fromTo(dot, { attr: { opacity: 0, r: 2 } }, { attr: { opacity: 1, r: hero ? 16 : 12 }, duration: 0.4, ease: "power3.out" }, at);
+            const [dx, dy, side] = LAB[a.name];
+            const el = document.createElement("div");
+            el.className = "pl" + (hero ? " hero" : "");
+            el.id = "routes-pl" + i;
+            el.style.top = (y - 14 + dy) + "px";
+            if (side === "left") el.style.right = (1920 - x - dx) + "px";
+            else el.style.left = (x + dx) + "px";
+            el.style.textAlign = side === "left" ? "right" : "left";
+            const withCost = hero || a.name === "all 7B" || a.name === "perfect verifier";
+            el.innerHTML = "<b>" + a.name + "</b> " + a.completion.toFixed(1) + "%" + (withCost ? " · $" + a.cost.toFixed(4) : "");
+            if (COLR[a.name] && !hero) el.style.color = COLR[a.name];
+            labels.appendChild(el);
+            tl.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.4 }, at + 0.15);
+          });
+          tl.fromTo("#routes-note", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, P2 + 2.8);
+          tl.to("#routes-in", { opacity: 0, duration: 0.4, ease: "power2.in" }, D - 0.4);
+          window.__timelines["routes"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>
