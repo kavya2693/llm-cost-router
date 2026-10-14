@@ -15,5 +15,5 @@
 [x] .env.example present, no real values
 [x] prepush-scan.sh passes
 [x] 10+ incremental commits
-[ ] Public repo created, pushed, remote HEAD == local HEAD
+[x] Public repo created, pushed, remote HEAD == local HEAD
 [ ] Root README index updated
