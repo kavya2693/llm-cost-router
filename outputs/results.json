@@ -1,0 +1,1129 @@
+{
+  "annual_requests": {
+    "classification": 5408265.452380952,
+    "extraction": 6878998.952380952,
+    "reasoning": 1642888.5714285714,
+    "summarization": 2464826.386904762
+  },
+  "model_seconds": {
+    "llama3.2": 706.2,
+    "qwen2.5-coder:3b": 796.1,
+    "qwen2.5-coder:7b": 1240.3
+  },
+  "policy": {
+    "classification": {
+      "dev_completion": 0.95,
+      "dev_cost_per_1k_usd": 0.010125,
+      "dev_large_completion": 0.9,
+      "dev_large_cost_per_1k_usd": 0.033740000000000006,
+      "first": "qwen2.5-coder:3b",
+      "threshold": 0.0
+    },
+    "extraction": {
+      "dev_completion": 1.0,
+      "dev_cost_per_1k_usd": 0.015974999999999996,
+      "dev_large_completion": 1.0,
+      "dev_large_cost_per_1k_usd": 0.06209999999999999,
+      "first": "llama3.2",
+      "threshold": 0.0
+    },
+    "reasoning": {
+      "dev_completion": 0.95,
+      "dev_cost_per_1k_usd": 0.039584,
+      "dev_large_completion": 0.95,
+      "dev_large_cost_per_1k_usd": 0.046929999999999986,
+      "first": "qwen2.5-coder:3b",
+      "threshold": 0.9999
+    },
+    "summarization": {
+      "dev_completion": 0.85,
+      "dev_cost_per_1k_usd": 0.011493,
+      "dev_large_completion": 0.85,
+      "dev_large_cost_per_1k_usd": 0.038299999999999994,
+      "first": "llama3.2",
+      "threshold": 0.0
+    }
+  },
+  "splits": {
+    "all": {
+      "all-large qwen2.5-coder:7b": {
+        "by_difficulty": {
+          "easy": {
+            "completion": 0.96,
+            "cost_per_1k_usd": 0.039988,
+            "escalation_rate": 0.0,
+            "n": 100,
+            "p50_latency_s": 5.2212499999999995,
+            "p95_latency_s": 9.911235,
+            "share_answered_small": 0.0,
+            "tokens_per_request": 199.94,
+            "verified": false,
+            "wrong_accepted_small": 0
+          },
+          "hard": {
+            "completion": 0.8,
+            "cost_per_1k_usd": 0.050508000000000004,
+            "escalation_rate": 0.0,
+            "n": 100,
+            "p50_latency_s": 6.1434,
+            "p95_latency_s": 12.87081,
+            "share_answered_small": 0.0,
+            "tokens_per_request": 252.54,
+            "verified": false,
+            "wrong_accepted_small": 0
+          }
+        },
+        "by_task": {
+          "classification": {
+            "completion": 0.88,
+            "cost_per_1k_usd": 0.033772,
+            "escalation_rate": 0.0,
+            "n": 50,
+            "p50_latency_s": 2.0648999999999997,
+            "p95_latency_s": 2.507875,
+            "share_answered_small": 0.0,
+            "tokens_per_request": 168.86,
+            "verified": false,
+            "wrong_accepted_small": 0
+          },
+          "extraction": {
+            "completion": 0.96,
+            "cost_per_1k_usd": 0.06180800000000002,
+            "escalation_rate": 0.0,
+            "n": 50,
+            "p50_latency_s": 8.05185,
+            "p95_latency_s": 10.47306,
+            "share_answered_small": 0.0,
+            "tokens_per_request": 309.04,
+            "verified": false,
+            "wrong_accepted_small": 0
+          },
+          "reasoning": {
+            "completion": 0.84,
+            "cost_per_1k_usd": 0.046979999999999994,
+            "escalation_rate": 0.0,
+            "n": 50,
+            "p50_latency_s": 9.47645,
+            "p95_latency_s": 15.694159999999998,
+            "share_answered_small": 0.0,
+            "tokens_per_request": 234.9,
+            "verified": false,
+            "wrong_accepted_small": 0
+          },
+          "summarization": {
+            "completion": 0.84,
+            "cost_per_1k_usd": 0.038431999999999994,
+            "escalation_rate": 0.0,
+            "n": 50,
+            "p50_latency_s": 4.1871,
+            "p95_latency_s": 5.208475,
+            "share_answered_small": 0.0,
+            "tokens_per_request": 192.16,
+            "verified": false,
+            "wrong_accepted_small": 0
+          }
+        },
+        "completion": 0.88,
+        "cost_per_1k_usd": 0.045248000000000024,
+        "escalation_rate": 0.0,
+        "n": 200,
+        "p50_latency_s": 5.630699999999999,
+        "p95_latency_s": 12.559285000000001,
+        "projected_annual_cost_usd": 779.7362208938098,
+        "share_answered_small": 0.0,
+        "tokens_per_request": 226.24,
+        "verified": false,
+        "wrong_accepted_small": 0
+      },
+      "all-small llama3.2": {
+        "by_difficulty": {
+          "easy": {
+            "completion": 0.92,
+            "cost_per_1k_usd": 0.010738200000000002,
+            "escalation_rate": 0.0,
+            "n": 100,
+            "p50_latency_s": 2.8985,
+            "p95_latency_s": 4.615305,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 178.97,
+            "verified": false,
+            "wrong_accepted_small": 0
+          },
+          "hard": {
+            "completion": 0.72,
+            "cost_per_1k_usd": 0.014223600000000001,
+            "escalation_rate": 0.0,
+            "n": 100,
+            "p50_latency_s": 3.73515,
+            "p95_latency_s": 9.162189999999999,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 237.06,
+            "verified": false,
+            "wrong_accepted_small": 0
+          }
+        },
+        "by_task": {
+          "classification": {
+            "completion": 0.78,
+            "cost_per_1k_usd": 0.009733200000000003,
+            "escalation_rate": 0.0,
+            "n": 50,
+            "p50_latency_s": 1.09355,
+            "p95_latency_s": 1.35873,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 162.22,
+            "verified": false,
+            "wrong_accepted_small": 0
+          },
+          "extraction": {
+            "completion": 0.96,
+            "cost_per_1k_usd": 0.015936000000000002,
+            "escalation_rate": 0.0,
+            "n": 50,
+            "p50_latency_s": 3.99055,
+            "p95_latency_s": 4.601125,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 265.6,
+            "verified": false,
+            "wrong_accepted_small": 0
+          },
+          "reasoning": {
+            "completion": 0.68,
+            "cost_per_1k_usd": 0.0127116,
+            "escalation_rate": 0.0,
+            "n": 50,
+            "p50_latency_s": 5.1056,
+            "p95_latency_s": 10.181154999999999,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 211.86,
+            "verified": false,
+            "wrong_accepted_small": 0
+          },
+          "summarization": {
+            "completion": 0.86,
+            "cost_per_1k_usd": 0.011542799999999997,
+            "escalation_rate": 0.0,
+            "n": 50,
+            "p50_latency_s": 2.8832,
+            "p95_latency_s": 3.849054999999999,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 192.38,
+            "verified": false,
+            "wrong_accepted_small": 0
+          }
+        },
+        "completion": 0.82,
+        "cost_per_1k_usd": 0.012480899999999996,
+        "escalation_rate": 0.0,
+        "n": 200,
+        "p50_latency_s": 3.3305,
+        "p95_latency_s": 8.343804999999998,
+        "projected_annual_cost_usd": 211.59819698959288,
+        "share_answered_small": 1.0,
+        "tokens_per_request": 208.015,
+        "verified": false,
+        "wrong_accepted_small": 0
+      },
+      "all-small qwen2.5-coder:3b": {
+        "by_difficulty": {
+          "easy": {
+            "completion": 0.94,
+            "cost_per_1k_usd": 0.0117306,
+            "escalation_rate": 0.0,
+            "n": 100,
+            "p50_latency_s": 3.5731,
+            "p95_latency_s": 6.604734999999999,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 195.51,
+            "verified": false,
+            "wrong_accepted_small": 0
+          },
+          "hard": {
+            "completion": 0.64,
+            "cost_per_1k_usd": 0.0150588,
+            "escalation_rate": 0.0,
+            "n": 100,
+            "p50_latency_s": 4.479850000000001,
+            "p95_latency_s": 9.21908,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 250.98,
+            "verified": false,
+            "wrong_accepted_small": 0
+          }
+        },
+        "by_task": {
+          "classification": {
+            "completion": 0.9,
+            "cost_per_1k_usd": 0.010132799999999999,
+            "escalation_rate": 0.0,
+            "n": 50,
+            "p50_latency_s": 1.0443500000000001,
+            "p95_latency_s": 1.3978249999999999,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 168.88,
+            "verified": false,
+            "wrong_accepted_small": 0
+          },
+          "extraction": {
+            "completion": 0.96,
+            "cost_per_1k_usd": 0.0183024,
+            "escalation_rate": 0.0,
+            "n": 50,
+            "p50_latency_s": 5.1223,
+            "p95_latency_s": 7.495535,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 305.04,
+            "verified": false,
+            "wrong_accepted_small": 0
+          },
+          "reasoning": {
+            "completion": 0.56,
+            "cost_per_1k_usd": 0.013090799999999998,
+            "escalation_rate": 0.0,
+            "n": 50,
+            "p50_latency_s": 6.0086,
+            "p95_latency_s": 9.513555,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 218.18,
+            "verified": false,
+            "wrong_accepted_small": 0
+          },
+          "summarization": {
+            "completion": 0.74,
+            "cost_per_1k_usd": 0.012052799999999999,
+            "escalation_rate": 0.0,
+            "n": 50,
+            "p50_latency_s": 3.04325,
+            "p95_latency_s": 4.484365,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 200.88,
+            "verified": false,
+            "wrong_accepted_small": 0
+          }
+        },
+        "completion": 0.79,
+        "cost_per_1k_usd": 0.013394700000000004,
+        "escalation_rate": 0.0,
+        "n": 200,
+        "p50_latency_s": 3.9126000000000003,
+        "p95_latency_s": 8.284259999999998,
+        "projected_annual_cost_usd": 231.9178477888857,
+        "share_answered_small": 1.0,
+        "tokens_per_request": 223.245,
+        "verified": false,
+        "wrong_accepted_small": 0
+      },
+      "oracle (perfect verifier)": {
+        "by_difficulty": {
+          "easy": {
+            "completion": 0.99,
+            "cost_per_1k_usd": 0.011989800000000004,
+            "escalation_rate": 0.0,
+            "n": 100,
+            "p50_latency_s": 3.51675,
+            "p95_latency_s": 6.850084999999999,
+            "share_answered_small": 0.99,
+            "tokens_per_request": 195.0,
+            "verified": false,
+            "wrong_accepted_small": 0
+          },
+          "hard": {
+            "completion": 0.88,
+            "cost_per_1k_usd": 0.0231724,
+            "escalation_rate": 0.0,
+            "n": 100,
+            "p50_latency_s": 4.7120999999999995,
+            "p95_latency_s": 11.575334999999999,
+            "share_answered_small": 0.78,
+            "tokens_per_request": 253.37,
+            "verified": false,
+            "wrong_accepted_small": 0
+          }
+        },
+        "by_task": {
+          "classification": {
+            "completion": 0.9,
+            "cost_per_1k_usd": 0.012560399999999996,
+            "escalation_rate": 0.0,
+            "n": 50,
+            "p50_latency_s": 1.06555,
+            "p95_latency_s": 2.059455,
+            "share_answered_small": 0.9,
+            "tokens_per_request": 168.88,
+            "verified": false,
+            "wrong_accepted_small": 0
+          },
+          "extraction": {
+            "completion": 0.96,
+            "cost_per_1k_usd": 0.020210400000000007,
+            "escalation_rate": 0.0,
+            "n": 50,
+            "p50_latency_s": 5.1223,
+            "p95_latency_s": 7.864589999999999,
+            "share_answered_small": 0.96,
+            "tokens_per_request": 305.2,
+            "verified": false,
+            "wrong_accepted_small": 0
+          },
+          "reasoning": {
+            "completion": 0.92,
+            "cost_per_1k_usd": 0.02305400000000001,
+            "escalation_rate": 0.0,
+            "n": 50,
+            "p50_latency_s": 6.1396,
+            "p95_latency_s": 14.024369999999994,
+            "share_answered_small": 0.76,
+            "tokens_per_request": 223.98,
+            "verified": false,
+            "wrong_accepted_small": 0
+          },
+          "summarization": {
+            "completion": 0.96,
+            "cost_per_1k_usd": 0.014499600000000001,
+            "escalation_rate": 0.0,
+            "n": 50,
+            "p50_latency_s": 3.0937,
+            "p95_latency_s": 4.6816949999999995,
+            "share_answered_small": 0.92,
+            "tokens_per_request": 198.68,
+            "verified": false,
+            "wrong_accepted_small": 0
+          }
+        },
+        "completion": 0.935,
+        "cost_per_1k_usd": 0.01758110000000001,
+        "escalation_rate": 0.0,
+        "n": 200,
+        "p50_latency_s": 3.92075,
+        "p95_latency_s": 10.929244999999998,
+        "projected_annual_cost_usd": 280.5714476205643,
+        "share_answered_small": 0.885,
+        "tokens_per_request": 224.185,
+        "verified": false,
+        "wrong_accepted_small": 0
+      },
+      "router, structural check only": {
+        "by_difficulty": {
+          "easy": {
+            "completion": 0.94,
+            "cost_per_1k_usd": 0.012080599999999999,
+            "escalation_rate": 0.01,
+            "n": 100,
+            "p50_latency_s": 3.5731,
+            "p95_latency_s": 6.850084999999999,
+            "share_answered_small": 0.99,
+            "tokens_per_request": 197.26,
+            "verified": true,
+            "wrong_accepted_small": 6
+          },
+          "hard": {
+            "completion": 0.66,
+            "cost_per_1k_usd": 0.0168228,
+            "escalation_rate": 0.04,
+            "n": 100,
+            "p50_latency_s": 4.7120999999999995,
+            "p95_latency_s": 9.513505,
+            "share_answered_small": 0.96,
+            "tokens_per_request": 259.8,
+            "verified": true,
+            "wrong_accepted_small": 34
+          }
+        },
+        "by_task": {
+          "classification": {
+            "completion": 0.9,
+            "cost_per_1k_usd": 0.010132799999999999,
+            "escalation_rate": 0.0,
+            "n": 50,
+            "p50_latency_s": 1.0443500000000001,
+            "p95_latency_s": 1.3978249999999999,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 168.88,
+            "verified": true,
+            "wrong_accepted_small": 5
+          },
+          "extraction": {
+            "completion": 0.96,
+            "cost_per_1k_usd": 0.0183024,
+            "escalation_rate": 0.0,
+            "n": 50,
+            "p50_latency_s": 5.1223,
+            "p95_latency_s": 7.495535,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 305.04,
+            "verified": true,
+            "wrong_accepted_small": 2
+          },
+          "reasoning": {
+            "completion": 0.56,
+            "cost_per_1k_usd": 0.013090799999999998,
+            "escalation_rate": 0.0,
+            "n": 50,
+            "p50_latency_s": 6.0086,
+            "p95_latency_s": 9.513555,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 218.18,
+            "verified": true,
+            "wrong_accepted_small": 22
+          },
+          "summarization": {
+            "completion": 0.78,
+            "cost_per_1k_usd": 0.016280799999999998,
+            "escalation_rate": 0.1,
+            "n": 50,
+            "p50_latency_s": 3.0516,
+            "p95_latency_s": 8.232645,
+            "share_answered_small": 0.9,
+            "tokens_per_request": 222.02,
+            "verified": true,
+            "wrong_accepted_small": 11
+          }
+        },
+        "completion": 0.8,
+        "cost_per_1k_usd": 0.014451700000000005,
+        "escalation_rate": 0.025,
+        "n": 200,
+        "p50_latency_s": 4.00245,
+        "p95_latency_s": 8.452114999999996,
+        "projected_annual_cost_usd": 242.33913375271908,
+        "share_answered_small": 0.975,
+        "tokens_per_request": 228.53,
+        "verified": true,
+        "wrong_accepted_small": 40
+      },
+      "router, tuned on dev": {
+        "by_difficulty": {
+          "easy": {
+            "completion": 0.95,
+            "cost_per_1k_usd": 0.011548400000000004,
+            "escalation_rate": 0.01,
+            "n": 100,
+            "p50_latency_s": 3.23985,
+            "p95_latency_s": 6.43025,
+            "share_answered_small": 0.99,
+            "tokens_per_request": 187.69,
+            "verified": true,
+            "wrong_accepted_small": 5
+          },
+          "hard": {
+            "completion": 0.79,
+            "cost_per_1k_usd": 0.0250068,
+            "escalation_rate": 0.2,
+            "n": 100,
+            "p50_latency_s": 3.73515,
+            "p95_latency_s": 21.93123,
+            "share_answered_small": 0.8,
+            "tokens_per_request": 290.85,
+            "verified": true,
+            "wrong_accepted_small": 15
+          }
+        },
+        "by_task": {
+          "classification": {
+            "completion": 0.9,
+            "cost_per_1k_usd": 0.010132799999999999,
+            "escalation_rate": 0.0,
+            "n": 50,
+            "p50_latency_s": 1.0443500000000001,
+            "p95_latency_s": 1.3978249999999999,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 168.88,
+            "verified": true,
+            "wrong_accepted_small": 5
+          },
+          "extraction": {
+            "completion": 0.96,
+            "cost_per_1k_usd": 0.015936000000000002,
+            "escalation_rate": 0.0,
+            "n": 50,
+            "p50_latency_s": 3.99055,
+            "p95_latency_s": 4.601125,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 265.6,
+            "verified": true,
+            "wrong_accepted_small": 2
+          },
+          "reasoning": {
+            "completion": 0.76,
+            "cost_per_1k_usd": 0.035498800000000004,
+            "escalation_rate": 0.42,
+            "n": 50,
+            "p50_latency_s": 8.2732,
+            "p95_latency_s": 23.490439999999996,
+            "share_answered_small": 0.58,
+            "tokens_per_request": 330.22,
+            "verified": true,
+            "wrong_accepted_small": 6
+          },
+          "summarization": {
+            "completion": 0.86,
+            "cost_per_1k_usd": 0.011542799999999997,
+            "escalation_rate": 0.0,
+            "n": 50,
+            "p50_latency_s": 2.8832,
+            "p95_latency_s": 3.849054999999999,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 192.38,
+            "verified": true,
+            "wrong_accepted_small": 7
+          }
+        },
+        "completion": 0.87,
+        "cost_per_1k_usd": 0.018277600000000005,
+        "escalation_rate": 0.105,
+        "n": 200,
+        "p50_latency_s": 3.5744,
+        "p95_latency_s": 19.09476499999999,
+        "projected_annual_cost_usd": 251.1961703192214,
+        "share_answered_small": 0.895,
+        "tokens_per_request": 239.27,
+        "verified": true,
+        "wrong_accepted_small": 20
+      },
+      "router_minus_large_ci95": [
+        -0.045,
+        0.025
+      ]
+    },
+    "test": {
+      "all-large qwen2.5-coder:7b": {
+        "by_difficulty": {
+          "easy": {
+            "completion": 0.95,
+            "cost_per_1k_usd": 0.04013333333333332,
+            "escalation_rate": 0.0,
+            "n": 60,
+            "p50_latency_s": 5.2212499999999995,
+            "p95_latency_s": 10.065159999999999,
+            "share_answered_small": 0.0,
+            "tokens_per_request": 200.66666666666666,
+            "verified": false,
+            "wrong_accepted_small": 0
+          },
+          "hard": {
+            "completion": 0.75,
+            "cost_per_1k_usd": 0.05033666666666668,
+            "escalation_rate": 0.0,
+            "n": 60,
+            "p50_latency_s": 6.72125,
+            "p95_latency_s": 12.87081,
+            "share_answered_small": 0.0,
+            "tokens_per_request": 251.68333333333334,
+            "verified": false,
+            "wrong_accepted_small": 0
+          }
+        },
+        "by_task": {
+          "classification": {
+            "completion": 0.8666666666666667,
+            "cost_per_1k_usd": 0.033793333333333335,
+            "escalation_rate": 0.0,
+            "n": 30,
+            "p50_latency_s": 2.08415,
+            "p95_latency_s": 2.5316899999999998,
+            "share_answered_small": 0.0,
+            "tokens_per_request": 168.96666666666667,
+            "verified": false,
+            "wrong_accepted_small": 0
+          },
+          "extraction": {
+            "completion": 0.9333333333333333,
+            "cost_per_1k_usd": 0.06161333333333332,
+            "escalation_rate": 0.0,
+            "n": 30,
+            "p50_latency_s": 8.26215,
+            "p95_latency_s": 10.47306,
+            "share_answered_small": 0.0,
+            "tokens_per_request": 308.06666666666666,
+            "verified": false,
+            "wrong_accepted_small": 0
+          },
+          "reasoning": {
+            "completion": 0.7666666666666667,
+            "cost_per_1k_usd": 0.04701333333333333,
+            "escalation_rate": 0.0,
+            "n": 30,
+            "p50_latency_s": 9.49795,
+            "p95_latency_s": 14.771344999999991,
+            "share_answered_small": 0.0,
+            "tokens_per_request": 235.06666666666666,
+            "verified": false,
+            "wrong_accepted_small": 0
+          },
+          "summarization": {
+            "completion": 0.8333333333333334,
+            "cost_per_1k_usd": 0.038520000000000006,
+            "escalation_rate": 0.0,
+            "n": 30,
+            "p50_latency_s": 4.2593,
+            "p95_latency_s": 5.272625,
+            "share_answered_small": 0.0,
+            "tokens_per_request": 192.6,
+            "verified": false,
+            "wrong_accepted_small": 0
+          }
+        },
+        "completion": 0.85,
+        "cost_per_1k_usd": 0.045234999999999984,
+        "escalation_rate": 0.0,
+        "n": 120,
+        "p50_latency_s": 5.7974499999999995,
+        "p95_latency_s": 12.559285000000001,
+        "projected_annual_cost_usd": 778.7841531018253,
+        "share_answered_small": 0.0,
+        "tokens_per_request": 226.175,
+        "verified": false,
+        "wrong_accepted_small": 0
+      },
+      "all-small llama3.2": {
+        "by_difficulty": {
+          "easy": {
+            "completion": 0.9,
+            "cost_per_1k_usd": 0.010729000000000008,
+            "escalation_rate": 0.0,
+            "n": 60,
+            "p50_latency_s": 2.8737500000000002,
+            "p95_latency_s": 4.620155,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 178.81666666666666,
+            "verified": false,
+            "wrong_accepted_small": 0
+          },
+          "hard": {
+            "completion": 0.7,
+            "cost_per_1k_usd": 0.014250000000000002,
+            "escalation_rate": 0.0,
+            "n": 60,
+            "p50_latency_s": 3.73515,
+            "p95_latency_s": 9.825104999999999,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 237.5,
+            "verified": false,
+            "wrong_accepted_small": 0
+          }
+        },
+        "by_task": {
+          "classification": {
+            "completion": 0.7333333333333333,
+            "cost_per_1k_usd": 0.00973,
+            "escalation_rate": 0.0,
+            "n": 30,
+            "p50_latency_s": 1.1146500000000001,
+            "p95_latency_s": 1.3345749999999998,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 162.16666666666666,
+            "verified": false,
+            "wrong_accepted_small": 0
+          },
+          "extraction": {
+            "completion": 0.9333333333333333,
+            "cost_per_1k_usd": 0.015909999999999997,
+            "escalation_rate": 0.0,
+            "n": 30,
+            "p50_latency_s": 3.9659500000000003,
+            "p95_latency_s": 5.177869999999997,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 265.1666666666667,
+            "verified": false,
+            "wrong_accepted_small": 0
+          },
+          "reasoning": {
+            "completion": 0.6666666666666666,
+            "cost_per_1k_usd": 0.012741999999999996,
+            "escalation_rate": 0.0,
+            "n": 30,
+            "p50_latency_s": 5.5319,
+            "p95_latency_s": 10.836549999999997,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 212.36666666666667,
+            "verified": false,
+            "wrong_accepted_small": 0
+          },
+          "summarization": {
+            "completion": 0.8666666666666667,
+            "cost_per_1k_usd": 0.011576,
+            "escalation_rate": 0.0,
+            "n": 30,
+            "p50_latency_s": 2.99275,
+            "p95_latency_s": 4.114269999999999,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 192.93333333333334,
+            "verified": false,
+            "wrong_accepted_small": 0
+          }
+        },
+        "completion": 0.8,
+        "cost_per_1k_usd": 0.012489499999999997,
+        "escalation_rate": 0.0,
+        "n": 120,
+        "p50_latency_s": 3.4232,
+        "p95_latency_s": 8.494,
+        "projected_annual_cost_usd": 211.533812616,
+        "share_answered_small": 1.0,
+        "tokens_per_request": 208.15833333333333,
+        "verified": false,
+        "wrong_accepted_small": 0
+      },
+      "all-small qwen2.5-coder:3b": {
+        "by_difficulty": {
+          "easy": {
+            "completion": 0.9166666666666666,
+            "cost_per_1k_usd": 0.011752,
+            "escalation_rate": 0.0,
+            "n": 60,
+            "p50_latency_s": 3.9126000000000003,
+            "p95_latency_s": 7.286985,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 195.86666666666667,
+            "verified": false,
+            "wrong_accepted_small": 0
+          },
+          "hard": {
+            "completion": 0.6,
+            "cost_per_1k_usd": 0.015066999999999994,
+            "escalation_rate": 0.0,
+            "n": 60,
+            "p50_latency_s": 4.922499999999999,
+            "p95_latency_s": 9.513505,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 251.11666666666667,
+            "verified": false,
+            "wrong_accepted_small": 0
+          }
+        },
+        "by_task": {
+          "classification": {
+            "completion": 0.8666666666666667,
+            "cost_per_1k_usd": 0.010138000000000001,
+            "escalation_rate": 0.0,
+            "n": 30,
+            "p50_latency_s": 1.18465,
+            "p95_latency_s": 1.4846199999999996,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 168.96666666666667,
+            "verified": false,
+            "wrong_accepted_small": 0
+          },
+          "extraction": {
+            "completion": 0.9333333333333333,
+            "cost_per_1k_usd": 0.018244,
+            "escalation_rate": 0.0,
+            "n": 30,
+            "p50_latency_s": 5.56935,
+            "p95_latency_s": 7.538615,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 304.06666666666666,
+            "verified": false,
+            "wrong_accepted_small": 0
+          },
+          "reasoning": {
+            "completion": 0.5,
+            "cost_per_1k_usd": 0.013122,
+            "escalation_rate": 0.0,
+            "n": 30,
+            "p50_latency_s": 6.13025,
+            "p95_latency_s": 9.78343,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 218.7,
+            "verified": false,
+            "wrong_accepted_small": 0
+          },
+          "summarization": {
+            "completion": 0.7333333333333333,
+            "cost_per_1k_usd": 0.012134,
+            "escalation_rate": 0.0,
+            "n": 30,
+            "p50_latency_s": 3.3731,
+            "p95_latency_s": 4.950094999999998,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 202.23333333333332,
+            "verified": false,
+            "wrong_accepted_small": 0
+          }
+        },
+        "completion": 0.7583333333333333,
+        "cost_per_1k_usd": 0.013409500000000001,
+        "escalation_rate": 0.0,
+        "n": 120,
+        "p50_latency_s": 4.207750000000001,
+        "p95_latency_s": 8.710579999999998,
+        "projected_annual_cost_usd": 231.7956392564643,
+        "share_answered_small": 1.0,
+        "tokens_per_request": 223.49166666666667,
+        "verified": false,
+        "wrong_accepted_small": 0
+      },
+      "oracle (perfect verifier)": {
+        "by_difficulty": {
+          "easy": {
+            "completion": 0.9833333333333333,
+            "cost_per_1k_usd": 0.012185,
+            "escalation_rate": 0.0,
+            "n": 60,
+            "p50_latency_s": 3.8049,
+            "p95_latency_s": 7.509965,
+            "share_answered_small": 0.9833333333333333,
+            "tokens_per_request": 195.03333333333333,
+            "verified": false,
+            "wrong_accepted_small": 0
+          },
+          "hard": {
+            "completion": 0.85,
+            "cost_per_1k_usd": 0.02338733333333333,
+            "escalation_rate": 0.0,
+            "n": 60,
+            "p50_latency_s": 5.1107499999999995,
+            "p95_latency_s": 11.575334999999999,
+            "share_answered_small": 0.7666666666666667,
+            "tokens_per_request": 252.78333333333333,
+            "verified": false,
+            "wrong_accepted_small": 0
+          }
+        },
+        "by_task": {
+          "classification": {
+            "completion": 0.8666666666666667,
+            "cost_per_1k_usd": 0.013376666666666667,
+            "escalation_rate": 0.0,
+            "n": 30,
+            "p50_latency_s": 1.26845,
+            "p95_latency_s": 2.075755,
+            "share_answered_small": 0.8666666666666667,
+            "tokens_per_request": 168.96666666666667,
+            "verified": false,
+            "wrong_accepted_small": 0
+          },
+          "extraction": {
+            "completion": 0.9333333333333333,
+            "cost_per_1k_usd": 0.021424000000000002,
+            "escalation_rate": 0.0,
+            "n": 30,
+            "p50_latency_s": 5.721349999999999,
+            "p95_latency_s": 8.27564,
+            "share_answered_small": 0.9333333333333333,
+            "tokens_per_request": 304.3333333333333,
+            "verified": false,
+            "wrong_accepted_small": 0
+          },
+          "reasoning": {
+            "completion": 0.9,
+            "cost_per_1k_usd": 0.022242666666666664,
+            "escalation_rate": 0.0,
+            "n": 30,
+            "p50_latency_s": 6.2961,
+            "p95_latency_s": 12.178734999999998,
+            "share_answered_small": 0.7666666666666667,
+            "tokens_per_request": 223.16666666666666,
+            "verified": false,
+            "wrong_accepted_small": 0
+          },
+          "summarization": {
+            "completion": 0.9666666666666667,
+            "cost_per_1k_usd": 0.014101333333333334,
+            "escalation_rate": 0.0,
+            "n": 30,
+            "p50_latency_s": 3.3337000000000003,
+            "p95_latency_s": 4.484365,
+            "share_answered_small": 0.9333333333333333,
+            "tokens_per_request": 199.16666666666666,
+            "verified": false,
+            "wrong_accepted_small": 0
+          }
+        },
+        "completion": 0.9166666666666666,
+        "cost_per_1k_usd": 0.017786166666666676,
+        "escalation_rate": 0.0,
+        "n": 120,
+        "p50_latency_s": 4.2067,
+        "p95_latency_s": 10.929245,
+        "projected_annual_cost_usd": 291.01979911246036,
+        "share_answered_small": 0.875,
+        "tokens_per_request": 223.90833333333333,
+        "verified": false,
+        "wrong_accepted_small": 0
+      },
+      "router, structural check only": {
+        "by_difficulty": {
+          "easy": {
+            "completion": 0.9166666666666666,
+            "cost_per_1k_usd": 0.012335333333333332,
+            "escalation_rate": 0.016666666666666666,
+            "n": 60,
+            "p50_latency_s": 3.99635,
+            "p95_latency_s": 7.509965,
+            "share_answered_small": 0.9833333333333333,
+            "tokens_per_request": 198.78333333333333,
+            "verified": true,
+            "wrong_accepted_small": 5
+          },
+          "hard": {
+            "completion": 0.6333333333333333,
+            "cost_per_1k_usd": 0.018006999999999992,
+            "escalation_rate": 0.06666666666666667,
+            "n": 60,
+            "p50_latency_s": 5.17065,
+            "p95_latency_s": 9.619815000000001,
+            "share_answered_small": 0.9333333333333333,
+            "tokens_per_request": 265.81666666666666,
+            "verified": true,
+            "wrong_accepted_small": 22
+          }
+        },
+        "by_task": {
+          "classification": {
+            "completion": 0.8666666666666667,
+            "cost_per_1k_usd": 0.010138000000000001,
+            "escalation_rate": 0.0,
+            "n": 30,
+            "p50_latency_s": 1.18465,
+            "p95_latency_s": 1.4846199999999996,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 168.96666666666667,
+            "verified": true,
+            "wrong_accepted_small": 4
+          },
+          "extraction": {
+            "completion": 0.9333333333333333,
+            "cost_per_1k_usd": 0.018244,
+            "escalation_rate": 0.0,
+            "n": 30,
+            "p50_latency_s": 5.56935,
+            "p95_latency_s": 7.538615,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 304.06666666666666,
+            "verified": true,
+            "wrong_accepted_small": 2
+          },
+          "reasoning": {
+            "completion": 0.5,
+            "cost_per_1k_usd": 0.013122,
+            "escalation_rate": 0.0,
+            "n": 30,
+            "p50_latency_s": 6.13025,
+            "p95_latency_s": 9.78343,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 218.7,
+            "verified": true,
+            "wrong_accepted_small": 15
+          },
+          "summarization": {
+            "completion": 0.8,
+            "cost_per_1k_usd": 0.01918066666666667,
+            "escalation_rate": 0.16666666666666666,
+            "n": 30,
+            "p50_latency_s": 3.4145,
+            "p95_latency_s": 9.006504999999997,
+            "share_answered_small": 0.8333333333333334,
+            "tokens_per_request": 237.46666666666667,
+            "verified": true,
+            "wrong_accepted_small": 6
+          }
+        },
+        "completion": 0.775,
+        "cost_per_1k_usd": 0.015171166666666668,
+        "escalation_rate": 0.041666666666666664,
+        "n": 120,
+        "p50_latency_s": 4.3485,
+        "p95_latency_s": 9.365205,
+        "projected_annual_cost_usd": 249.16444919618652,
+        "share_answered_small": 0.9583333333333334,
+        "tokens_per_request": 232.3,
+        "verified": true,
+        "wrong_accepted_small": 27
+      },
+      "router, tuned on dev": {
+        "by_difficulty": {
+          "easy": {
+            "completion": 0.9333333333333333,
+            "cost_per_1k_usd": 0.011159999999999998,
+            "escalation_rate": 0.0,
+            "n": 60,
+            "p50_latency_s": 3.4543,
+            "p95_latency_s": 6.334395,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 186.0,
+            "verified": true,
+            "wrong_accepted_small": 4
+          },
+          "hard": {
+            "completion": 0.7166666666666667,
+            "cost_per_1k_usd": 0.02403966666666667,
+            "escalation_rate": 0.18333333333333332,
+            "n": 60,
+            "p50_latency_s": 3.73515,
+            "p95_latency_s": 21.93123,
+            "share_answered_small": 0.8166666666666667,
+            "tokens_per_request": 286.01666666666665,
+            "verified": true,
+            "wrong_accepted_small": 12
+          }
+        },
+        "by_task": {
+          "classification": {
+            "completion": 0.8666666666666667,
+            "cost_per_1k_usd": 0.010138000000000001,
+            "escalation_rate": 0.0,
+            "n": 30,
+            "p50_latency_s": 1.18465,
+            "p95_latency_s": 1.4846199999999996,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 168.96666666666667,
+            "verified": true,
+            "wrong_accepted_small": 4
+          },
+          "extraction": {
+            "completion": 0.9333333333333333,
+            "cost_per_1k_usd": 0.015909999999999997,
+            "escalation_rate": 0.0,
+            "n": 30,
+            "p50_latency_s": 3.9659500000000003,
+            "p95_latency_s": 5.177869999999997,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 265.1666666666667,
+            "verified": true,
+            "wrong_accepted_small": 2
+          },
+          "reasoning": {
+            "completion": 0.6333333333333333,
+            "cost_per_1k_usd": 0.03277533333333332,
+            "escalation_rate": 0.36666666666666664,
+            "n": 30,
+            "p50_latency_s": 7.7706,
+            "p95_latency_s": 23.486374999999995,
+            "share_answered_small": 0.6333333333333333,
+            "tokens_per_request": 316.96666666666664,
+            "verified": true,
+            "wrong_accepted_small": 6
+          },
+          "summarization": {
+            "completion": 0.8666666666666667,
+            "cost_per_1k_usd": 0.011576,
+            "escalation_rate": 0.0,
+            "n": 30,
+            "p50_latency_s": 2.99275,
+            "p95_latency_s": 4.114269999999999,
+            "share_answered_small": 1.0,
+            "tokens_per_request": 192.93333333333334,
+            "verified": true,
+            "wrong_accepted_small": 4
+          }
+        },
+        "completion": 0.825,
+        "cost_per_1k_usd": 0.01759983333333333,
+        "escalation_rate": 0.09166666666666666,
+        "n": 120,
+        "p50_latency_s": 3.6226000000000003,
+        "p95_latency_s": 20.44727,
+        "projected_annual_cost_usd": 246.65291930152378,
+        "share_answered_small": 0.9083333333333333,
+        "tokens_per_request": 236.00833333333333,
+        "verified": true,
+        "wrong_accepted_small": 16
+      },
+      "router_minus_large_ci95": [
+        -0.075,
+        0.025
+      ]
+    }
+  }
+}

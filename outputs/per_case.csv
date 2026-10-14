@@ -1,0 +1,721 @@
+arm,id,task,difficulty,final_model,escalated,correct,cost_usd,latency_s
+all-small qwen2.5-coder:3b,ext-020,extraction,easy,qwen2.5-coder:3b,False,True,1.65e-05,4.68
+all-small qwen2.5-coder:3b,ext-021,extraction,hard,qwen2.5-coder:3b,False,False,2.034e-05,5.206
+all-small qwen2.5-coder:3b,ext-022,extraction,easy,qwen2.5-coder:3b,False,True,1.674e-05,4.696
+all-small qwen2.5-coder:3b,ext-023,extraction,hard,qwen2.5-coder:3b,False,True,2.004e-05,5.086
+all-small qwen2.5-coder:3b,ext-024,extraction,easy,qwen2.5-coder:3b,False,True,1.626e-05,4.347
+all-small qwen2.5-coder:3b,ext-025,extraction,hard,qwen2.5-coder:3b,False,True,1.992e-05,5.365
+all-small qwen2.5-coder:3b,ext-026,extraction,easy,qwen2.5-coder:3b,False,True,1.626e-05,5.44
+all-small qwen2.5-coder:3b,ext-027,extraction,hard,qwen2.5-coder:3b,False,True,1.968e-05,6.14
+all-small qwen2.5-coder:3b,ext-028,extraction,easy,qwen2.5-coder:3b,False,True,1.674e-05,5.846
+all-small qwen2.5-coder:3b,ext-029,extraction,hard,qwen2.5-coder:3b,False,True,2.04e-05,5.657
+all-small qwen2.5-coder:3b,ext-030,extraction,easy,qwen2.5-coder:3b,False,True,1.68e-05,5.34
+all-small qwen2.5-coder:3b,ext-031,extraction,hard,qwen2.5-coder:3b,False,True,2.016e-05,5.423
+all-small qwen2.5-coder:3b,ext-032,extraction,easy,qwen2.5-coder:3b,False,True,1.566e-05,4.696
+all-small qwen2.5-coder:3b,ext-033,extraction,hard,qwen2.5-coder:3b,False,False,1.986e-05,5.668
+all-small qwen2.5-coder:3b,ext-034,extraction,easy,qwen2.5-coder:3b,False,True,1.656e-05,5.011
+all-small qwen2.5-coder:3b,ext-035,extraction,hard,qwen2.5-coder:3b,False,True,1.974e-05,5.135
+all-small qwen2.5-coder:3b,ext-036,extraction,easy,qwen2.5-coder:3b,False,True,1.65e-05,4.89
+all-small qwen2.5-coder:3b,ext-037,extraction,hard,qwen2.5-coder:3b,False,True,2.004e-05,5.482
+all-small qwen2.5-coder:3b,ext-038,extraction,easy,qwen2.5-coder:3b,False,True,1.686e-05,6.321
+all-small qwen2.5-coder:3b,ext-039,extraction,hard,qwen2.5-coder:3b,False,True,2.022e-05,8.11
+all-small qwen2.5-coder:3b,ext-040,extraction,easy,qwen2.5-coder:3b,False,True,1.71e-05,7.507
+all-small qwen2.5-coder:3b,ext-041,extraction,hard,qwen2.5-coder:3b,False,True,2.022e-05,7.018
+all-small qwen2.5-coder:3b,ext-042,extraction,easy,qwen2.5-coder:3b,False,True,1.602e-05,7.564
+all-small qwen2.5-coder:3b,ext-043,extraction,hard,qwen2.5-coder:3b,False,True,2.004e-05,7.481
+all-small qwen2.5-coder:3b,ext-044,extraction,easy,qwen2.5-coder:3b,False,True,1.59e-05,6.593
+all-small qwen2.5-coder:3b,ext-045,extraction,hard,qwen2.5-coder:3b,False,True,1.986e-05,5.354
+all-small qwen2.5-coder:3b,ext-046,extraction,easy,qwen2.5-coder:3b,False,True,1.68e-05,5.835
+all-small qwen2.5-coder:3b,ext-047,extraction,hard,qwen2.5-coder:3b,False,True,2.028e-05,5.818
+all-small qwen2.5-coder:3b,ext-048,extraction,easy,qwen2.5-coder:3b,False,True,1.59e-05,6.54
+all-small qwen2.5-coder:3b,ext-049,extraction,hard,qwen2.5-coder:3b,False,True,1.992e-05,5.786
+all-small qwen2.5-coder:3b,cla-020,classification,easy,qwen2.5-coder:3b,False,True,9.84e-06,0.973
+all-small qwen2.5-coder:3b,cla-021,classification,hard,qwen2.5-coder:3b,False,True,1.074e-05,1.048
+all-small qwen2.5-coder:3b,cla-022,classification,easy,qwen2.5-coder:3b,False,True,9.66e-06,1.041
+all-small qwen2.5-coder:3b,cla-023,classification,hard,qwen2.5-coder:3b,False,False,1.05e-05,1.035
+all-small qwen2.5-coder:3b,cla-024,classification,easy,qwen2.5-coder:3b,False,True,9.84e-06,0.999
+all-small qwen2.5-coder:3b,cla-025,classification,hard,qwen2.5-coder:3b,False,True,1.092e-05,1.058
+all-small qwen2.5-coder:3b,cla-026,classification,easy,qwen2.5-coder:3b,False,True,9.96e-06,1.156
+all-small qwen2.5-coder:3b,cla-027,classification,hard,qwen2.5-coder:3b,False,True,1.008e-05,1.272
+all-small qwen2.5-coder:3b,cla-028,classification,easy,qwen2.5-coder:3b,False,True,9.78e-06,1.098
+all-small qwen2.5-coder:3b,cla-029,classification,hard,qwen2.5-coder:3b,False,False,1.038e-05,1.065
+all-small qwen2.5-coder:3b,cla-030,classification,easy,qwen2.5-coder:3b,False,True,9.84e-06,1.036
+all-small qwen2.5-coder:3b,cla-031,classification,hard,qwen2.5-coder:3b,False,True,1.056e-05,1.194
+all-small qwen2.5-coder:3b,cla-032,classification,easy,qwen2.5-coder:3b,False,True,9.78e-06,1.017
+all-small qwen2.5-coder:3b,cla-033,classification,hard,qwen2.5-coder:3b,False,True,1.074e-05,1.117
+all-small qwen2.5-coder:3b,cla-034,classification,easy,qwen2.5-coder:3b,False,True,9.96e-06,1.152
+all-small qwen2.5-coder:3b,cla-035,classification,hard,qwen2.5-coder:3b,False,True,1.05e-05,1.265
+all-small qwen2.5-coder:3b,cla-036,classification,easy,qwen2.5-coder:3b,False,True,9.48e-06,1.013
+all-small qwen2.5-coder:3b,cla-037,classification,hard,qwen2.5-coder:3b,False,True,1.068e-05,1.175
+all-small qwen2.5-coder:3b,cla-038,classification,easy,qwen2.5-coder:3b,False,True,9.84e-06,1.302
+all-small qwen2.5-coder:3b,cla-039,classification,hard,qwen2.5-coder:3b,False,True,1.008e-05,1.413
+all-small qwen2.5-coder:3b,cla-040,classification,easy,qwen2.5-coder:3b,False,True,9.12e-06,1.623
+all-small qwen2.5-coder:3b,cla-041,classification,hard,qwen2.5-coder:3b,False,False,1.038e-05,1.349
+all-small qwen2.5-coder:3b,cla-042,classification,easy,qwen2.5-coder:3b,False,True,9.54e-06,1.379
+all-small qwen2.5-coder:3b,cla-043,classification,hard,qwen2.5-coder:3b,False,True,1.11e-05,1.287
+all-small qwen2.5-coder:3b,cla-044,classification,easy,qwen2.5-coder:3b,False,True,9.84e-06,1.316
+all-small qwen2.5-coder:3b,cla-045,classification,hard,qwen2.5-coder:3b,False,True,1.074e-05,1.367
+all-small qwen2.5-coder:3b,cla-046,classification,easy,qwen2.5-coder:3b,False,True,9.66e-06,1.348
+all-small qwen2.5-coder:3b,cla-047,classification,hard,qwen2.5-coder:3b,False,False,1.038e-05,1.251
+all-small qwen2.5-coder:3b,cla-048,classification,easy,qwen2.5-coder:3b,False,True,9.72e-06,1.543
+all-small qwen2.5-coder:3b,cla-049,classification,hard,qwen2.5-coder:3b,False,True,1.05e-05,1.273
+all-small qwen2.5-coder:3b,sum-020,summarization,easy,qwen2.5-coder:3b,False,True,1.08e-05,3.01
+all-small qwen2.5-coder:3b,sum-021,summarization,hard,qwen2.5-coder:3b,False,False,1.566e-05,5.298
+all-small qwen2.5-coder:3b,sum-022,summarization,easy,qwen2.5-coder:3b,False,True,1.032e-05,2.632
+all-small qwen2.5-coder:3b,sum-023,summarization,hard,qwen2.5-coder:3b,False,False,1.26e-05,2.766
+all-small qwen2.5-coder:3b,sum-024,summarization,easy,qwen2.5-coder:3b,False,False,9.78e-06,2.339
+all-small qwen2.5-coder:3b,sum-025,summarization,hard,qwen2.5-coder:3b,False,False,1.308e-05,2.386
+all-small qwen2.5-coder:3b,sum-026,summarization,easy,qwen2.5-coder:3b,False,True,9.66e-06,3.404
+all-small qwen2.5-coder:3b,sum-027,summarization,hard,qwen2.5-coder:3b,False,True,1.29e-05,3.204
+all-small qwen2.5-coder:3b,sum-028,summarization,easy,qwen2.5-coder:3b,False,True,1.056e-05,3.151
+all-small qwen2.5-coder:3b,sum-029,summarization,hard,qwen2.5-coder:3b,False,False,1.542e-05,5.446
+all-small qwen2.5-coder:3b,sum-030,summarization,easy,qwen2.5-coder:3b,False,True,1.044e-05,3.097
+all-small qwen2.5-coder:3b,sum-031,summarization,hard,qwen2.5-coder:3b,False,True,1.476e-05,3.613
+all-small qwen2.5-coder:3b,sum-032,summarization,easy,qwen2.5-coder:3b,False,True,1.014e-05,2.576
+all-small qwen2.5-coder:3b,sum-033,summarization,hard,qwen2.5-coder:3b,False,True,1.278e-05,2.96
+all-small qwen2.5-coder:3b,sum-034,summarization,easy,qwen2.5-coder:3b,False,True,1.152e-05,3.882
+all-small qwen2.5-coder:3b,sum-035,summarization,hard,qwen2.5-coder:3b,False,True,1.494e-05,3.343
+all-small qwen2.5-coder:3b,sum-036,summarization,easy,qwen2.5-coder:3b,False,True,8.94e-06,2.312
+all-small qwen2.5-coder:3b,sum-037,summarization,hard,qwen2.5-coder:3b,False,False,1.512e-05,4.148
+all-small qwen2.5-coder:3b,sum-038,summarization,easy,qwen2.5-coder:3b,False,True,9.48e-06,2.94
+all-small qwen2.5-coder:3b,sum-039,summarization,hard,qwen2.5-coder:3b,False,True,1.452e-05,4.525
+all-small qwen2.5-coder:3b,sum-040,summarization,easy,qwen2.5-coder:3b,False,True,1.02e-05,3.612
+all-small qwen2.5-coder:3b,sum-041,summarization,hard,qwen2.5-coder:3b,False,True,1.308e-05,3.425
+all-small qwen2.5-coder:3b,sum-042,summarization,easy,qwen2.5-coder:3b,False,True,1.014e-05,3.727
+all-small qwen2.5-coder:3b,sum-043,summarization,hard,qwen2.5-coder:3b,False,False,1.5e-05,4.211
+all-small qwen2.5-coder:3b,sum-044,summarization,easy,qwen2.5-coder:3b,False,False,9.18e-06,3.058
+all-small qwen2.5-coder:3b,sum-045,summarization,hard,qwen2.5-coder:3b,False,True,1.518e-05,3.959
+all-small qwen2.5-coder:3b,sum-046,summarization,easy,qwen2.5-coder:3b,False,True,9.12e-06,2.687
+all-small qwen2.5-coder:3b,sum-047,summarization,hard,qwen2.5-coder:3b,False,True,1.35e-05,3.656
+all-small qwen2.5-coder:3b,sum-048,summarization,easy,qwen2.5-coder:3b,False,True,1.002e-05,3.534
+all-small qwen2.5-coder:3b,sum-049,summarization,hard,qwen2.5-coder:3b,False,True,1.518e-05,4.435
+all-small qwen2.5-coder:3b,rea-020,reasoning,easy,qwen2.5-coder:3b,False,True,1.224e-05,6.004
+all-small qwen2.5-coder:3b,rea-021,reasoning,hard,qwen2.5-coder:3b,False,True,1.782e-05,9.514
+all-small qwen2.5-coder:3b,rea-022,reasoning,easy,qwen2.5-coder:3b,False,True,1.044e-05,4.05
+all-small qwen2.5-coder:3b,rea-023,reasoning,hard,qwen2.5-coder:3b,False,False,1.314e-05,6.256
+all-small qwen2.5-coder:3b,rea-024,reasoning,easy,qwen2.5-coder:3b,False,True,1.026e-05,4.086
+all-small qwen2.5-coder:3b,rea-025,reasoning,hard,qwen2.5-coder:3b,False,False,1.704e-05,8.354
+all-small qwen2.5-coder:3b,rea-026,reasoning,easy,qwen2.5-coder:3b,False,True,1.11e-05,6.326
+all-small qwen2.5-coder:3b,rea-027,reasoning,hard,qwen2.5-coder:3b,False,False,1.674e-05,9.357
+all-small qwen2.5-coder:3b,rea-028,reasoning,easy,qwen2.5-coder:3b,False,False,1.026e-05,3.943
+all-small qwen2.5-coder:3b,rea-029,reasoning,hard,qwen2.5-coder:3b,False,True,1.224e-05,5.968
+all-small qwen2.5-coder:3b,rea-030,reasoning,easy,qwen2.5-coder:3b,False,True,1.038e-05,4.35
+all-small qwen2.5-coder:3b,rea-031,reasoning,hard,qwen2.5-coder:3b,False,False,1.722e-05,8.684
+all-small qwen2.5-coder:3b,rea-032,reasoning,easy,qwen2.5-coder:3b,False,False,1.212e-05,5.837
+all-small qwen2.5-coder:3b,rea-033,reasoning,hard,qwen2.5-coder:3b,False,False,1.89e-05,10.004
+all-small qwen2.5-coder:3b,rea-034,reasoning,easy,qwen2.5-coder:3b,False,False,1.026e-05,4.204
+all-small qwen2.5-coder:3b,rea-035,reasoning,hard,qwen2.5-coder:3b,False,False,1.194e-05,4.327
+all-small qwen2.5-coder:3b,rea-036,reasoning,easy,qwen2.5-coder:3b,False,True,1.062e-05,4.423
+all-small qwen2.5-coder:3b,rea-037,reasoning,hard,qwen2.5-coder:3b,False,False,1.626e-05,9.212
+all-small qwen2.5-coder:3b,rea-038,reasoning,easy,qwen2.5-coder:3b,False,True,1.224e-05,8.266
+all-small qwen2.5-coder:3b,rea-039,reasoning,hard,qwen2.5-coder:3b,False,True,1.68e-05,11.568
+all-small qwen2.5-coder:3b,rea-040,reasoning,easy,qwen2.5-coder:3b,False,True,1.014e-05,4.821
+all-small qwen2.5-coder:3b,rea-041,reasoning,hard,qwen2.5-coder:3b,False,False,1.206e-05,7.372
+all-small qwen2.5-coder:3b,rea-042,reasoning,easy,qwen2.5-coder:3b,False,True,9.96e-06,4.77
+all-small qwen2.5-coder:3b,rea-043,reasoning,hard,qwen2.5-coder:3b,False,False,1.59e-05,8.44
+all-small qwen2.5-coder:3b,rea-044,reasoning,easy,qwen2.5-coder:3b,False,True,1.224e-05,7.275
+all-small qwen2.5-coder:3b,rea-045,reasoning,hard,qwen2.5-coder:3b,False,False,1.596e-05,8.281
+all-small qwen2.5-coder:3b,rea-046,reasoning,easy,qwen2.5-coder:3b,False,True,1.014e-05,4.178
+all-small qwen2.5-coder:3b,rea-047,reasoning,hard,qwen2.5-coder:3b,False,False,1.2e-05,4.759
+all-small qwen2.5-coder:3b,rea-048,reasoning,easy,qwen2.5-coder:3b,False,True,9.96e-06,4.638
+all-small qwen2.5-coder:3b,rea-049,reasoning,hard,qwen2.5-coder:3b,False,False,1.728e-05,9.514
+all-small llama3.2,ext-020,extraction,easy,llama3.2,False,True,1.428e-05,3.618
+all-small llama3.2,ext-021,extraction,hard,llama3.2,False,False,1.77e-05,4.453
+all-small llama3.2,ext-022,extraction,easy,llama3.2,False,True,1.458e-05,3.562
+all-small llama3.2,ext-023,extraction,hard,llama3.2,False,True,1.728e-05,3.675
+all-small llama3.2,ext-024,extraction,easy,llama3.2,False,True,1.44e-05,3.542
+all-small llama3.2,ext-025,extraction,hard,llama3.2,False,True,1.734e-05,3.93
+all-small llama3.2,ext-026,extraction,easy,llama3.2,False,True,1.44e-05,4.043
+all-small llama3.2,ext-027,extraction,hard,llama3.2,False,True,1.728e-05,4.588
+all-small llama3.2,ext-028,extraction,easy,llama3.2,False,True,1.464e-05,6.496
+all-small llama3.2,ext-029,extraction,hard,llama3.2,False,True,1.752e-05,5.641
+all-small llama3.2,ext-030,extraction,easy,llama3.2,False,True,1.464e-05,4.5
+all-small llama3.2,ext-031,extraction,hard,llama3.2,False,True,1.74e-05,3.729
+all-small llama3.2,ext-032,extraction,easy,llama3.2,False,True,1.404e-05,3.656
+all-small llama3.2,ext-033,extraction,hard,llama3.2,False,False,1.722e-05,4.227
+all-small llama3.2,ext-034,extraction,easy,llama3.2,False,True,1.464e-05,4.067
+all-small llama3.2,ext-035,extraction,hard,llama3.2,False,True,1.734e-05,3.98
+all-small llama3.2,ext-036,extraction,easy,llama3.2,False,True,1.434e-05,3.627
+all-small llama3.2,ext-037,extraction,hard,llama3.2,False,True,1.722e-05,4.057
+all-small llama3.2,ext-038,extraction,easy,llama3.2,False,True,1.464e-05,3.952
+all-small llama3.2,ext-039,extraction,hard,llama3.2,False,True,1.74e-05,4.455
+all-small llama3.2,ext-040,extraction,easy,llama3.2,False,True,1.482e-05,4.305
+all-small llama3.2,ext-041,extraction,hard,llama3.2,False,True,1.758e-05,4.089
+all-small llama3.2,ext-042,extraction,easy,llama3.2,False,True,1.44e-05,3.656
+all-small llama3.2,ext-043,extraction,hard,llama3.2,False,True,1.722e-05,4.612
+all-small llama3.2,ext-044,extraction,easy,llama3.2,False,True,1.416e-05,3.367
+all-small llama3.2,ext-045,extraction,hard,llama3.2,False,True,1.728e-05,3.741
+all-small llama3.2,ext-046,extraction,easy,llama3.2,False,True,1.47e-05,3.744
+all-small llama3.2,ext-047,extraction,hard,llama3.2,False,True,1.74e-05,4.026
+all-small llama3.2,ext-048,extraction,easy,llama3.2,False,True,1.416e-05,3.59
+all-small llama3.2,ext-049,extraction,hard,llama3.2,False,True,1.728e-05,3.904
+all-small llama3.2,cla-020,classification,easy,llama3.2,False,False,9.72e-06,1.337
+all-small llama3.2,cla-021,classification,hard,llama3.2,False,True,1.026e-05,1.114
+all-small llama3.2,cla-022,classification,easy,llama3.2,False,True,9.18e-06,1.055
+all-small llama3.2,cla-023,classification,hard,llama3.2,False,False,1.002e-05,1.017
+all-small llama3.2,cla-024,classification,easy,llama3.2,False,True,9.36e-06,1.021
+all-small llama3.2,cla-025,classification,hard,llama3.2,False,True,1.044e-05,1.092
+all-small llama3.2,cla-026,classification,easy,llama3.2,False,True,9.48e-06,1.111
+all-small llama3.2,cla-027,classification,hard,llama3.2,False,True,9.84e-06,1.331
+all-small llama3.2,cla-028,classification,easy,llama3.2,False,True,9.3e-06,1.296
+all-small llama3.2,cla-029,classification,hard,llama3.2,False,False,9.9e-06,1.285
+all-small llama3.2,cla-030,classification,easy,llama3.2,False,True,9.36e-06,1.194
+all-small llama3.2,cla-031,classification,hard,llama3.2,False,False,1.014e-05,1.218
+all-small llama3.2,cla-032,classification,easy,llama3.2,False,True,9.3e-06,1.092
+all-small llama3.2,cla-033,classification,hard,llama3.2,False,True,1.026e-05,1.217
+all-small llama3.2,cla-034,classification,easy,llama3.2,False,True,9.48e-06,1.144
+all-small llama3.2,cla-035,classification,hard,llama3.2,False,True,1.002e-05,1.185
+all-small llama3.2,cla-036,classification,easy,llama3.2,False,True,9.18e-06,1.072
+all-small llama3.2,cla-037,classification,hard,llama3.2,False,True,1.02e-05,1.108
+all-small llama3.2,cla-038,classification,easy,llama3.2,False,False,9.72e-06,1.376
+all-small llama3.2,cla-039,classification,hard,llama3.2,False,True,9.84e-06,1.158
+all-small llama3.2,cla-040,classification,easy,llama3.2,False,True,8.88e-06,1.06
+all-small llama3.2,cla-041,classification,hard,llama3.2,False,False,9.9e-06,1.027
+all-small llama3.2,cla-042,classification,easy,llama3.2,False,True,9.18e-06,1.055
+all-small llama3.2,cla-043,classification,hard,llama3.2,False,True,1.062e-05,1.145
+all-small llama3.2,cla-044,classification,easy,llama3.2,False,False,9.72e-06,1.314
+all-small llama3.2,cla-045,classification,hard,llama3.2,False,True,1.026e-05,1.077
+all-small llama3.2,cla-046,classification,easy,llama3.2,False,True,9.18e-06,1.115
+all-small llama3.2,cla-047,classification,hard,llama3.2,False,False,9.9e-06,1.031
+all-small llama3.2,cla-048,classification,easy,llama3.2,False,True,9.24e-06,1.064
+all-small llama3.2,cla-049,classification,hard,llama3.2,False,True,1.002e-05,1.147
+all-small llama3.2,sum-020,summarization,easy,llama3.2,False,False,1.008e-05,2.521
+all-small llama3.2,sum-021,summarization,hard,llama3.2,False,False,1.296e-05,3.658
+all-small llama3.2,sum-022,summarization,easy,llama3.2,False,True,9.9e-06,2.508
+all-small llama3.2,sum-023,summarization,hard,llama3.2,False,True,1.278e-05,3.073
+all-small llama3.2,sum-024,summarization,easy,llama3.2,False,True,9.6e-06,3.031
+all-small llama3.2,sum-025,summarization,hard,llama3.2,False,True,1.362e-05,3.254
+all-small llama3.2,sum-026,summarization,easy,llama3.2,False,True,9.18e-06,2.822
+all-small llama3.2,sum-027,summarization,hard,llama3.2,False,True,1.272e-05,5.351
+all-small llama3.2,sum-028,summarization,easy,llama3.2,False,True,1.002e-05,4.006
+all-small llama3.2,sum-029,summarization,hard,llama3.2,False,True,1.392e-05,4.203
+all-small llama3.2,sum-030,summarization,easy,llama3.2,False,True,9.84e-06,2.514
+all-small llama3.2,sum-031,summarization,hard,llama3.2,False,True,1.428e-05,3.627
+all-small llama3.2,sum-032,summarization,easy,llama3.2,False,True,9.9e-06,2.89
+all-small llama3.2,sum-033,summarization,hard,llama3.2,False,True,1.206e-05,2.81
+all-small llama3.2,sum-034,summarization,easy,llama3.2,False,True,1.02e-05,2.837
+all-small llama3.2,sum-035,summarization,hard,llama3.2,False,True,1.458e-05,3.48
+all-small llama3.2,sum-036,summarization,easy,llama3.2,False,True,8.88e-06,2.479
+all-small llama3.2,sum-037,summarization,hard,llama3.2,False,False,1.398e-05,3.002
+all-small llama3.2,sum-038,summarization,easy,llama3.2,False,True,9.48e-06,2.835
+all-small llama3.2,sum-039,summarization,hard,llama3.2,False,False,1.386e-05,3.264
+all-small llama3.2,sum-040,summarization,easy,llama3.2,False,True,9.54e-06,2.634
+all-small llama3.2,sum-041,summarization,hard,llama3.2,False,True,1.29e-05,3.32
+all-small llama3.2,sum-042,summarization,easy,llama3.2,False,True,9.96e-06,2.725
+all-small llama3.2,sum-043,summarization,hard,llama3.2,False,True,1.374e-05,3.325
+all-small llama3.2,sum-044,summarization,easy,llama3.2,False,True,9e-06,2.388
+all-small llama3.2,sum-045,summarization,hard,llama3.2,False,True,1.422e-05,3.015
+all-small llama3.2,sum-046,summarization,easy,llama3.2,False,True,9.24e-06,2.642
+all-small llama3.2,sum-047,summarization,hard,llama3.2,False,True,1.236e-05,2.539
+all-small llama3.2,sum-048,summarization,easy,llama3.2,False,True,9.72e-06,2.984
+all-small llama3.2,sum-049,summarization,hard,llama3.2,False,True,1.476e-05,3.586
+all-small llama3.2,rea-020,reasoning,easy,llama3.2,False,True,7.86e-06,2.51
+all-small llama3.2,rea-021,reasoning,hard,llama3.2,False,False,1.818e-05,8.473
+all-small llama3.2,rea-022,reasoning,easy,llama3.2,False,True,9.36e-06,3.134
+all-small llama3.2,rea-023,reasoning,hard,llama3.2,False,True,1.416e-05,6.013
+all-small llama3.2,rea-024,reasoning,easy,llama3.2,False,True,1.092e-05,4.614
+all-small llama3.2,rea-025,reasoning,hard,llama3.2,False,True,1.83e-05,11.111
+all-small llama3.2,rea-026,reasoning,easy,llama3.2,False,True,7.86e-06,2.857
+all-small llama3.2,rea-027,reasoning,hard,llama3.2,False,False,1.512e-05,11.789
+all-small llama3.2,rea-028,reasoning,easy,llama3.2,False,True,9.6e-06,4.21
+all-small llama3.2,rea-029,reasoning,hard,llama3.2,False,False,1.59e-05,10.502
+all-small llama3.2,rea-030,reasoning,easy,llama3.2,False,True,1.038e-05,4.496
+all-small llama3.2,rea-031,reasoning,hard,llama3.2,False,False,1.596e-05,8.182
+all-small llama3.2,rea-032,reasoning,easy,llama3.2,False,True,7.98e-06,2.851
+all-small llama3.2,rea-033,reasoning,hard,llama3.2,False,False,1.536e-05,7.366
+all-small llama3.2,rea-034,reasoning,easy,llama3.2,False,False,9.6e-06,4.151
+all-small llama3.2,rea-035,reasoning,hard,llama3.2,False,False,1.518e-05,6.739
+all-small llama3.2,rea-036,reasoning,easy,llama3.2,False,True,1.116e-05,4.731
+all-small llama3.2,rea-037,reasoning,hard,llama3.2,False,False,1.794e-05,9.028
+all-small llama3.2,rea-038,reasoning,easy,llama3.2,False,True,7.86e-06,2.679
+all-small llama3.2,rea-039,reasoning,hard,llama3.2,False,True,1.53e-05,7.399
+all-small llama3.2,rea-040,reasoning,easy,llama3.2,False,True,9.6e-06,3.496
+all-small llama3.2,rea-041,reasoning,hard,llama3.2,False,True,1.386e-05,6.266
+all-small llama3.2,rea-042,reasoning,easy,llama3.2,False,True,1.086e-05,5.056
+all-small llama3.2,rea-043,reasoning,hard,llama3.2,False,True,1.698e-05,8.891
+all-small llama3.2,rea-044,reasoning,easy,llama3.2,False,True,8.82e-06,3.169
+all-small llama3.2,rea-045,reasoning,hard,llama3.2,False,False,1.752e-05,9.79
+all-small llama3.2,rea-046,reasoning,easy,llama3.2,False,False,9.6e-06,3.708
+all-small llama3.2,rea-047,reasoning,hard,llama3.2,False,True,1.386e-05,6.008
+all-small llama3.2,rea-048,reasoning,easy,llama3.2,False,True,1.062e-05,4.466
+all-small llama3.2,rea-049,reasoning,hard,llama3.2,False,True,1.656e-05,8.133
+all-large qwen2.5-coder:7b,ext-020,extraction,easy,qwen2.5-coder:7b,False,True,5.58e-05,8.05
+all-large qwen2.5-coder:7b,ext-021,extraction,hard,qwen2.5-coder:7b,False,False,6.86e-05,9.048
+all-large qwen2.5-coder:7b,ext-022,extraction,easy,qwen2.5-coder:7b,False,True,5.66e-05,8.298
+all-large qwen2.5-coder:7b,ext-023,extraction,hard,qwen2.5-coder:7b,False,True,6.76e-05,8.011
+all-large qwen2.5-coder:7b,ext-024,extraction,easy,qwen2.5-coder:7b,False,True,5.5e-05,7.22
+all-large qwen2.5-coder:7b,ext-025,extraction,hard,qwen2.5-coder:7b,False,True,6.72e-05,8.427
+all-large qwen2.5-coder:7b,ext-026,extraction,easy,qwen2.5-coder:7b,False,True,5.5e-05,8.053
+all-large qwen2.5-coder:7b,ext-027,extraction,hard,qwen2.5-coder:7b,False,True,6.64e-05,8.228
+all-large qwen2.5-coder:7b,ext-028,extraction,easy,qwen2.5-coder:7b,False,True,5.66e-05,7.8
+all-large qwen2.5-coder:7b,ext-029,extraction,hard,qwen2.5-coder:7b,False,True,6.88e-05,8.44
+all-large qwen2.5-coder:7b,ext-030,extraction,easy,qwen2.5-coder:7b,False,True,5.68e-05,8.423
+all-large qwen2.5-coder:7b,ext-031,extraction,hard,qwen2.5-coder:7b,False,True,6.8e-05,8.379
+all-large qwen2.5-coder:7b,ext-032,extraction,easy,qwen2.5-coder:7b,False,True,5.3e-05,6.688
+all-large qwen2.5-coder:7b,ext-033,extraction,hard,qwen2.5-coder:7b,False,False,6.7e-05,8.411
+all-large qwen2.5-coder:7b,ext-034,extraction,easy,qwen2.5-coder:7b,False,True,5.6e-05,8.836
+all-large qwen2.5-coder:7b,ext-035,extraction,hard,qwen2.5-coder:7b,False,True,6.66e-05,8.297
+all-large qwen2.5-coder:7b,ext-036,extraction,easy,qwen2.5-coder:7b,False,True,5.58e-05,7.741
+all-large qwen2.5-coder:7b,ext-037,extraction,hard,qwen2.5-coder:7b,False,True,6.76e-05,8.355
+all-large qwen2.5-coder:7b,ext-038,extraction,easy,qwen2.5-coder:7b,False,True,5.7e-05,7.868
+all-large qwen2.5-coder:7b,ext-039,extraction,hard,qwen2.5-coder:7b,False,True,6.82e-05,8.626
+all-large qwen2.5-coder:7b,ext-040,extraction,easy,qwen2.5-coder:7b,False,True,5.78e-05,8.825
+all-large qwen2.5-coder:7b,ext-041,extraction,hard,qwen2.5-coder:7b,False,True,6.82e-05,12.855
+all-large qwen2.5-coder:7b,ext-042,extraction,easy,qwen2.5-coder:7b,False,True,5.42e-05,10.486
+all-large qwen2.5-coder:7b,ext-043,extraction,hard,qwen2.5-coder:7b,False,True,6.76e-05,10.457
+all-large qwen2.5-coder:7b,ext-044,extraction,easy,qwen2.5-coder:7b,False,True,5.38e-05,7.204
+all-large qwen2.5-coder:7b,ext-045,extraction,hard,qwen2.5-coder:7b,False,True,6.7e-05,7.261
+all-large qwen2.5-coder:7b,ext-046,extraction,easy,qwen2.5-coder:7b,False,True,5.68e-05,7.705
+all-large qwen2.5-coder:7b,ext-047,extraction,hard,qwen2.5-coder:7b,False,True,6.84e-05,7.998
+all-large qwen2.5-coder:7b,ext-048,extraction,easy,qwen2.5-coder:7b,False,True,5.38e-05,6.96
+all-large qwen2.5-coder:7b,ext-049,extraction,hard,qwen2.5-coder:7b,False,True,6.72e-05,7.973
+all-large qwen2.5-coder:7b,cla-020,classification,easy,qwen2.5-coder:7b,False,True,3.28e-05,2.453
+all-large qwen2.5-coder:7b,cla-021,classification,hard,qwen2.5-coder:7b,False,True,3.58e-05,2.213
+all-large qwen2.5-coder:7b,cla-022,classification,easy,qwen2.5-coder:7b,False,True,3.22e-05,2.196
+all-large qwen2.5-coder:7b,cla-023,classification,hard,qwen2.5-coder:7b,False,False,3.5e-05,2.084
+all-large qwen2.5-coder:7b,cla-024,classification,easy,qwen2.5-coder:7b,False,True,3.28e-05,2.056
+all-large qwen2.5-coder:7b,cla-025,classification,hard,qwen2.5-coder:7b,False,True,3.64e-05,2.049
+all-large qwen2.5-coder:7b,cla-026,classification,easy,qwen2.5-coder:7b,False,True,3.32e-05,2.333
+all-large qwen2.5-coder:7b,cla-027,classification,hard,qwen2.5-coder:7b,False,True,3.36e-05,2.111
+all-large qwen2.5-coder:7b,cla-028,classification,easy,qwen2.5-coder:7b,False,True,3.26e-05,2.101
+all-large qwen2.5-coder:7b,cla-029,classification,hard,qwen2.5-coder:7b,False,False,3.46e-05,2.066
+all-large qwen2.5-coder:7b,cla-030,classification,easy,qwen2.5-coder:7b,False,True,3.28e-05,2.643
+all-large qwen2.5-coder:7b,cla-031,classification,hard,qwen2.5-coder:7b,False,True,3.52e-05,2.027
+all-large qwen2.5-coder:7b,cla-032,classification,easy,qwen2.5-coder:7b,False,True,3.26e-05,2.068
+all-large qwen2.5-coder:7b,cla-033,classification,hard,qwen2.5-coder:7b,False,True,3.58e-05,2.083
+all-large qwen2.5-coder:7b,cla-034,classification,easy,qwen2.5-coder:7b,False,True,3.32e-05,2.153
+all-large qwen2.5-coder:7b,cla-035,classification,hard,qwen2.5-coder:7b,False,True,3.5e-05,2.238
+all-large qwen2.5-coder:7b,cla-036,classification,easy,qwen2.5-coder:7b,False,True,3.16e-05,2.022
+all-large qwen2.5-coder:7b,cla-037,classification,hard,qwen2.5-coder:7b,False,True,3.56e-05,2.046
+all-large qwen2.5-coder:7b,cla-038,classification,easy,qwen2.5-coder:7b,False,True,3.28e-05,2.064
+all-large qwen2.5-coder:7b,cla-039,classification,hard,qwen2.5-coder:7b,False,True,3.36e-05,2.144
+all-large qwen2.5-coder:7b,cla-040,classification,easy,qwen2.5-coder:7b,False,True,3.04e-05,1.977
+all-large qwen2.5-coder:7b,cla-041,classification,hard,qwen2.5-coder:7b,False,False,3.46e-05,2.596
+all-large qwen2.5-coder:7b,cla-042,classification,easy,qwen2.5-coder:7b,False,True,3.18e-05,2.453
+all-large qwen2.5-coder:7b,cla-043,classification,hard,qwen2.5-coder:7b,False,True,3.7e-05,2.207
+all-large qwen2.5-coder:7b,cla-044,classification,easy,qwen2.5-coder:7b,False,True,3.28e-05,2.037
+all-large qwen2.5-coder:7b,cla-045,classification,hard,qwen2.5-coder:7b,False,True,3.58e-05,2.103
+all-large qwen2.5-coder:7b,cla-046,classification,easy,qwen2.5-coder:7b,False,True,3.22e-05,2.084
+all-large qwen2.5-coder:7b,cla-047,classification,hard,qwen2.5-coder:7b,False,False,3.46e-05,2.052
+all-large qwen2.5-coder:7b,cla-048,classification,easy,qwen2.5-coder:7b,False,True,3.24e-05,2.011
+all-large qwen2.5-coder:7b,cla-049,classification,hard,qwen2.5-coder:7b,False,True,3.5e-05,2.024
+all-large qwen2.5-coder:7b,sum-020,summarization,easy,qwen2.5-coder:7b,False,True,3.36e-05,4.1
+all-large qwen2.5-coder:7b,sum-021,summarization,hard,qwen2.5-coder:7b,False,True,4.26e-05,4.406
+all-large qwen2.5-coder:7b,sum-022,summarization,easy,qwen2.5-coder:7b,False,True,3.24e-05,3.939
+all-large qwen2.5-coder:7b,sum-023,summarization,hard,qwen2.5-coder:7b,False,True,4.04e-05,3.859
+all-large qwen2.5-coder:7b,sum-024,summarization,easy,qwen2.5-coder:7b,False,True,3.2e-05,3.947
+all-large qwen2.5-coder:7b,sum-025,summarization,hard,qwen2.5-coder:7b,False,True,4.42e-05,4.381
+all-large qwen2.5-coder:7b,sum-026,summarization,easy,qwen2.5-coder:7b,False,True,2.9e-05,3.343
+all-large qwen2.5-coder:7b,sum-027,summarization,hard,qwen2.5-coder:7b,False,True,4.18e-05,4.311
+all-large qwen2.5-coder:7b,sum-028,summarization,easy,qwen2.5-coder:7b,False,True,3.32e-05,4.203
+all-large qwen2.5-coder:7b,sum-029,summarization,hard,qwen2.5-coder:7b,False,True,4.46e-05,4.17
+all-large qwen2.5-coder:7b,sum-030,summarization,easy,qwen2.5-coder:7b,False,True,3.34e-05,4.487
+all-large qwen2.5-coder:7b,sum-031,summarization,hard,qwen2.5-coder:7b,False,True,4.66e-05,4.281
+all-large qwen2.5-coder:7b,sum-032,summarization,easy,qwen2.5-coder:7b,False,False,3.36e-05,4.367
+all-large qwen2.5-coder:7b,sum-033,summarization,hard,qwen2.5-coder:7b,False,True,4.16e-05,4.048
+all-large qwen2.5-coder:7b,sum-034,summarization,easy,qwen2.5-coder:7b,False,True,3.5e-05,4.38
+all-large qwen2.5-coder:7b,sum-035,summarization,hard,qwen2.5-coder:7b,False,True,4.84e-05,6.182
+all-large qwen2.5-coder:7b,sum-036,summarization,easy,qwen2.5-coder:7b,False,False,2.9e-05,3.418
+all-large qwen2.5-coder:7b,sum-037,summarization,hard,qwen2.5-coder:7b,False,False,4.96e-05,5.247
+all-large qwen2.5-coder:7b,sum-038,summarization,easy,qwen2.5-coder:7b,False,True,3.2e-05,4.17
+all-large qwen2.5-coder:7b,sum-039,summarization,hard,qwen2.5-coder:7b,False,False,4.62e-05,4.171
+all-large qwen2.5-coder:7b,sum-040,summarization,easy,qwen2.5-coder:7b,False,True,3.24e-05,4.43
+all-large qwen2.5-coder:7b,sum-041,summarization,hard,qwen2.5-coder:7b,False,True,4.32e-05,4.957
+all-large qwen2.5-coder:7b,sum-042,summarization,easy,qwen2.5-coder:7b,False,True,3.24e-05,5.03
+all-large qwen2.5-coder:7b,sum-043,summarization,hard,qwen2.5-coder:7b,False,False,4.82e-05,5.294
+all-large qwen2.5-coder:7b,sum-044,summarization,easy,qwen2.5-coder:7b,False,True,3e-05,3.635
+all-large qwen2.5-coder:7b,sum-045,summarization,hard,qwen2.5-coder:7b,False,True,4.76e-05,4.237
+all-large qwen2.5-coder:7b,sum-046,summarization,easy,qwen2.5-coder:7b,False,True,3.08e-05,3.89
+all-large qwen2.5-coder:7b,sum-047,summarization,hard,qwen2.5-coder:7b,False,True,4.36e-05,4.587
+all-large qwen2.5-coder:7b,sum-048,summarization,easy,qwen2.5-coder:7b,False,True,3e-05,3.425
+all-large qwen2.5-coder:7b,sum-049,summarization,hard,qwen2.5-coder:7b,False,True,4.82e-05,4.611
+all-large qwen2.5-coder:7b,rea-020,reasoning,easy,qwen2.5-coder:7b,False,True,4.08e-05,10.043
+all-large qwen2.5-coder:7b,rea-021,reasoning,hard,qwen2.5-coder:7b,False,True,5.54e-05,12.711
+all-large qwen2.5-coder:7b,rea-022,reasoning,easy,qwen2.5-coder:7b,False,True,4.02e-05,9.402
+all-large qwen2.5-coder:7b,rea-023,reasoning,hard,qwen2.5-coder:7b,False,False,4.34e-05,8.773
+all-large qwen2.5-coder:7b,rea-024,reasoning,easy,qwen2.5-coder:7b,False,True,4.34e-05,9.491
+all-large qwen2.5-coder:7b,rea-025,reasoning,hard,qwen2.5-coder:7b,False,False,5.48e-05,13.173
+all-large qwen2.5-coder:7b,rea-026,reasoning,easy,qwen2.5-coder:7b,False,True,3.06e-05,5.413
+all-large qwen2.5-coder:7b,rea-027,reasoning,hard,qwen2.5-coder:7b,False,True,5.56e-05,12.558
+all-large qwen2.5-coder:7b,rea-028,reasoning,easy,qwen2.5-coder:7b,False,True,3.64e-05,6.931
+all-large qwen2.5-coder:7b,rea-029,reasoning,hard,qwen2.5-coder:7b,False,True,4.36e-05,8.694
+all-large qwen2.5-coder:7b,rea-030,reasoning,easy,qwen2.5-coder:7b,False,True,4.38e-05,10.956
+all-large qwen2.5-coder:7b,rea-031,reasoning,hard,qwen2.5-coder:7b,False,False,5.66e-05,11.715
+all-large qwen2.5-coder:7b,rea-032,reasoning,easy,qwen2.5-coder:7b,False,True,4.2e-05,9.481
+all-large qwen2.5-coder:7b,rea-033,reasoning,hard,qwen2.5-coder:7b,False,True,5.7e-05,11.42
+all-large qwen2.5-coder:7b,rea-034,reasoning,easy,qwen2.5-coder:7b,False,False,4.14e-05,8.579
+all-large qwen2.5-coder:7b,rea-035,reasoning,hard,qwen2.5-coder:7b,False,True,4.3e-05,8.807
+all-large qwen2.5-coder:7b,rea-036,reasoning,easy,qwen2.5-coder:7b,False,True,4.46e-05,9.904
+all-large qwen2.5-coder:7b,rea-037,reasoning,hard,qwen2.5-coder:7b,False,False,7.02e-05,17.301
+all-large qwen2.5-coder:7b,rea-038,reasoning,easy,qwen2.5-coder:7b,False,True,4.08e-05,9.505
+all-large qwen2.5-coder:7b,rea-039,reasoning,hard,qwen2.5-coder:7b,False,True,5.58e-05,11.432
+all-large qwen2.5-coder:7b,rea-040,reasoning,easy,qwen2.5-coder:7b,False,True,4.1e-05,9.01
+all-large qwen2.5-coder:7b,rea-041,reasoning,hard,qwen2.5-coder:7b,False,True,4.44e-05,8.796
+all-large qwen2.5-coder:7b,rea-042,reasoning,easy,qwen2.5-coder:7b,False,True,4.28e-05,12.576
+all-large qwen2.5-coder:7b,rea-043,reasoning,hard,qwen2.5-coder:7b,False,False,6.5e-05,16.079
+all-large qwen2.5-coder:7b,rea-044,reasoning,easy,qwen2.5-coder:7b,False,True,3.74e-05,7.846
+all-large qwen2.5-coder:7b,rea-045,reasoning,hard,qwen2.5-coder:7b,False,True,5.56e-05,10.92
+all-large qwen2.5-coder:7b,rea-046,reasoning,easy,qwen2.5-coder:7b,False,True,4.1e-05,8.281
+all-large qwen2.5-coder:7b,rea-047,reasoning,hard,qwen2.5-coder:7b,False,True,4.4e-05,7.893
+all-large qwen2.5-coder:7b,rea-048,reasoning,easy,qwen2.5-coder:7b,False,True,4.28e-05,9.177
+all-large qwen2.5-coder:7b,rea-049,reasoning,hard,qwen2.5-coder:7b,False,False,5.7e-05,11.853
+"router, structural check only",ext-020,extraction,easy,qwen2.5-coder:3b,False,True,1.65e-05,4.68
+"router, structural check only",ext-021,extraction,hard,qwen2.5-coder:3b,False,False,2.034e-05,5.206
+"router, structural check only",ext-022,extraction,easy,qwen2.5-coder:3b,False,True,1.674e-05,4.696
+"router, structural check only",ext-023,extraction,hard,qwen2.5-coder:3b,False,True,2.004e-05,5.086
+"router, structural check only",ext-024,extraction,easy,qwen2.5-coder:3b,False,True,1.626e-05,4.347
+"router, structural check only",ext-025,extraction,hard,qwen2.5-coder:3b,False,True,1.992e-05,5.365
+"router, structural check only",ext-026,extraction,easy,qwen2.5-coder:3b,False,True,1.626e-05,5.44
+"router, structural check only",ext-027,extraction,hard,qwen2.5-coder:3b,False,True,1.968e-05,6.14
+"router, structural check only",ext-028,extraction,easy,qwen2.5-coder:3b,False,True,1.674e-05,5.846
+"router, structural check only",ext-029,extraction,hard,qwen2.5-coder:3b,False,True,2.04e-05,5.657
+"router, structural check only",ext-030,extraction,easy,qwen2.5-coder:3b,False,True,1.68e-05,5.34
+"router, structural check only",ext-031,extraction,hard,qwen2.5-coder:3b,False,True,2.016e-05,5.423
+"router, structural check only",ext-032,extraction,easy,qwen2.5-coder:3b,False,True,1.566e-05,4.696
+"router, structural check only",ext-033,extraction,hard,qwen2.5-coder:3b,False,False,1.986e-05,5.668
+"router, structural check only",ext-034,extraction,easy,qwen2.5-coder:3b,False,True,1.656e-05,5.011
+"router, structural check only",ext-035,extraction,hard,qwen2.5-coder:3b,False,True,1.974e-05,5.135
+"router, structural check only",ext-036,extraction,easy,qwen2.5-coder:3b,False,True,1.65e-05,4.89
+"router, structural check only",ext-037,extraction,hard,qwen2.5-coder:3b,False,True,2.004e-05,5.482
+"router, structural check only",ext-038,extraction,easy,qwen2.5-coder:3b,False,True,1.686e-05,6.321
+"router, structural check only",ext-039,extraction,hard,qwen2.5-coder:3b,False,True,2.022e-05,8.11
+"router, structural check only",ext-040,extraction,easy,qwen2.5-coder:3b,False,True,1.71e-05,7.507
+"router, structural check only",ext-041,extraction,hard,qwen2.5-coder:3b,False,True,2.022e-05,7.018
+"router, structural check only",ext-042,extraction,easy,qwen2.5-coder:3b,False,True,1.602e-05,7.564
+"router, structural check only",ext-043,extraction,hard,qwen2.5-coder:3b,False,True,2.004e-05,7.481
+"router, structural check only",ext-044,extraction,easy,qwen2.5-coder:3b,False,True,1.59e-05,6.593
+"router, structural check only",ext-045,extraction,hard,qwen2.5-coder:3b,False,True,1.986e-05,5.354
+"router, structural check only",ext-046,extraction,easy,qwen2.5-coder:3b,False,True,1.68e-05,5.835
+"router, structural check only",ext-047,extraction,hard,qwen2.5-coder:3b,False,True,2.028e-05,5.818
+"router, structural check only",ext-048,extraction,easy,qwen2.5-coder:3b,False,True,1.59e-05,6.54
+"router, structural check only",ext-049,extraction,hard,qwen2.5-coder:3b,False,True,1.992e-05,5.786
+"router, structural check only",cla-020,classification,easy,qwen2.5-coder:3b,False,True,9.84e-06,0.973
+"router, structural check only",cla-021,classification,hard,qwen2.5-coder:3b,False,True,1.074e-05,1.048
+"router, structural check only",cla-022,classification,easy,qwen2.5-coder:3b,False,True,9.66e-06,1.041
+"router, structural check only",cla-023,classification,hard,qwen2.5-coder:3b,False,False,1.05e-05,1.035
+"router, structural check only",cla-024,classification,easy,qwen2.5-coder:3b,False,True,9.84e-06,0.999
+"router, structural check only",cla-025,classification,hard,qwen2.5-coder:3b,False,True,1.092e-05,1.058
+"router, structural check only",cla-026,classification,easy,qwen2.5-coder:3b,False,True,9.96e-06,1.156
+"router, structural check only",cla-027,classification,hard,qwen2.5-coder:3b,False,True,1.008e-05,1.272
+"router, structural check only",cla-028,classification,easy,qwen2.5-coder:3b,False,True,9.78e-06,1.098
+"router, structural check only",cla-029,classification,hard,qwen2.5-coder:3b,False,False,1.038e-05,1.065
+"router, structural check only",cla-030,classification,easy,qwen2.5-coder:3b,False,True,9.84e-06,1.036
+"router, structural check only",cla-031,classification,hard,qwen2.5-coder:3b,False,True,1.056e-05,1.194
+"router, structural check only",cla-032,classification,easy,qwen2.5-coder:3b,False,True,9.78e-06,1.017
+"router, structural check only",cla-033,classification,hard,qwen2.5-coder:3b,False,True,1.074e-05,1.117
+"router, structural check only",cla-034,classification,easy,qwen2.5-coder:3b,False,True,9.96e-06,1.152
+"router, structural check only",cla-035,classification,hard,qwen2.5-coder:3b,False,True,1.05e-05,1.265
+"router, structural check only",cla-036,classification,easy,qwen2.5-coder:3b,False,True,9.48e-06,1.013
+"router, structural check only",cla-037,classification,hard,qwen2.5-coder:3b,False,True,1.068e-05,1.175
+"router, structural check only",cla-038,classification,easy,qwen2.5-coder:3b,False,True,9.84e-06,1.302
+"router, structural check only",cla-039,classification,hard,qwen2.5-coder:3b,False,True,1.008e-05,1.413
+"router, structural check only",cla-040,classification,easy,qwen2.5-coder:3b,False,True,9.12e-06,1.623
+"router, structural check only",cla-041,classification,hard,qwen2.5-coder:3b,False,False,1.038e-05,1.349
+"router, structural check only",cla-042,classification,easy,qwen2.5-coder:3b,False,True,9.54e-06,1.379
+"router, structural check only",cla-043,classification,hard,qwen2.5-coder:3b,False,True,1.11e-05,1.287
+"router, structural check only",cla-044,classification,easy,qwen2.5-coder:3b,False,True,9.84e-06,1.316
+"router, structural check only",cla-045,classification,hard,qwen2.5-coder:3b,False,True,1.074e-05,1.367
+"router, structural check only",cla-046,classification,easy,qwen2.5-coder:3b,False,True,9.66e-06,1.348
+"router, structural check only",cla-047,classification,hard,qwen2.5-coder:3b,False,False,1.038e-05,1.251
+"router, structural check only",cla-048,classification,easy,qwen2.5-coder:3b,False,True,9.72e-06,1.543
+"router, structural check only",cla-049,classification,hard,qwen2.5-coder:3b,False,True,1.05e-05,1.273
+"router, structural check only",sum-020,summarization,easy,qwen2.5-coder:3b,False,True,1.08e-05,3.01
+"router, structural check only",sum-021,summarization,hard,qwen2.5-coder:7b,True,True,5.826e-05,9.704
+"router, structural check only",sum-022,summarization,easy,qwen2.5-coder:3b,False,True,1.032e-05,2.632
+"router, structural check only",sum-023,summarization,hard,qwen2.5-coder:3b,False,False,1.26e-05,2.766
+"router, structural check only",sum-024,summarization,easy,qwen2.5-coder:3b,False,False,9.78e-06,2.339
+"router, structural check only",sum-025,summarization,hard,qwen2.5-coder:3b,False,False,1.308e-05,2.386
+"router, structural check only",sum-026,summarization,easy,qwen2.5-coder:3b,False,True,9.66e-06,3.404
+"router, structural check only",sum-027,summarization,hard,qwen2.5-coder:3b,False,True,1.29e-05,3.204
+"router, structural check only",sum-028,summarization,easy,qwen2.5-coder:3b,False,True,1.056e-05,3.151
+"router, structural check only",sum-029,summarization,hard,qwen2.5-coder:7b,True,True,6.002e-05,9.615
+"router, structural check only",sum-030,summarization,easy,qwen2.5-coder:3b,False,True,1.044e-05,3.097
+"router, structural check only",sum-031,summarization,hard,qwen2.5-coder:3b,False,True,1.476e-05,3.613
+"router, structural check only",sum-032,summarization,easy,qwen2.5-coder:3b,False,True,1.014e-05,2.576
+"router, structural check only",sum-033,summarization,hard,qwen2.5-coder:7b,True,True,5.438e-05,7.008
+"router, structural check only",sum-034,summarization,easy,qwen2.5-coder:7b,True,True,4.652e-05,8.262
+"router, structural check only",sum-035,summarization,hard,qwen2.5-coder:3b,False,True,1.494e-05,3.343
+"router, structural check only",sum-036,summarization,easy,qwen2.5-coder:3b,False,True,8.94e-06,2.312
+"router, structural check only",sum-037,summarization,hard,qwen2.5-coder:3b,False,False,1.512e-05,4.148
+"router, structural check only",sum-038,summarization,easy,qwen2.5-coder:3b,False,True,9.48e-06,2.94
+"router, structural check only",sum-039,summarization,hard,qwen2.5-coder:3b,False,True,1.452e-05,4.525
+"router, structural check only",sum-040,summarization,easy,qwen2.5-coder:3b,False,True,1.02e-05,3.612
+"router, structural check only",sum-041,summarization,hard,qwen2.5-coder:3b,False,True,1.308e-05,3.425
+"router, structural check only",sum-042,summarization,easy,qwen2.5-coder:3b,False,True,1.014e-05,3.727
+"router, structural check only",sum-043,summarization,hard,qwen2.5-coder:3b,False,False,1.5e-05,4.211
+"router, structural check only",sum-044,summarization,easy,qwen2.5-coder:3b,False,False,9.18e-06,3.058
+"router, structural check only",sum-045,summarization,hard,qwen2.5-coder:7b,True,True,6.278e-05,8.196
+"router, structural check only",sum-046,summarization,easy,qwen2.5-coder:3b,False,True,9.12e-06,2.687
+"router, structural check only",sum-047,summarization,hard,qwen2.5-coder:3b,False,True,1.35e-05,3.656
+"router, structural check only",sum-048,summarization,easy,qwen2.5-coder:3b,False,True,1.002e-05,3.534
+"router, structural check only",sum-049,summarization,hard,qwen2.5-coder:3b,False,True,1.518e-05,4.435
+"router, structural check only",rea-020,reasoning,easy,qwen2.5-coder:3b,False,True,1.224e-05,6.004
+"router, structural check only",rea-021,reasoning,hard,qwen2.5-coder:3b,False,True,1.782e-05,9.514
+"router, structural check only",rea-022,reasoning,easy,qwen2.5-coder:3b,False,True,1.044e-05,4.05
+"router, structural check only",rea-023,reasoning,hard,qwen2.5-coder:3b,False,False,1.314e-05,6.256
+"router, structural check only",rea-024,reasoning,easy,qwen2.5-coder:3b,False,True,1.026e-05,4.086
+"router, structural check only",rea-025,reasoning,hard,qwen2.5-coder:3b,False,False,1.704e-05,8.354
+"router, structural check only",rea-026,reasoning,easy,qwen2.5-coder:3b,False,True,1.11e-05,6.326
+"router, structural check only",rea-027,reasoning,hard,qwen2.5-coder:3b,False,False,1.674e-05,9.357
+"router, structural check only",rea-028,reasoning,easy,qwen2.5-coder:3b,False,False,1.026e-05,3.943
+"router, structural check only",rea-029,reasoning,hard,qwen2.5-coder:3b,False,True,1.224e-05,5.968
+"router, structural check only",rea-030,reasoning,easy,qwen2.5-coder:3b,False,True,1.038e-05,4.35
+"router, structural check only",rea-031,reasoning,hard,qwen2.5-coder:3b,False,False,1.722e-05,8.684
+"router, structural check only",rea-032,reasoning,easy,qwen2.5-coder:3b,False,False,1.212e-05,5.837
+"router, structural check only",rea-033,reasoning,hard,qwen2.5-coder:3b,False,False,1.89e-05,10.004
+"router, structural check only",rea-034,reasoning,easy,qwen2.5-coder:3b,False,False,1.026e-05,4.204
+"router, structural check only",rea-035,reasoning,hard,qwen2.5-coder:3b,False,False,1.194e-05,4.327
+"router, structural check only",rea-036,reasoning,easy,qwen2.5-coder:3b,False,True,1.062e-05,4.423
+"router, structural check only",rea-037,reasoning,hard,qwen2.5-coder:3b,False,False,1.626e-05,9.212
+"router, structural check only",rea-038,reasoning,easy,qwen2.5-coder:3b,False,True,1.224e-05,8.266
+"router, structural check only",rea-039,reasoning,hard,qwen2.5-coder:3b,False,True,1.68e-05,11.568
+"router, structural check only",rea-040,reasoning,easy,qwen2.5-coder:3b,False,True,1.014e-05,4.821
+"router, structural check only",rea-041,reasoning,hard,qwen2.5-coder:3b,False,False,1.206e-05,7.372
+"router, structural check only",rea-042,reasoning,easy,qwen2.5-coder:3b,False,True,9.96e-06,4.77
+"router, structural check only",rea-043,reasoning,hard,qwen2.5-coder:3b,False,False,1.59e-05,8.44
+"router, structural check only",rea-044,reasoning,easy,qwen2.5-coder:3b,False,True,1.224e-05,7.275
+"router, structural check only",rea-045,reasoning,hard,qwen2.5-coder:3b,False,False,1.596e-05,8.281
+"router, structural check only",rea-046,reasoning,easy,qwen2.5-coder:3b,False,True,1.014e-05,4.178
+"router, structural check only",rea-047,reasoning,hard,qwen2.5-coder:3b,False,False,1.2e-05,4.759
+"router, structural check only",rea-048,reasoning,easy,qwen2.5-coder:3b,False,True,9.96e-06,4.638
+"router, structural check only",rea-049,reasoning,hard,qwen2.5-coder:3b,False,False,1.728e-05,9.514
+"router, tuned on dev",ext-020,extraction,easy,llama3.2,False,True,1.428e-05,3.618
+"router, tuned on dev",ext-021,extraction,hard,llama3.2,False,False,1.77e-05,4.453
+"router, tuned on dev",ext-022,extraction,easy,llama3.2,False,True,1.458e-05,3.562
+"router, tuned on dev",ext-023,extraction,hard,llama3.2,False,True,1.728e-05,3.675
+"router, tuned on dev",ext-024,extraction,easy,llama3.2,False,True,1.44e-05,3.542
+"router, tuned on dev",ext-025,extraction,hard,llama3.2,False,True,1.734e-05,3.93
+"router, tuned on dev",ext-026,extraction,easy,llama3.2,False,True,1.44e-05,4.043
+"router, tuned on dev",ext-027,extraction,hard,llama3.2,False,True,1.728e-05,4.588
+"router, tuned on dev",ext-028,extraction,easy,llama3.2,False,True,1.464e-05,6.496
+"router, tuned on dev",ext-029,extraction,hard,llama3.2,False,True,1.752e-05,5.641
+"router, tuned on dev",ext-030,extraction,easy,llama3.2,False,True,1.464e-05,4.5
+"router, tuned on dev",ext-031,extraction,hard,llama3.2,False,True,1.74e-05,3.729
+"router, tuned on dev",ext-032,extraction,easy,llama3.2,False,True,1.404e-05,3.656
+"router, tuned on dev",ext-033,extraction,hard,llama3.2,False,False,1.722e-05,4.227
+"router, tuned on dev",ext-034,extraction,easy,llama3.2,False,True,1.464e-05,4.067
+"router, tuned on dev",ext-035,extraction,hard,llama3.2,False,True,1.734e-05,3.98
+"router, tuned on dev",ext-036,extraction,easy,llama3.2,False,True,1.434e-05,3.627
+"router, tuned on dev",ext-037,extraction,hard,llama3.2,False,True,1.722e-05,4.057
+"router, tuned on dev",ext-038,extraction,easy,llama3.2,False,True,1.464e-05,3.952
+"router, tuned on dev",ext-039,extraction,hard,llama3.2,False,True,1.74e-05,4.455
+"router, tuned on dev",ext-040,extraction,easy,llama3.2,False,True,1.482e-05,4.305
+"router, tuned on dev",ext-041,extraction,hard,llama3.2,False,True,1.758e-05,4.089
+"router, tuned on dev",ext-042,extraction,easy,llama3.2,False,True,1.44e-05,3.656
+"router, tuned on dev",ext-043,extraction,hard,llama3.2,False,True,1.722e-05,4.612
+"router, tuned on dev",ext-044,extraction,easy,llama3.2,False,True,1.416e-05,3.367
+"router, tuned on dev",ext-045,extraction,hard,llama3.2,False,True,1.728e-05,3.741
+"router, tuned on dev",ext-046,extraction,easy,llama3.2,False,True,1.47e-05,3.744
+"router, tuned on dev",ext-047,extraction,hard,llama3.2,False,True,1.74e-05,4.026
+"router, tuned on dev",ext-048,extraction,easy,llama3.2,False,True,1.416e-05,3.59
+"router, tuned on dev",ext-049,extraction,hard,llama3.2,False,True,1.728e-05,3.904
+"router, tuned on dev",cla-020,classification,easy,qwen2.5-coder:3b,False,True,9.84e-06,0.973
+"router, tuned on dev",cla-021,classification,hard,qwen2.5-coder:3b,False,True,1.074e-05,1.048
+"router, tuned on dev",cla-022,classification,easy,qwen2.5-coder:3b,False,True,9.66e-06,1.041
+"router, tuned on dev",cla-023,classification,hard,qwen2.5-coder:3b,False,False,1.05e-05,1.035
+"router, tuned on dev",cla-024,classification,easy,qwen2.5-coder:3b,False,True,9.84e-06,0.999
+"router, tuned on dev",cla-025,classification,hard,qwen2.5-coder:3b,False,True,1.092e-05,1.058
+"router, tuned on dev",cla-026,classification,easy,qwen2.5-coder:3b,False,True,9.96e-06,1.156
+"router, tuned on dev",cla-027,classification,hard,qwen2.5-coder:3b,False,True,1.008e-05,1.272
+"router, tuned on dev",cla-028,classification,easy,qwen2.5-coder:3b,False,True,9.78e-06,1.098
+"router, tuned on dev",cla-029,classification,hard,qwen2.5-coder:3b,False,False,1.038e-05,1.065
+"router, tuned on dev",cla-030,classification,easy,qwen2.5-coder:3b,False,True,9.84e-06,1.036
+"router, tuned on dev",cla-031,classification,hard,qwen2.5-coder:3b,False,True,1.056e-05,1.194
+"router, tuned on dev",cla-032,classification,easy,qwen2.5-coder:3b,False,True,9.78e-06,1.017
+"router, tuned on dev",cla-033,classification,hard,qwen2.5-coder:3b,False,True,1.074e-05,1.117
+"router, tuned on dev",cla-034,classification,easy,qwen2.5-coder:3b,False,True,9.96e-06,1.152
+"router, tuned on dev",cla-035,classification,hard,qwen2.5-coder:3b,False,True,1.05e-05,1.265
+"router, tuned on dev",cla-036,classification,easy,qwen2.5-coder:3b,False,True,9.48e-06,1.013
+"router, tuned on dev",cla-037,classification,hard,qwen2.5-coder:3b,False,True,1.068e-05,1.175
+"router, tuned on dev",cla-038,classification,easy,qwen2.5-coder:3b,False,True,9.84e-06,1.302
+"router, tuned on dev",cla-039,classification,hard,qwen2.5-coder:3b,False,True,1.008e-05,1.413
+"router, tuned on dev",cla-040,classification,easy,qwen2.5-coder:3b,False,True,9.12e-06,1.623
+"router, tuned on dev",cla-041,classification,hard,qwen2.5-coder:3b,False,False,1.038e-05,1.349
+"router, tuned on dev",cla-042,classification,easy,qwen2.5-coder:3b,False,True,9.54e-06,1.379
+"router, tuned on dev",cla-043,classification,hard,qwen2.5-coder:3b,False,True,1.11e-05,1.287
+"router, tuned on dev",cla-044,classification,easy,qwen2.5-coder:3b,False,True,9.84e-06,1.316
+"router, tuned on dev",cla-045,classification,hard,qwen2.5-coder:3b,False,True,1.074e-05,1.367
+"router, tuned on dev",cla-046,classification,easy,qwen2.5-coder:3b,False,True,9.66e-06,1.348
+"router, tuned on dev",cla-047,classification,hard,qwen2.5-coder:3b,False,False,1.038e-05,1.251
+"router, tuned on dev",cla-048,classification,easy,qwen2.5-coder:3b,False,True,9.72e-06,1.543
+"router, tuned on dev",cla-049,classification,hard,qwen2.5-coder:3b,False,True,1.05e-05,1.273
+"router, tuned on dev",sum-020,summarization,easy,llama3.2,False,False,1.008e-05,2.521
+"router, tuned on dev",sum-021,summarization,hard,llama3.2,False,False,1.296e-05,3.658
+"router, tuned on dev",sum-022,summarization,easy,llama3.2,False,True,9.9e-06,2.508
+"router, tuned on dev",sum-023,summarization,hard,llama3.2,False,True,1.278e-05,3.073
+"router, tuned on dev",sum-024,summarization,easy,llama3.2,False,True,9.6e-06,3.031
+"router, tuned on dev",sum-025,summarization,hard,llama3.2,False,True,1.362e-05,3.254
+"router, tuned on dev",sum-026,summarization,easy,llama3.2,False,True,9.18e-06,2.822
+"router, tuned on dev",sum-027,summarization,hard,llama3.2,False,True,1.272e-05,5.351
+"router, tuned on dev",sum-028,summarization,easy,llama3.2,False,True,1.002e-05,4.006
+"router, tuned on dev",sum-029,summarization,hard,llama3.2,False,True,1.392e-05,4.203
+"router, tuned on dev",sum-030,summarization,easy,llama3.2,False,True,9.84e-06,2.514
+"router, tuned on dev",sum-031,summarization,hard,llama3.2,False,True,1.428e-05,3.627
+"router, tuned on dev",sum-032,summarization,easy,llama3.2,False,True,9.9e-06,2.89
+"router, tuned on dev",sum-033,summarization,hard,llama3.2,False,True,1.206e-05,2.81
+"router, tuned on dev",sum-034,summarization,easy,llama3.2,False,True,1.02e-05,2.837
+"router, tuned on dev",sum-035,summarization,hard,llama3.2,False,True,1.458e-05,3.48
+"router, tuned on dev",sum-036,summarization,easy,llama3.2,False,True,8.88e-06,2.479
+"router, tuned on dev",sum-037,summarization,hard,llama3.2,False,False,1.398e-05,3.002
+"router, tuned on dev",sum-038,summarization,easy,llama3.2,False,True,9.48e-06,2.835
+"router, tuned on dev",sum-039,summarization,hard,llama3.2,False,False,1.386e-05,3.264
+"router, tuned on dev",sum-040,summarization,easy,llama3.2,False,True,9.54e-06,2.634
+"router, tuned on dev",sum-041,summarization,hard,llama3.2,False,True,1.29e-05,3.32
+"router, tuned on dev",sum-042,summarization,easy,llama3.2,False,True,9.96e-06,2.725
+"router, tuned on dev",sum-043,summarization,hard,llama3.2,False,True,1.374e-05,3.325
+"router, tuned on dev",sum-044,summarization,easy,llama3.2,False,True,9e-06,2.388
+"router, tuned on dev",sum-045,summarization,hard,llama3.2,False,True,1.422e-05,3.015
+"router, tuned on dev",sum-046,summarization,easy,llama3.2,False,True,9.24e-06,2.642
+"router, tuned on dev",sum-047,summarization,hard,llama3.2,False,True,1.236e-05,2.539
+"router, tuned on dev",sum-048,summarization,easy,llama3.2,False,True,9.72e-06,2.984
+"router, tuned on dev",sum-049,summarization,hard,llama3.2,False,True,1.476e-05,3.586
+"router, tuned on dev",rea-020,reasoning,easy,qwen2.5-coder:3b,False,True,1.224e-05,6.004
+"router, tuned on dev",rea-021,reasoning,hard,qwen2.5-coder:7b,True,True,7.322e-05,22.224
+"router, tuned on dev",rea-022,reasoning,easy,qwen2.5-coder:3b,False,True,1.044e-05,4.05
+"router, tuned on dev",rea-023,reasoning,hard,qwen2.5-coder:3b,False,False,1.314e-05,6.256
+"router, tuned on dev",rea-024,reasoning,easy,qwen2.5-coder:3b,False,True,1.026e-05,4.086
+"router, tuned on dev",rea-025,reasoning,hard,qwen2.5-coder:7b,True,False,7.184e-05,21.527
+"router, tuned on dev",rea-026,reasoning,easy,qwen2.5-coder:3b,False,True,1.11e-05,6.326
+"router, tuned on dev",rea-027,reasoning,hard,qwen2.5-coder:7b,True,True,7.234e-05,21.916
+"router, tuned on dev",rea-028,reasoning,easy,qwen2.5-coder:3b,False,False,1.026e-05,3.943
+"router, tuned on dev",rea-029,reasoning,hard,qwen2.5-coder:7b,True,True,5.584e-05,14.662
+"router, tuned on dev",rea-030,reasoning,easy,qwen2.5-coder:3b,False,True,1.038e-05,4.35
+"router, tuned on dev",rea-031,reasoning,hard,qwen2.5-coder:7b,True,False,7.382e-05,20.399
+"router, tuned on dev",rea-032,reasoning,easy,qwen2.5-coder:3b,False,False,1.212e-05,5.837
+"router, tuned on dev",rea-033,reasoning,hard,qwen2.5-coder:3b,False,False,1.89e-05,10.004
+"router, tuned on dev",rea-034,reasoning,easy,qwen2.5-coder:3b,False,False,1.026e-05,4.204
+"router, tuned on dev",rea-035,reasoning,hard,qwen2.5-coder:7b,True,True,5.494e-05,13.134
+"router, tuned on dev",rea-036,reasoning,easy,qwen2.5-coder:3b,False,True,1.062e-05,4.423
+"router, tuned on dev",rea-037,reasoning,hard,qwen2.5-coder:7b,True,False,8.646e-05,26.513
+"router, tuned on dev",rea-038,reasoning,easy,qwen2.5-coder:3b,False,True,1.224e-05,8.266
+"router, tuned on dev",rea-039,reasoning,hard,qwen2.5-coder:3b,False,True,1.68e-05,11.568
+"router, tuned on dev",rea-040,reasoning,easy,qwen2.5-coder:3b,False,True,1.014e-05,4.821
+"router, tuned on dev",rea-041,reasoning,hard,qwen2.5-coder:7b,True,True,5.646e-05,16.168
+"router, tuned on dev",rea-042,reasoning,easy,qwen2.5-coder:3b,False,True,9.96e-06,4.77
+"router, tuned on dev",rea-043,reasoning,hard,qwen2.5-coder:7b,True,False,8.09e-05,24.519
+"router, tuned on dev",rea-044,reasoning,easy,qwen2.5-coder:3b,False,True,1.224e-05,7.275
+"router, tuned on dev",rea-045,reasoning,hard,qwen2.5-coder:3b,False,False,1.596e-05,8.281
+"router, tuned on dev",rea-046,reasoning,easy,qwen2.5-coder:3b,False,True,1.014e-05,4.178
+"router, tuned on dev",rea-047,reasoning,hard,qwen2.5-coder:7b,True,True,5.6e-05,12.651
+"router, tuned on dev",rea-048,reasoning,easy,qwen2.5-coder:3b,False,True,9.96e-06,4.638
+"router, tuned on dev",rea-049,reasoning,hard,qwen2.5-coder:7b,True,False,7.428e-05,21.366
+oracle (perfect verifier),ext-020,extraction,easy,qwen2.5-coder:3b,False,True,1.65e-05,4.68
+oracle (perfect verifier),ext-021,extraction,hard,qwen2.5-coder:7b,False,False,6.86e-05,9.048
+oracle (perfect verifier),ext-022,extraction,easy,qwen2.5-coder:3b,False,True,1.674e-05,4.696
+oracle (perfect verifier),ext-023,extraction,hard,qwen2.5-coder:3b,False,True,2.004e-05,5.086
+oracle (perfect verifier),ext-024,extraction,easy,qwen2.5-coder:3b,False,True,1.626e-05,4.347
+oracle (perfect verifier),ext-025,extraction,hard,qwen2.5-coder:3b,False,True,1.992e-05,5.365
+oracle (perfect verifier),ext-026,extraction,easy,qwen2.5-coder:3b,False,True,1.626e-05,5.44
+oracle (perfect verifier),ext-027,extraction,hard,qwen2.5-coder:3b,False,True,1.968e-05,6.14
+oracle (perfect verifier),ext-028,extraction,easy,qwen2.5-coder:3b,False,True,1.674e-05,5.846
+oracle (perfect verifier),ext-029,extraction,hard,qwen2.5-coder:3b,False,True,2.04e-05,5.657
+oracle (perfect verifier),ext-030,extraction,easy,qwen2.5-coder:3b,False,True,1.68e-05,5.34
+oracle (perfect verifier),ext-031,extraction,hard,qwen2.5-coder:3b,False,True,2.016e-05,5.423
+oracle (perfect verifier),ext-032,extraction,easy,qwen2.5-coder:3b,False,True,1.566e-05,4.696
+oracle (perfect verifier),ext-033,extraction,hard,qwen2.5-coder:7b,False,False,6.7e-05,8.411
+oracle (perfect verifier),ext-034,extraction,easy,qwen2.5-coder:3b,False,True,1.656e-05,5.011
+oracle (perfect verifier),ext-035,extraction,hard,qwen2.5-coder:3b,False,True,1.974e-05,5.135
+oracle (perfect verifier),ext-036,extraction,easy,qwen2.5-coder:3b,False,True,1.65e-05,4.89
+oracle (perfect verifier),ext-037,extraction,hard,qwen2.5-coder:3b,False,True,2.004e-05,5.482
+oracle (perfect verifier),ext-038,extraction,easy,qwen2.5-coder:3b,False,True,1.686e-05,6.321
+oracle (perfect verifier),ext-039,extraction,hard,qwen2.5-coder:3b,False,True,2.022e-05,8.11
+oracle (perfect verifier),ext-040,extraction,easy,qwen2.5-coder:3b,False,True,1.71e-05,7.507
+oracle (perfect verifier),ext-041,extraction,hard,qwen2.5-coder:3b,False,True,2.022e-05,7.018
+oracle (perfect verifier),ext-042,extraction,easy,qwen2.5-coder:3b,False,True,1.602e-05,7.564
+oracle (perfect verifier),ext-043,extraction,hard,qwen2.5-coder:3b,False,True,2.004e-05,7.481
+oracle (perfect verifier),ext-044,extraction,easy,qwen2.5-coder:3b,False,True,1.59e-05,6.593
+oracle (perfect verifier),ext-045,extraction,hard,qwen2.5-coder:3b,False,True,1.986e-05,5.354
+oracle (perfect verifier),ext-046,extraction,easy,qwen2.5-coder:3b,False,True,1.68e-05,5.835
+oracle (perfect verifier),ext-047,extraction,hard,qwen2.5-coder:3b,False,True,2.028e-05,5.818
+oracle (perfect verifier),ext-048,extraction,easy,qwen2.5-coder:3b,False,True,1.59e-05,6.54
+oracle (perfect verifier),ext-049,extraction,hard,qwen2.5-coder:3b,False,True,1.992e-05,5.786
+oracle (perfect verifier),cla-020,classification,easy,qwen2.5-coder:3b,False,True,9.84e-06,0.973
+oracle (perfect verifier),cla-021,classification,hard,qwen2.5-coder:3b,False,True,1.074e-05,1.048
+oracle (perfect verifier),cla-022,classification,easy,qwen2.5-coder:3b,False,True,9.66e-06,1.041
+oracle (perfect verifier),cla-023,classification,hard,qwen2.5-coder:7b,False,False,3.5e-05,2.084
+oracle (perfect verifier),cla-024,classification,easy,qwen2.5-coder:3b,False,True,9.84e-06,0.999
+oracle (perfect verifier),cla-025,classification,hard,qwen2.5-coder:3b,False,True,1.092e-05,1.058
+oracle (perfect verifier),cla-026,classification,easy,qwen2.5-coder:3b,False,True,9.96e-06,1.156
+oracle (perfect verifier),cla-027,classification,hard,qwen2.5-coder:3b,False,True,1.008e-05,1.272
+oracle (perfect verifier),cla-028,classification,easy,qwen2.5-coder:3b,False,True,9.78e-06,1.098
+oracle (perfect verifier),cla-029,classification,hard,qwen2.5-coder:7b,False,False,3.46e-05,2.066
+oracle (perfect verifier),cla-030,classification,easy,qwen2.5-coder:3b,False,True,9.84e-06,1.036
+oracle (perfect verifier),cla-031,classification,hard,qwen2.5-coder:3b,False,True,1.056e-05,1.194
+oracle (perfect verifier),cla-032,classification,easy,qwen2.5-coder:3b,False,True,9.78e-06,1.017
+oracle (perfect verifier),cla-033,classification,hard,qwen2.5-coder:3b,False,True,1.074e-05,1.117
+oracle (perfect verifier),cla-034,classification,easy,qwen2.5-coder:3b,False,True,9.96e-06,1.152
+oracle (perfect verifier),cla-035,classification,hard,qwen2.5-coder:3b,False,True,1.05e-05,1.265
+oracle (perfect verifier),cla-036,classification,easy,qwen2.5-coder:3b,False,True,9.48e-06,1.013
+oracle (perfect verifier),cla-037,classification,hard,qwen2.5-coder:3b,False,True,1.068e-05,1.175
+oracle (perfect verifier),cla-038,classification,easy,qwen2.5-coder:3b,False,True,9.84e-06,1.302
+oracle (perfect verifier),cla-039,classification,hard,qwen2.5-coder:3b,False,True,1.008e-05,1.413
+oracle (perfect verifier),cla-040,classification,easy,qwen2.5-coder:3b,False,True,9.12e-06,1.623
+oracle (perfect verifier),cla-041,classification,hard,qwen2.5-coder:7b,False,False,3.46e-05,2.596
+oracle (perfect verifier),cla-042,classification,easy,qwen2.5-coder:3b,False,True,9.54e-06,1.379
+oracle (perfect verifier),cla-043,classification,hard,qwen2.5-coder:3b,False,True,1.11e-05,1.287
+oracle (perfect verifier),cla-044,classification,easy,qwen2.5-coder:3b,False,True,9.84e-06,1.316
+oracle (perfect verifier),cla-045,classification,hard,qwen2.5-coder:3b,False,True,1.074e-05,1.367
+oracle (perfect verifier),cla-046,classification,easy,qwen2.5-coder:3b,False,True,9.66e-06,1.348
+oracle (perfect verifier),cla-047,classification,hard,qwen2.5-coder:7b,False,False,3.46e-05,2.052
+oracle (perfect verifier),cla-048,classification,easy,qwen2.5-coder:3b,False,True,9.72e-06,1.543
+oracle (perfect verifier),cla-049,classification,hard,qwen2.5-coder:3b,False,True,1.05e-05,1.273
+oracle (perfect verifier),sum-020,summarization,easy,qwen2.5-coder:3b,False,True,1.08e-05,3.01
+oracle (perfect verifier),sum-021,summarization,hard,qwen2.5-coder:7b,False,True,4.26e-05,4.406
+oracle (perfect verifier),sum-022,summarization,easy,qwen2.5-coder:3b,False,True,1.032e-05,2.632
+oracle (perfect verifier),sum-023,summarization,hard,llama3.2,False,True,1.278e-05,3.073
+oracle (perfect verifier),sum-024,summarization,easy,llama3.2,False,True,9.6e-06,3.031
+oracle (perfect verifier),sum-025,summarization,hard,llama3.2,False,True,1.362e-05,3.254
+oracle (perfect verifier),sum-026,summarization,easy,qwen2.5-coder:3b,False,True,9.66e-06,3.404
+oracle (perfect verifier),sum-027,summarization,hard,qwen2.5-coder:3b,False,True,1.29e-05,3.204
+oracle (perfect verifier),sum-028,summarization,easy,qwen2.5-coder:3b,False,True,1.056e-05,3.151
+oracle (perfect verifier),sum-029,summarization,hard,llama3.2,False,True,1.392e-05,4.203
+oracle (perfect verifier),sum-030,summarization,easy,qwen2.5-coder:3b,False,True,1.044e-05,3.097
+oracle (perfect verifier),sum-031,summarization,hard,qwen2.5-coder:3b,False,True,1.476e-05,3.613
+oracle (perfect verifier),sum-032,summarization,easy,qwen2.5-coder:3b,False,True,1.014e-05,2.576
+oracle (perfect verifier),sum-033,summarization,hard,qwen2.5-coder:3b,False,True,1.278e-05,2.96
+oracle (perfect verifier),sum-034,summarization,easy,qwen2.5-coder:3b,False,True,1.152e-05,3.882
+oracle (perfect verifier),sum-035,summarization,hard,qwen2.5-coder:3b,False,True,1.494e-05,3.343
+oracle (perfect verifier),sum-036,summarization,easy,qwen2.5-coder:3b,False,True,8.94e-06,2.312
+oracle (perfect verifier),sum-037,summarization,hard,qwen2.5-coder:7b,False,False,4.96e-05,5.247
+oracle (perfect verifier),sum-038,summarization,easy,qwen2.5-coder:3b,False,True,9.48e-06,2.94
+oracle (perfect verifier),sum-039,summarization,hard,qwen2.5-coder:3b,False,True,1.452e-05,4.525
+oracle (perfect verifier),sum-040,summarization,easy,qwen2.5-coder:3b,False,True,1.02e-05,3.612
+oracle (perfect verifier),sum-041,summarization,hard,qwen2.5-coder:3b,False,True,1.308e-05,3.425
+oracle (perfect verifier),sum-042,summarization,easy,qwen2.5-coder:3b,False,True,1.014e-05,3.727
+oracle (perfect verifier),sum-043,summarization,hard,llama3.2,False,True,1.374e-05,3.325
+oracle (perfect verifier),sum-044,summarization,easy,llama3.2,False,True,9e-06,2.388
+oracle (perfect verifier),sum-045,summarization,hard,qwen2.5-coder:3b,False,True,1.518e-05,3.959
+oracle (perfect verifier),sum-046,summarization,easy,qwen2.5-coder:3b,False,True,9.12e-06,2.687
+oracle (perfect verifier),sum-047,summarization,hard,qwen2.5-coder:3b,False,True,1.35e-05,3.656
+oracle (perfect verifier),sum-048,summarization,easy,qwen2.5-coder:3b,False,True,1.002e-05,3.534
+oracle (perfect verifier),sum-049,summarization,hard,qwen2.5-coder:3b,False,True,1.518e-05,4.435
+oracle (perfect verifier),rea-020,reasoning,easy,qwen2.5-coder:3b,False,True,1.224e-05,6.004
+oracle (perfect verifier),rea-021,reasoning,hard,qwen2.5-coder:3b,False,True,1.782e-05,9.514
+oracle (perfect verifier),rea-022,reasoning,easy,qwen2.5-coder:3b,False,True,1.044e-05,4.05
+oracle (perfect verifier),rea-023,reasoning,hard,llama3.2,False,True,1.416e-05,6.013
+oracle (perfect verifier),rea-024,reasoning,easy,qwen2.5-coder:3b,False,True,1.026e-05,4.086
+oracle (perfect verifier),rea-025,reasoning,hard,llama3.2,False,True,1.83e-05,11.111
+oracle (perfect verifier),rea-026,reasoning,easy,qwen2.5-coder:3b,False,True,1.11e-05,6.326
+oracle (perfect verifier),rea-027,reasoning,hard,qwen2.5-coder:7b,False,True,5.56e-05,12.558
+oracle (perfect verifier),rea-028,reasoning,easy,llama3.2,False,True,9.6e-06,4.21
+oracle (perfect verifier),rea-029,reasoning,hard,qwen2.5-coder:3b,False,True,1.224e-05,5.968
+oracle (perfect verifier),rea-030,reasoning,easy,qwen2.5-coder:3b,False,True,1.038e-05,4.35
+oracle (perfect verifier),rea-031,reasoning,hard,qwen2.5-coder:7b,False,False,5.66e-05,11.715
+oracle (perfect verifier),rea-032,reasoning,easy,llama3.2,False,True,7.98e-06,2.851
+oracle (perfect verifier),rea-033,reasoning,hard,qwen2.5-coder:7b,False,True,5.7e-05,11.42
+oracle (perfect verifier),rea-034,reasoning,easy,qwen2.5-coder:7b,False,False,4.14e-05,8.579
+oracle (perfect verifier),rea-035,reasoning,hard,qwen2.5-coder:7b,False,True,4.3e-05,8.807
+oracle (perfect verifier),rea-036,reasoning,easy,qwen2.5-coder:3b,False,True,1.062e-05,4.423
+oracle (perfect verifier),rea-037,reasoning,hard,qwen2.5-coder:7b,False,False,7.02e-05,17.301
+oracle (perfect verifier),rea-038,reasoning,easy,qwen2.5-coder:3b,False,True,1.224e-05,8.266
+oracle (perfect verifier),rea-039,reasoning,hard,qwen2.5-coder:3b,False,True,1.68e-05,11.568
+oracle (perfect verifier),rea-040,reasoning,easy,qwen2.5-coder:3b,False,True,1.014e-05,4.821
+oracle (perfect verifier),rea-041,reasoning,hard,llama3.2,False,True,1.386e-05,6.266
+oracle (perfect verifier),rea-042,reasoning,easy,qwen2.5-coder:3b,False,True,9.96e-06,4.77
+oracle (perfect verifier),rea-043,reasoning,hard,llama3.2,False,True,1.698e-05,8.891
+oracle (perfect verifier),rea-044,reasoning,easy,qwen2.5-coder:3b,False,True,1.224e-05,7.275
+oracle (perfect verifier),rea-045,reasoning,hard,qwen2.5-coder:7b,False,True,5.56e-05,10.92
+oracle (perfect verifier),rea-046,reasoning,easy,qwen2.5-coder:3b,False,True,1.014e-05,4.178
+oracle (perfect verifier),rea-047,reasoning,hard,llama3.2,False,True,1.386e-05,6.008
+oracle (perfect verifier),rea-048,reasoning,easy,qwen2.5-coder:3b,False,True,9.96e-06,4.638
+oracle (perfect verifier),rea-049,reasoning,hard,llama3.2,False,True,1.656e-05,8.133

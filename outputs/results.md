@@ -1,0 +1,80 @@
+# Results
+
+## Held-out split (120 cases)
+
+| Arm | Completion | Hard cases | Cost / 1k req | Cost saved vs all-large | p50 s | p95 s | Answered by small | Wrong answers let through |
+|---|---|---|---|---|---|---|---|---|
+| all-small qwen2.5-coder:3b | 75.8% | 60.0% | $0.0134 | 70% | 4.2 | 8.7 | 100% | - |
+| all-small llama3.2 | 80.0% | 70.0% | $0.0125 | 72% | 3.4 | 8.5 | 100% | - |
+| all-large qwen2.5-coder:7b | 85.0% | 75.0% | $0.0452 | 0% | 5.8 | 12.6 | 0% | - |
+| router, structural check only | 77.5% | 63.3% | $0.0152 | 66% | 4.3 | 9.4 | 96% | 27 |
+| router, tuned on dev | 82.5% | 71.7% | $0.0176 | 61% | 3.6 | 20.4 | 91% | 16 |
+| oracle (perfect verifier) | 91.7% | 85.0% | $0.0178 | 61% | 4.2 | 10.9 | 88% | - |
+
+Router minus all-large completion, paired bootstrap 95% CI: [-7.5%, +2.5%]
+
+| Arm | extraction | classification | summarization | reasoning |
+|---|---|---|---|---|
+| all-small qwen2.5-coder:3b | 93% ($0.018) | 87% ($0.010) | 73% ($0.012) | 50% ($0.013) |
+| all-small llama3.2 | 93% ($0.016) | 73% ($0.010) | 87% ($0.012) | 67% ($0.013) |
+| all-large qwen2.5-coder:7b | 93% ($0.062) | 87% ($0.034) | 83% ($0.039) | 77% ($0.047) |
+| router, structural check only | 93% ($0.018) | 87% ($0.010) | 80% ($0.019) | 50% ($0.013) |
+| router, tuned on dev | 93% ($0.016) | 87% ($0.010) | 87% ($0.012) | 63% ($0.033) |
+| oracle (perfect verifier) | 93% ($0.021) | 87% ($0.013) | 97% ($0.014) | 90% ($0.022) |
+
+| Arm | Projected annual cost at logged traffic |
+|---|---|
+| all-small qwen2.5-coder:3b | $232 |
+| all-small llama3.2 | $212 |
+| all-large qwen2.5-coder:7b | $779 |
+| router, structural check only | $249 |
+| router, tuned on dev | $247 |
+| oracle (perfect verifier) | $291 |
+
+## All 200 cases
+
+| Arm | Completion | Hard cases | Cost / 1k req | Cost saved vs all-large | p50 s | p95 s | Answered by small | Wrong answers let through |
+|---|---|---|---|---|---|---|---|---|
+| all-small qwen2.5-coder:3b | 79.0% | 64.0% | $0.0134 | 70% | 3.9 | 8.3 | 100% | - |
+| all-small llama3.2 | 82.0% | 72.0% | $0.0125 | 72% | 3.3 | 8.3 | 100% | - |
+| all-large qwen2.5-coder:7b | 88.0% | 80.0% | $0.0452 | 0% | 5.6 | 12.6 | 0% | - |
+| router, structural check only | 80.0% | 66.0% | $0.0145 | 68% | 4.0 | 8.5 | 98% | 40 |
+| router, tuned on dev | 87.0% | 79.0% | $0.0183 | 60% | 3.6 | 19.1 | 90% | 20 |
+| oracle (perfect verifier) | 93.5% | 88.0% | $0.0176 | 61% | 3.9 | 10.9 | 88% | - |
+
+Router minus all-large completion, paired bootstrap 95% CI: [-4.5%, +2.5%]
+
+| Arm | extraction | classification | summarization | reasoning |
+|---|---|---|---|---|
+| all-small qwen2.5-coder:3b | 96% ($0.018) | 90% ($0.010) | 74% ($0.012) | 56% ($0.013) |
+| all-small llama3.2 | 96% ($0.016) | 78% ($0.010) | 86% ($0.012) | 68% ($0.013) |
+| all-large qwen2.5-coder:7b | 96% ($0.062) | 88% ($0.034) | 84% ($0.038) | 84% ($0.047) |
+| router, structural check only | 96% ($0.018) | 90% ($0.010) | 78% ($0.016) | 56% ($0.013) |
+| router, tuned on dev | 96% ($0.016) | 90% ($0.010) | 86% ($0.012) | 76% ($0.035) |
+| oracle (perfect verifier) | 96% ($0.020) | 90% ($0.013) | 96% ($0.014) | 92% ($0.023) |
+
+| Arm | Projected annual cost at logged traffic |
+|---|---|
+| all-small qwen2.5-coder:3b | $232 |
+| all-small llama3.2 | $212 |
+| all-large qwen2.5-coder:7b | $780 |
+| router, structural check only | $242 |
+| router, tuned on dev | $251 |
+| oracle (perfect verifier) | $281 |
+
+## Tuned policy (chosen on the dev split)
+
+| Task | First model | Threshold |
+|---|---|---|
+| extraction | llama3.2 | 0.000 |
+| classification | qwen2.5-coder:3b | 0.000 |
+| summarization | llama3.2 | 0.000 |
+| reasoning | qwen2.5-coder:3b | 1.000 |
+
+| Model | Inference time for all 200 cases on this machine |
+|---|---|
+| qwen2.5-coder:3b | 13.3 min |
+| llama3.2 | 11.8 min |
+| qwen2.5-coder:7b | 20.7 min |
+
+Annual request volume from the traffic log: 16,394,979
