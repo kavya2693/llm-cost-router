@@ -220,6 +220,10 @@ def evaluate(
         split["router_minus_large_ci95"] = paired_bootstrap(outcomes_by_arm["router, tuned on dev"], large)
         results["splits"][split_name] = split
     results["per_case"] = per_case
+    # Total inference time per model over the whole suite: what a fresh `make models` costs.
+    results["model_seconds"] = {
+        m: round(sum(call(m, c).latency_s for c in suite), 1) for m in [*small_models, LARGE_MODEL]
+    }
     if volume:
         results["annual_requests"] = volume
     return results
@@ -279,6 +283,10 @@ def render_markdown(results: dict[str, Any]) -> str:
     ]
     for t, p in results["policy"].items():
         lines.append(f"| {t} | {p['first'] or 'straight to large'} | {p['threshold']:.3f} |")
+    if "model_seconds" in results:
+        lines += ["", "| Model | Inference time for all 200 cases on this machine |", "|---|---|"]
+        for m, secs in results["model_seconds"].items():
+            lines.append(f"| {m} | {secs / 60:.1f} min |")
     if "annual_requests" in results:
         total = sum(results["annual_requests"].values())
         lines += ["", f"Annual request volume from the traffic log: {total:,.0f}"]
