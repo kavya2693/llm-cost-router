@@ -38,3 +38,15 @@ jobs:
           git diff --exit-code data/
           uv run llm-cost-router evaluate
           git diff --exit-code outputs/results.md outputs/results.json
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: build image
+        run: docker build -t llm-cost-router .
+
+      # The image replays the committed cache, so it runs without a model server.
+      - name: run image
+        run: docker run --rm llm-cost-router
