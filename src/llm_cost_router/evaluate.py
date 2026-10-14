@@ -78,6 +78,7 @@ def summarise(outcomes: list[Outcome]) -> dict[str, Any]:
             c.prompt_tokens + c.completion_tokens for o in outcomes for c in o.routed.calls
         )
         / max(n, 1),
+        "verified": bool(tried_cheap),
         "p50_latency_s": percentile(lat, 0.5),
         "p95_latency_s": percentile(lat, 0.95),
         "share_answered_small": len(accepted_cheap) / n if n else 0.0,
@@ -231,11 +232,13 @@ def evaluate(
 
 def _fmt_row(name: str, s: dict[str, Any], large: dict[str, Any]) -> str:
     saving = 1 - s["cost_per_1k_usd"] / large["cost_per_1k_usd"] if large["cost_per_1k_usd"] else 0.0
+    # Only a cascade has a verifier that can let a wrong answer through; single-model arms show a dash.
+    let_through = str(s["wrong_accepted_small"]) if s["verified"] else "-"
     return (
         f"| {name} | {s['completion']:.1%} | {s['by_difficulty'].get('hard', {}).get('completion', 0):.1%} "
-        f"| ${s['cost_per_1k_usd']:.4f} | {saving:+.0%} "
+        f"| ${s['cost_per_1k_usd']:.4f} | {saving:.0%} "
         f"| {s['p50_latency_s']:.1f} | {s['p95_latency_s']:.1f} "
-        f"| {s['share_answered_small']:.0%} | {s['wrong_accepted_small']} |"
+        f"| {s['share_answered_small']:.0%} | {let_through} |"
     )
 
 
@@ -247,7 +250,7 @@ def render_markdown(results: dict[str, Any]) -> str:
         lines += [
             f"## {title}",
             "",
-            "| Arm | Completion | Hard cases | Cost / 1k req | vs all-large | p50 s | p95 s "
+            "| Arm | Completion | Hard cases | Cost / 1k req | Cost saved vs all-large | p50 s | p95 s "
             "| Answered by small | Wrong answers let through |",
             "|---|---|---|---|---|---|---|---|---|",
         ]
