@@ -296,6 +296,18 @@ def render_markdown(results: dict[str, Any]) -> str:
     return "\n".join(lines) + "\n"
 
 
+def _round_floats(obj: Any, digits: int = 10) -> Any:
+    # Summation order differs between platforms' numpy builds, so the last bits of a float
+    # change between macOS and Linux. Rounding keeps results.json byte-identical in CI.
+    if isinstance(obj, float):
+        return round(obj, digits)
+    if isinstance(obj, dict):
+        return {k: _round_floats(v, digits) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [_round_floats(v, digits) for v in obj]
+    return obj
+
+
 def write_outputs(results: dict[str, Any], out_dir: Path) -> None:
     out_dir.mkdir(parents=True, exist_ok=True)
     per_case = results.pop("per_case")
@@ -303,6 +315,6 @@ def write_outputs(results: dict[str, Any], out_dir: Path) -> None:
         writer = csv.DictWriter(f, fieldnames=list(per_case[0]))
         writer.writeheader()
         writer.writerows(per_case)
-    (out_dir / "results.json").write_text(json.dumps(results, indent=2, sort_keys=True) + "\n")
+    (out_dir / "results.json").write_text(json.dumps(_round_floats(results), indent=2, sort_keys=True) + "\n")
     (out_dir / "results.md").write_text(render_markdown(results))
     results["per_case"] = per_case
