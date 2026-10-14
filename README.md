@@ -267,7 +267,7 @@ What this says:
    threshold, cuts that to 16.
 
 On all 200 cases (dev included) the tuned router reaches 87.0% against 88.0% for the large model
-at 59% lower cost, interval [-4.5, +2.5] points; the dev cases flatter it.
+at 60% lower cost, interval [-4.5, +2.5] points; the dev cases flatter it.
 
 **Inference time.** Running every model on all 200 cases took 13.3 min (Qwen 3B), 11.8 min
 (Llama 3.2) and 20.7 min (Qwen 7B), 45.8 minutes in all on CPU: just over the 45-minute budget
